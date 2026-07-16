@@ -215,13 +215,13 @@
 <div data-dc-tpl="473" style="font-size: 13px; color: var(--text-tertiary);">전체 <span data-dc-tpl="474" style="font-family: var(--font-mono); color: var(--teal-700); font-weight: 700;">24</span>건</div>
 </div>
 <div data-dc-tpl="475" style="display: flex; gap: 8px;">
-<a class="btn-ghost" data-dc-tpl="476" href="#story?cat=all" style="background: var(--teal-700); color: var(--gray-0); border-color: var(--teal-700);">전체</a>
-<a class="btn-ghost" data-dc-tpl="477" href="#story?cat=env">환경뉴스</a>
-<a class="btn-ghost" data-dc-tpl="478" href="#story?cat=company">회사소식</a>
+<a class="btn-ghost story-filter-btn active" data-dc-tpl="476" data-filter="all" href="#" style="background: var(--teal-700); color: var(--gray-0); border-color: var(--teal-700);">전체</a>
+<a class="btn-ghost story-filter-btn" data-dc-tpl="477" data-filter="env" href="#">환경뉴스</a>
+<a class="btn-ghost story-filter-btn" data-dc-tpl="478" data-filter="company" href="#">회사소식</a>
 </div>
 </div>
 <div data-dc-tpl="479" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-<a data-dc-tpl="481" href="story-1.html" style="display: block; color: inherit;">
+<a class="story-card" data-dc-tpl="481" data-story-cat="env" href="story-1.html" style="display: block; color: inherit;">
 <article class="card" data-dc-tpl="482" style="overflow: hidden; height: 100%; transition: box-shadow var(--duration-base) var(--ease-out);">
 <div data-dc-tpl="483" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--teal-100), var(--teal-300)); position: relative;">
 <div data-dc-tpl="484" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);"><span class="sc-interp">환경뉴스</span></div>
@@ -236,7 +236,7 @@
 </div>
 </article>
 </a>
-<a data-dc-tpl="481" href="story-2.html" style="display: block; color: inherit;">
+<a class="story-card" data-dc-tpl="481" data-story-cat="company" href="story-2.html" style="display: block; color: inherit;">
 <article class="card" data-dc-tpl="482" style="overflow: hidden; height: 100%; transition: box-shadow var(--duration-base) var(--ease-out);">
 <div data-dc-tpl="483" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--teal-200), var(--teal-500)); position: relative;">
 <div data-dc-tpl="484" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);"><span class="sc-interp">회사소식</span></div>
@@ -251,7 +251,7 @@
 </div>
 </article>
 </a>
-<a data-dc-tpl="481" href="story-3.html" style="display: block; color: inherit;">
+<a class="story-card" data-dc-tpl="481" data-story-cat="env" href="story-3.html" style="display: block; color: inherit;">
 <article class="card" data-dc-tpl="482" style="overflow: hidden; height: 100%; transition: box-shadow var(--duration-base) var(--ease-out);">
 <div data-dc-tpl="483" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--teal-300), var(--teal-600)); position: relative;">
 <div data-dc-tpl="484" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);"><span class="sc-interp">환경뉴스</span></div>
@@ -266,7 +266,7 @@
 </div>
 </article>
 </a>
-<a data-dc-tpl="481" href="story-4.html" style="display: block; color: inherit;">
+<a class="story-card" data-dc-tpl="481" data-story-cat="env" href="story-4.html" style="display: block; color: inherit;">
 <article class="card" data-dc-tpl="482" style="overflow: hidden; height: 100%; transition: box-shadow var(--duration-base) var(--ease-out);">
 <div data-dc-tpl="483" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--teal-100), var(--teal-400)); position: relative;">
 <div data-dc-tpl="484" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);"><span class="sc-interp">환경뉴스</span></div>
@@ -281,7 +281,7 @@
 </div>
 </article>
 </a>
-<a data-dc-tpl="481" href="story-5.html" style="display: block; color: inherit;">
+<a class="story-card" data-dc-tpl="481" data-story-cat="env" href="story-5.html" style="display: block; color: inherit;">
 <article class="card" data-dc-tpl="482" style="overflow: hidden; height: 100%; transition: box-shadow var(--duration-base) var(--ease-out);">
 <div data-dc-tpl="483" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--teal-200), var(--teal-400)); position: relative;">
 <div data-dc-tpl="484" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);"><span class="sc-interp">환경뉴스</span></div>
@@ -296,7 +296,7 @@
 </div>
 </article>
 </a>
-<a data-dc-tpl="481" href="story-6.html" style="display: block; color: inherit;">
+<a class="story-card" data-dc-tpl="481" data-story-cat="env" href="story-6.html" style="display: block; color: inherit;">
 <article class="card" data-dc-tpl="482" style="overflow: hidden; height: 100%; transition: box-shadow var(--duration-base) var(--ease-out);">
 <div data-dc-tpl="483" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--teal-300), var(--teal-500)); position: relative;">
 <div data-dc-tpl="484" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);"><span class="sc-interp">환경뉴스</span></div>
@@ -311,7 +311,7 @@
 </div>
 </article>
 </a>
-<a data-dc-tpl="481" href="story-7.html" style="display: block; color: inherit;">
+<a class="story-card" data-dc-tpl="481" data-story-cat="company" href="story-7.html" style="display: block; color: inherit;">
 <article class="card" data-dc-tpl="482" style="overflow: hidden; height: 100%; transition: box-shadow var(--duration-base) var(--ease-out);">
 <div data-dc-tpl="483" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--teal-100), var(--teal-500)); position: relative;">
 <div data-dc-tpl="484" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);"><span class="sc-interp">회사소식</span></div>
@@ -326,7 +326,7 @@
 </div>
 </article>
 </a>
-<a data-dc-tpl="481" href="story-8.html" style="display: block; color: inherit;">
+<a class="story-card" data-dc-tpl="481" data-story-cat="env" href="story-8.html" style="display: block; color: inherit;">
 <article class="card" data-dc-tpl="482" style="overflow: hidden; height: 100%; transition: box-shadow var(--duration-base) var(--ease-out);">
 <div data-dc-tpl="483" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--teal-200), var(--teal-600)); position: relative;">
 <div data-dc-tpl="484" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);"><span class="sc-interp">환경뉴스</span></div>
@@ -341,7 +341,7 @@
 </div>
 </article>
 </a>
-<a data-dc-tpl="481" href="story-9.html" style="display: block; color: inherit;">
+<a class="story-card" data-dc-tpl="481" data-story-cat="company" href="story-9.html" style="display: block; color: inherit;">
 <article class="card" data-dc-tpl="482" style="overflow: hidden; height: 100%; transition: box-shadow var(--duration-base) var(--ease-out);">
 <div data-dc-tpl="483" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--teal-300), var(--teal-500)); position: relative;">
 <div data-dc-tpl="484" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);"><span class="sc-interp">회사소식</span></div>

@@ -83,4 +83,33 @@
       });
     });
   }
+  // ─── 4. BZ STORY 카테고리 필터 (전체/환경뉴스/회사소식) ───
+  var storyFilterBtns = document.querySelectorAll('.story-filter-btn');
+  if (storyFilterBtns.length) {
+    var storyCards = document.querySelectorAll('.story-card');
+    storyFilterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var filter = btn.getAttribute('data-filter');
+        storyFilterBtns.forEach(function (b) {
+          var isActive = b === btn;
+          b.classList.toggle('active', isActive);
+          if (isActive) {
+            b.style.background = 'var(--teal-700)';
+            b.style.color = 'var(--gray-0)';
+            b.style.borderColor = 'var(--teal-700)';
+          } else {
+            b.style.background = '';
+            b.style.color = '';
+            b.style.borderColor = '';
+          }
+        });
+        storyCards.forEach(function (card) {
+          var cat = card.getAttribute('data-story-cat');
+          var show = (filter === 'all' || filter === cat);
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  }
 })();
