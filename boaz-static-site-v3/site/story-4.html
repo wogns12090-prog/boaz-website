@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html><head><style>
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<style>x-dc{display:none!important}</style><style></style><link data-dc-tpl="1" href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/fonts.css" rel="stylesheet"/><link data-dc-tpl="2" href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/colors.css" rel="stylesheet"/><link data-dc-tpl="3" href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/typography.css" rel="stylesheet"/><link data-dc-tpl="4" href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/spacing.css" rel="stylesheet"/><link data-dc-tpl="5" href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/radii.css" rel="stylesheet"/><link data-dc-tpl="6" href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/shadows.css" rel="stylesheet"/><link data-dc-tpl="7" href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/motion.css" rel="stylesheet"/><link data-dc-tpl="8" href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/semantic.css" rel="stylesheet"/><link data-dc-tpl="9" href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/styles.css" rel="stylesheet"/><style data-dc-tpl="10">
+  body { margin: 0; background: var(--paper); font-family: var(--font-sans); color: var(--text-primary); }
+  a { color: var(--teal-600); text-decoration: none; }
+  a:hover { color: var(--teal-700); }
+  .container { max-width: var(--container-wide); margin: 0 auto; padding: 0 32px; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-600); font-weight: 600; }
+  .page-title { font-size: 40px; font-weight: 800; letter-spacing: -0.03em; margin: 12px 0 0; color: var(--gray-0); }
+  .section-title { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 24px; color: var(--text-primary); }
+  .h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px; }
+  .body-text { font-size: 15px; line-height: 1.8; color: var(--text-secondary); }
+  .card { background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--teal-700); color: var(--gray-0); border-radius: var(--radius-md); font-size: 14px; font-weight: 600; border: none; cursor: pointer; }
+  .btn-primary:hover { background: var(--teal-800); color: var(--gray-0); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: var(--gray-0); color: var(--text-primary); border: 1px solid var(--border-default); border-radius: var(--radius-md); font-size: 14px; font-weight: 500; cursor: pointer; }
+  .btn-ghost:hover { background: var(--gray-50); color: var(--text-primary); }
+  .nav-link { padding: 8px 16px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; color: var(--text-secondary); }
+  .nav-link.active { color: var(--teal-700); background: var(--teal-50); }
+  .subnav a { padding: 10px 16px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; color: var(--text-secondary); border: 1px solid var(--border-subtle); background: var(--gray-0); }
+  .subnav a.active { background: var(--teal-700); color: var(--gray-0); border-color: var(--teal-700); }
+  .admin-tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; color: var(--teal-700); background: var(--teal-50); border: 1px solid var(--teal-100); border-radius: var(--radius-pill); vertical-align: middle; font-family: var(--font-sans); text-transform: uppercase; }
+  .admin-tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal-600); }
+  .admin-wrap { position: relative; }
+  .admin-wrap > .admin-tag { position: absolute; top: -12px; right: 12px; z-index: 2; background: var(--gray-0); }
+</style><style data-site="1">
+/* ─── Responsive (mobile / tablet) ─── */
+@media (max-width: 900px) {
+  .container { padding: 0 20px !important; }
+  header nav a[href^="greeting"],
+  header nav a[href^="biz-air"],
+  header nav a[href^="story"],
+  header nav a[href^="review"] { display: none !important; }
+  header nav a[href*="pf.kakao"] { padding: 6px 10px !important; font-size: 12px !important; }
+  header img[alt*="보아스"] { height: 72px !important; }
+  section { padding: 48px 0 !important; }
+  h1, .section-title { font-size: 26px !important; line-height: 1.25 !important; }
+  h2 { font-size: 22px !important; }
+  /* Grids: any explicit 3/4 column grids collapse to 1-2 */
+  [style*="grid-template-columns: repeat(3"] ,
+  [style*="grid-template-columns: repeat(4"] ,
+  [style*="grid-template-columns: repeat(5"] ,
+  [style*="grid-template-columns: repeat(6"] { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+  [style*="grid-template-columns: 1.05fr 1fr"] ,
+  [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 32px !important; }
+  [style*="grid-template-columns: 230px 1fr"] ,
+  [style*="grid-template-columns: 160px 1fr"] { grid-template-columns: 1fr !important; }
+  /* Hero */
+  #home { min-height: 70vh !important; }
+  #home h1 { font-size: 28px !important; }
+}
+@media (max-width: 560px) {
+  [style*="grid-template-columns: repeat(3"] ,
+  [style*="grid-template-columns: repeat(4"] ,
+  [style*="grid-template-columns: repeat(5"] ,
+  [style*="grid-template-columns: repeat(6"] { grid-template-columns: 1fr !important; }
+  header .container { flex-wrap: wrap !important; }
+  header img[alt*="보아스"] { height: 56px !important; }
+}
+
+/* ─── 이용후기 캐러셀 ─── */
+.review-carousel { position: relative; overflow: hidden; }
+.review-track {
+  display: flex;
+  transition: transform 480ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  gap: 20px;
+}
+.review-track > * {
+  flex: 0 0 calc((100% - 40px) / 3);
+  min-width: 0;
+}
+@media (max-width: 900px) {
+  .review-track > * { flex: 0 0 calc((100% - 20px) / 2); }
+  .review-track { gap: 20px; }
+}
+@media (max-width: 560px) {
+  .review-track > * { flex: 0 0 100%; }
+}
+.carousel-btn {
+  position: absolute;
+  top: 40%;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--border-default);
+  background: var(--gray-0);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  color: var(--text-primary);
+  z-index: 3;
+  transition: all 140ms;
+}
+.carousel-btn:hover { background: var(--teal-50); color: var(--teal-800); border-color: var(--teal-600); }
+.carousel-btn[disabled] { opacity: 0.35; cursor: not-allowed; }
+.carousel-btn.prev { left: -22px; }
+.carousel-btn.next { right: -22px; }
+@media (max-width: 900px) {
+  .carousel-btn.prev { left: 4px; }
+  .carousel-btn.next { right: 4px; }
+}
+
+/* ─── 보유장비 탭 페이드 ─── */
+.eq-panel {
+  transition: opacity 320ms ease-out;
+}
+.eq-panel[hidden] { display: none !important; }
+.eq-tab-btn {
+  padding: 12px 22px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-tertiary);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+.eq-tab-btn.active {
+  border-bottom-color: var(--teal-700);
+  color: var(--teal-800);
+  font-weight: 700;
+}
+</style></head>
+<body>
+<div id="dc-root"><div class="sc-host" data-sc-name="sub"><header data-dc-tpl="11" style="position: sticky; top: 0px; z-index: 20; background: rgba(251, 250, 247, 0.94); backdrop-filter: saturate(1.2) blur(8px); border-bottom: 1px solid var(--border-subtle);">
+<div class="container" data-dc-tpl="12" style="display: flex; align-items: center; justify-content: space-between; padding-top: 16px; padding-bottom: 16px; gap: 24px;">
+<a data-dc-tpl="13" href="index.html" style="display: flex; align-items: center; gap: 12px;">
+<img alt="㈜보아스환경기술" data-dc-tpl="14" src="assets/logo.svg" style="height: 108px; width: auto; display: block;"/>
+</a>
+<nav data-dc-tpl="15" style="display: flex; align-items: center; gap: 4px;">
+<a class="nav-link" data-dc-tpl="16" href="greeting.html">회사소개</a>
+<a class="nav-link" data-dc-tpl="17" href="biz-air.html">사업분야</a>
+<a class="nav-link active" data-dc-tpl="18" href="story.html">BZ STORY</a>
+<a class="nav-link" data-dc-tpl="19" href="review.html">BZ 이용후기</a>
+<div data-dc-tpl="20" style="width: 12px;"></div>
+<a data-dc-tpl="21" href="https://pf.kakao.com/_tnRdG" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgb(254, 229, 0); color: rgb(25, 25, 25); border-radius: var(--radius-md); font-size: 13px; font-weight: 600;" target="_blank">
+<svg aria-hidden="true" data-dc-tpl="22" fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.86 1.87 5.36 4.68 6.78L5.5 21.5c-.1.3.24.55.5.37L10.6 19.1c.46.05.93.08 1.4.08 5.52 0 10-3.58 10-8s-4.48-8-10-8z" data-dc-tpl="23"></path></svg>
+        카카오톡 상담
+      </a>
+</nav>
+</div></header><section class="admin-wrap" data-dc-tpl="24" style="position: relative; background: linear-gradient(135deg, var(--teal-800) 0%, var(--teal-600) 100%); color: var(--gray-0); overflow: hidden; min-height: 320px; display: flex; align-items: center;">
+<span class="admin-tag" data-dc-tpl="25" style="position: absolute; top: 16px; right: 24px; z-index: 3; background: rgba(255, 255, 255, 0.92);">이미지 교체 가능 · 배너 배경</span>
+<div aria-hidden="true" data-dc-tpl="26" style="position: absolute; inset: 0px; background-image: linear-gradient(135deg, rgba(1, 63, 68, 0.82) 0%, rgba(1, 115, 125, 0.7) 100%), radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 45%); background-size: cover; background-position: center center;"></div>
+<div aria-hidden="true" data-dc-tpl="27" style="position: absolute; inset: 0px; opacity: 0.35; background: repeating-linear-gradient(90deg, transparent 0 120px, rgba(255, 255, 255, 0.05) 120px 121px);"></div>
+<div aria-hidden="true" data-dc-tpl="28" style="position: absolute; right: -40px; bottom: -40px; width: 280px; height: 280px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 50%;"></div>
+<div aria-hidden="true" data-dc-tpl="29" style="position: absolute; right: 80px; top: -60px; width: 180px; height: 180px; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 50%;"></div>
+<div class="container" data-dc-tpl="30" style="position: relative; padding-top: 72px; padding-bottom: 64px; width: 100%;">
+<div data-dc-tpl="31" style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); font-weight: 600;"><span class="sc-interp">BZ STORY · 보아스 스토리</span></div>
+<h1 class="page-title" data-dc-tpl="32" style="text-shadow: 0 2px 20px rgba(0,0,0,0.25);"><span class="sc-interp">게시글 상세</span></h1>
+<nav aria-label="breadcrumb" data-dc-tpl="33" style="margin-top: 22px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255, 255, 255, 0.8);">
+<a data-dc-tpl="34" href="index.html" style="color: rgba(255, 255, 255, 0.8);">홈</a>
+<span aria-hidden="true" data-dc-tpl="35">›</span>
+<span data-dc-tpl="36"><span class="sc-interp">BZ STORY</span></span>
+<span aria-hidden="true" data-dc-tpl="37">›</span>
+<span data-dc-tpl="38" style="color: var(--gray-0); font-weight: 500;"><span class="sc-interp">게시글 상세</span></span>
+</nav>
+</div></section><main data-dc-tpl="44" style="padding: 64px 0px 96px;"><div class="container" data-dc-tpl="45">
+<article data-dc-tpl="498" style="max-width: 860px; margin: 0px auto;">
+<div data-dc-tpl="499" style="display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-700); background: var(--teal-50); padding: 5px 12px; border-radius: var(--radius-pill);"><span class="sc-interp">환경뉴스</span></div>
+<h1 data-dc-tpl="500" style="font-size: 32px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.35; margin: 18px 0px 20px;"><span class="sc-interp">2025년 상반기 정기측정 일정 조율 안내</span></h1>
+<div data-dc-tpl="501" style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0px; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); font-size: 13px; color: var(--text-tertiary);">
+<div data-dc-tpl="502" style="display: flex; gap: 20px;">
+<span data-dc-tpl="503">작성자 · <span data-dc-tpl="504" style="color: var(--text-primary);">관리자</span></span>
+<span data-dc-tpl="505">작성일 · <span data-dc-tpl="506" style="font-family: var(--font-mono); color: var(--text-primary);"><span class="sc-interp">2025.02.20</span></span></span>
+</div>
+<span data-dc-tpl="507">조회 <span data-dc-tpl="508" style="font-family: var(--font-mono); color: var(--text-primary);"><span class="sc-interp">742</span></span></span>
+</div>
+<div data-dc-tpl="509" style="margin-top: 32px; aspect-ratio: 16 / 8; background: linear-gradient(135deg, var(--teal-100), var(--teal-400)); border-radius: var(--radius-xl);"></div>
+<div data-dc-tpl="510" style="margin-top: 40px; font-size: 16px; line-height: 1.9; color: var(--text-primary);">
+<p data-dc-tpl="511" style="margin: 0px 0px 20px;"><b data-dc-tpl="512"><span class="sc-interp">본 안내는 사업장 환경 담당자님이 반드시 확인해야 하는 사항으로, 관련 법령 준수 및 안전관리를 위해 사전 검토가 필요합니다.</span></b></p>
+<p data-dc-tpl="514" style="margin: 0px 0px 20px; color: var(--text-secondary); font-size: 15px;"><span class="sc-interp">㈜보아스환경기술은 대기측정 대행 업무 수행 과정에서 축적된 현장 경험을 바탕으로, 사업장 담당자님이 실무에 바로 활용할 수 있는 최신 규제 정보와 안전 가이드라인을 정기적으로 안내드리고 있습니다.</span></p>
+<p data-dc-tpl="514" style="margin: 0px 0px 20px; color: var(--text-secondary); font-size: 15px;"><span class="sc-interp">본 안내 사항은 2024년 말 환경부·고용노동부 공동 지침에 근거하여 작성되었으며, 대기환경보전법·산업안전보건법 상 사업장 책임자의 의무 사항과 직접 연계되어 있습니다. 관련 조항 위반 시 과태료 및 개선명령이 부과될 수 있으므로 사전 대응이 권장됩니다.</span></p>
+<p data-dc-tpl="514" style="margin: 0px 0px 20px; color: var(--text-secondary); font-size: 15px;"><span class="sc-interp">보아스환경기술은 계약 사업장 담당자님을 대상으로 관련 규제 변경 사항에 대한 이메일 알림 및 카카오톡 채널 안내를 제공하고 있습니다. 알림 신청 및 세부 문의는 대기측정본부로 연락 주시기 바랍니다.</span></p>
+<p data-dc-tpl="514" style="margin: 0px 0px 20px; color: var(--text-secondary); font-size: 15px;"><span class="sc-interp">본 안내와 관련한 추가 자료는 홈페이지 BZ STORY 게시판에서 확인하실 수 있으며, 사업장별 맞춤 컨설팅은 별도 문의를 통해 안내해 드리고 있습니다.</span></p>
+<div data-dc-tpl="515" style="margin-top: 32px; padding: 24px; background: var(--teal-50); border-radius: var(--radius-xl); border-left: 4px solid var(--teal-600);">
+<div data-dc-tpl="516" style="font-size: 12px; letter-spacing: 0.1em; color: var(--teal-700); font-weight: 700;">문의</div>
+<div data-dc-tpl="517" style="font-size: 14px; color: var(--text-primary); margin-top: 8px; line-height: 1.7;">
+          본 안내와 관련한 문의는 <b data-dc-tpl="518">㈜보아스환경기술 대기측정본부</b>로 연락 주시기 바랍니다.<br data-dc-tpl="519"/>
+          TEL <span data-dc-tpl="520" style="font-family: var(--font-mono);">052-707-2255</span> · E-MAIL <span data-dc-tpl="521" style="font-family: var(--font-mono);">boazet0408@naver.com</span>
+</div>
+</div>
+</div>
+<div data-dc-tpl="522" style="margin-top: 56px; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+<a data-dc-tpl="523" href="story-3.html" style="display: flex; align-items: center; gap: 16px; padding: 18px 0px; border-bottom: 1px solid var(--border-subtle); color: var(--text-primary);">
+<span data-dc-tpl="524" style="font-size: 12px; color: var(--text-tertiary); letter-spacing: 0.1em; font-weight: 600; width: 60px;">이전 글</span>
+<span data-dc-tpl="525" style="font-size: 14px;"><span class="sc-interp">GHP 대기배출시설 허가·신고 관련 안내</span></span>
+</a>
+<a data-dc-tpl="526" href="story-5.html" style="display: flex; align-items: center; gap: 16px; padding: 18px 0px; color: var(--text-primary);">
+<span data-dc-tpl="527" style="font-size: 12px; color: var(--text-tertiary); letter-spacing: 0.1em; font-weight: 600; width: 60px;">다음 글</span>
+<span data-dc-tpl="528" style="font-size: 14px;"><span class="sc-interp">2025 설 연휴 업무 안내</span></span>
+</a>
+</div>
+<div data-dc-tpl="529" style="margin-top: 32px; text-align: center;">
+<a class="btn-ghost" data-dc-tpl="530" href="story.html">목록으로</a>
+</div>
+</article></div></main><section data-dc-tpl="607" style="background: var(--teal-800); color: var(--gray-0); padding: 56px 0px;">
+<div class="container" data-dc-tpl="608" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;">
+<div data-dc-tpl="609">
+<div data-dc-tpl="610" style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); font-weight: 600;">24H CONSULTING</div>
+<h2 data-dc-tpl="611" style="font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin: 10px 0px 0px;">카카오톡으로 24시간 상담하세요</h2>
+<p data-dc-tpl="612" style="font-size: 15px; color: rgba(255, 255, 255, 0.8); margin-top: 10px;">측정 문의 · 견적 · 일정 조율 — 담당자가 신속하게 안내해 드립니다.</p>
+</div>
+<a data-dc-tpl="613" href="https://pf.kakao.com/_tnRdG" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px; background: rgb(254, 229, 0); color: rgb(25, 25, 25); border-radius: var(--radius-md); font-size: 16px; font-weight: 700;" target="_blank">
+<svg aria-hidden="true" data-dc-tpl="614" fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.86 1.87 5.36 4.68 6.78L5.5 21.5c-.1.3.24.55.5.37L10.6 19.1c.46.05.93.08 1.4.08 5.52 0 10-3.58 10-8s-4.48-8-10-8z" data-dc-tpl="615"></path></svg>
+      카카오톡 상담 시작
+    </a>
+</div></section><footer data-dc-tpl="616" style="background: var(--teal-900); color: var(--gray-0);">
+<div class="container" data-dc-tpl="617" style="padding-top: 60px; padding-bottom: 32px;">
+<div data-dc-tpl="618" style="display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 48px;">
+<div data-dc-tpl="619">
+<img alt="㈜보아스환경기술" data-dc-tpl="620" src="assets/logo.svg" style="height: 42px; width: auto; display: block; filter: brightness(0) invert(1);"/>
+<div data-dc-tpl="621" style="font-size: 11px; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.55); margin-top: 12px; font-weight: 600;">BOAZ ENVIRONMENTAL TECHNOLOGY CO., LTD.</div>
+<p data-dc-tpl="622" style="font-size: 13px; color: rgba(255, 255, 255, 0.7); line-height: 1.7; margin-top: 16px; max-width: 340px;">대기측정 및 분석 전문 기업. 자가측정 대행, 대기·악취저감 컨설팅, 인허가 자료 작성 등 종합 환경업무를 수행합니다.</p>
+</div>
+<div data-dc-tpl="623">
+<div data-dc-tpl="624" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.55); font-weight: 600; margin-bottom: 14px;">회사 정보</div>
+<div data-dc-tpl="625" style="font-size: 13px; color: rgba(255, 255, 255, 0.85); line-height: 2;">
+<div data-dc-tpl="626">상호 · ㈜보아스환경기술</div>
+<div data-dc-tpl="627">대표이사 · 류재훈</div>
+<div data-dc-tpl="628">사업자등록번호 · <span data-dc-tpl="629" style="font-family: var(--font-mono);">556-81-02077</span></div>
+<div data-dc-tpl="630">업종 · 환경 관련 엔지니어링 서비스업</div>
+</div>
+</div>
+<div data-dc-tpl="631">
+<div data-dc-tpl="632" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.55); font-weight: 600; margin-bottom: 14px;">연락처</div>
+<div data-dc-tpl="633" style="font-size: 13px; color: rgba(255, 255, 255, 0.85); line-height: 2;">
+<div data-dc-tpl="634">주소 · 울산광역시 남구 테크노산업로29번길 39, 에이동</div>
+<div data-dc-tpl="635">TEL · <span data-dc-tpl="636" style="font-family: var(--font-mono);">052-707-2255</span></div>
+<div data-dc-tpl="637">FAX · <span data-dc-tpl="638" style="font-family: var(--font-mono);">052-707-2266</span></div>
+<div data-dc-tpl="639">E-MAIL · <span data-dc-tpl="640" style="font-family: var(--font-mono);">boazet0408@naver.com</span></div>
+</div>
+</div>
+</div>
+</div>
+<div data-dc-tpl="641" style="border-top: 1px solid rgba(255, 255, 255, 0.1);">
+<div class="container" data-dc-tpl="642" style="padding-top: 18px; padding-bottom: 18px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: rgba(255, 255, 255, 0.55); flex-wrap: wrap; gap: 10px;">
+<span data-dc-tpl="643">© 2026 Boaz Environmental Technology Co., Ltd. All rights reserved.</span>
+<span data-dc-tpl="644" style="font-family: var(--font-mono); letter-spacing: 0.05em;">대기측정 · 분석 대행업체</span>
+</div>
+</div></footer></div></div>
+<script src="site.js"></script></body></html>

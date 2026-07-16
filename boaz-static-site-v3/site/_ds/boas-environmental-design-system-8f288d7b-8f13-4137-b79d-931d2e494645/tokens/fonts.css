@@ -1,0 +1,16 @@
+/* Webfonts for the Boas Environmental design system.
+   Primary Korean+Latin: Pretendard Variable (via jsdelivr — official distribution).
+   Data / technical numerals: IBM Plex Mono (Google Fonts).
+   Both are pinned so consumers get identical rendering. */
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* Base stacks — Pretendard covers Hangul + Latin in one variable file.
+     Fallback chain keeps rendering usable if the CDN is unreachable. */
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono",
+    Consolas, "Liberation Mono", Menlo, monospace;
+}
