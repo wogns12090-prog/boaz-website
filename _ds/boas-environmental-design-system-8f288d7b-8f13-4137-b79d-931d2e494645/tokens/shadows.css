@@ -1,0 +1,19 @@
+/* Shadows are quiet and grounded. Y-only elevation, cool-gray tint that
+   sits well against #FBFAF7 paper. No colored glows. */
+
+:root {
+  --shadow-xs: 0 1px 1px rgba(18, 24, 29, 0.04);
+  --shadow-sm: 0 1px 2px rgba(18, 24, 29, 0.06), 0 1px 3px rgba(18, 24, 29, 0.03);
+  --shadow-md: 0 2px 4px rgba(18, 24, 29, 0.05), 0 4px 12px rgba(18, 24, 29, 0.06);
+  --shadow-lg: 0 4px 8px rgba(18, 24, 29, 0.05), 0 12px 24px rgba(18, 24, 29, 0.08);
+  --shadow-xl: 0 8px 16px rgba(18, 24, 29, 0.06), 0 24px 48px rgba(18, 24, 29, 0.10);
+
+  /* Ring shadows — used for focus states, pressed states.
+     Kept separate so components can compose them with elevation. */
+  --ring-focus:   0 0 0 3px rgba(43, 149, 157, 0.28);
+  --ring-danger:  0 0 0 3px rgba(198, 61, 61, 0.24);
+  --ring-neutral: 0 0 0 3px rgba(108, 120, 128, 0.20);
+
+  /* Inner (used sparingly — inputs, sunken data cells) */
+  --shadow-inset-sm: inset 0 1px 2px rgba(18, 24, 29, 0.06);
+}
