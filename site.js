@@ -11,6 +11,29 @@
     return d.replace(/-/g, '.');
   }
 
+  // ── 간단 마크다운 → HTML 변환 (본문 중간 사진 삽입 지원) ──
+  function renderMarkdownBody(md) {
+    if (!md) return '';
+    var blocks = md.split(/\n\s*\n/);
+    return blocks.map(function (block) {
+      block = block.trim();
+      if (!block) return '';
+      var imgOnly = block.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+      if (imgOnly) {
+        return '<figure style="margin: 28px 0;"><img src="' + imgOnly[2] + '" alt="' + imgOnly[1] + '" loading="lazy" style="width: 100%; height: auto; border-radius: var(--radius-xl); display: block;">' +
+          (imgOnly[1] ? '<figcaption style="margin-top: 8px; font-size: 13px; color: var(--text-tertiary); text-align: center;">' + imgOnly[1] + '</figcaption>' : '') +
+          '</figure>';
+      }
+      var html = block
+        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy" style="max-width: 100%; height: auto; border-radius: var(--radius-lg); display: block; margin: 12px 0;">')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+        .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+        .replace(/\*([^*]+)\*/g, '<i>$1</i>')
+        .replace(/\n/g, '<br>');
+      return '<p style="margin: 0 0 20px; color: var(--text-secondary);">' + html + '</p>';
+    }).join('');
+  }
+
   function reviewImageHTML(r, aspectStyle) {
     if (r.image) {
       return '<div style="' + aspectStyle + ' width: 100%; height: 100%; min-height: 100px; background-color: var(--teal-200); background-image: url(' + r.image + '); background-size: cover; background-position: center;"></div>';
@@ -170,10 +193,7 @@
         }
       }
       var bodyEl = document.getElementById('rv-body');
-      var paragraphs = (r.body || r.summary || '').split(/\n\n+/);
-      bodyEl.innerHTML = paragraphs.map(function (p) {
-        return '<p style="margin: 0 0 20px; color: var(--text-secondary);">' + p.replace(/\n/g, '<br>') + '</p>';
-      }).join('');
+      bodyEl.innerHTML = renderMarkdownBody(r.body || r.summary || '');
       var replyBlock = document.getElementById('rv-reply-block');
       if (r.reply && r.reply.trim()) {
         document.getElementById('rv-reply-text').textContent = r.reply;
@@ -318,11 +338,19 @@
       document.getElementById('st-title').textContent = s.title;
       document.getElementById('st-date').textContent = fmtDate(s.date);
       document.getElementById('st-views').textContent = s.views;
+      var stImgBox = document.getElementById('st-image');
+      if (stImgBox) {
+        if (s.image) {
+          stImgBox.style.backgroundColor = 'var(--teal-200)';
+          stImgBox.style.backgroundImage = 'url(' + s.image + ')';
+          stImgBox.style.backgroundSize = 'cover';
+          stImgBox.style.backgroundPosition = 'center';
+        } else {
+          stImgBox.hidden = true;
+        }
+      }
       var bodyEl = document.getElementById('st-body');
-      var paragraphs = (s.body || s.summary || '').split(/\n\n+/);
-      bodyEl.innerHTML = paragraphs.map(function (p) {
-        return '<p style="margin: 0 0 20px; color: var(--text-secondary);">' + p.replace(/\n/g, '<br>') + '</p>';
-      }).join('');
+      bodyEl.innerHTML = renderMarkdownBody(s.body || s.summary || '');
 
       var prevS = sorted[idx - 1];
       var nextS = sorted[idx + 1];
