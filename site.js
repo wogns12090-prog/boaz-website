@@ -237,33 +237,107 @@
     });
   }
 
-  // ─── BZ STORY 카테고리 필터 (전체/환경뉴스/회사소식) ───
-  var storyFilterBtns = document.querySelectorAll('.story-filter-btn');
-  if (storyFilterBtns.length) {
-    var storyCards = document.querySelectorAll('.story-card');
-    storyFilterBtns.forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        var filter = btn.getAttribute('data-filter');
-        storyFilterBtns.forEach(function (b) {
-          var isActive = b === btn;
-          b.classList.toggle('active', isActive);
-          if (isActive) {
-            b.style.background = 'var(--teal-700)';
-            b.style.color = 'var(--gray-0)';
-            b.style.borderColor = 'var(--teal-700)';
-          } else {
-            b.style.background = '';
-            b.style.color = '';
-            b.style.borderColor = '';
-          }
-        });
-        storyCards.forEach(function (card) {
-          var cat = card.getAttribute('data-story-cat');
-          var show = (filter === 'all' || filter === cat);
-          card.style.display = show ? '' : 'none';
+  // ═══════════════ BZ STORY (소식) ═══════════════
+  function loadStories() {
+    return fetch('data/stories.json').then(function (res) { return res.json(); }).then(function (data) { return data.stories || data; });
+  }
+  var catMap = { '환경뉴스': 'env', '회사소식': 'company' };
+
+  function storyCardHTML(s) {
+    var cat = catMap[s.category] || 'env';
+    var imgArea = s.image
+      ? '<div style="aspect-ratio: 16 / 10; position: relative; background-color: var(--teal-200); background-image: url(' + s.image + '); background-size: cover; background-position: center;">'
+      : '<div style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--teal-100), var(--teal-300)); position: relative;">';
+    return '' +
+      '<a class="story-card" data-story-cat="' + cat + '" href="story-detail.html?id=' + encodeURIComponent(s.id) + '" style="display: block; color: inherit;">' +
+        '<article class="card" style="overflow: hidden; height: 100%; transition: box-shadow var(--duration-base) var(--ease-out);">' +
+          imgArea +
+            '<div style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);">' + s.category + '</div>' +
+          '</div>' +
+          '<div style="padding: 22px 24px 24px;">' +
+            '<h3 style="font-size: 17px; font-weight: 600; margin: 0px 0px 10px; line-height: 1.45; letter-spacing: -0.01em; color: var(--text-primary);">' + s.title + '</h3>' +
+            '<p style="font-size: 13.5px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">' + s.summary + '</p>' +
+            '<div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-tertiary);">' +
+              '<span style="font-family: var(--font-mono);">' + fmtDate(s.date) + '</span>' +
+              '<span>조회 ' + s.views + '</span>' +
+            '</div>' +
+          '</div>' +
+        '</article>' +
+      '</a>';
+  }
+
+  // ── 목록 페이지 ──
+  var stListContainer = document.getElementById('st-list-container');
+  if (stListContainer) {
+    loadStories().then(function (stories) {
+      var totalEl = document.getElementById('st-total-count');
+      if (totalEl) totalEl.textContent = stories.length;
+      var sorted = stories.slice().sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+      stListContainer.innerHTML = sorted.map(storyCardHTML).join('');
+
+      var storyFilterBtns = document.querySelectorAll('.story-filter-btn');
+      storyFilterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          var filter = btn.getAttribute('data-filter');
+          storyFilterBtns.forEach(function (b) {
+            var isActive = b === btn;
+            b.classList.toggle('active', isActive);
+            if (isActive) {
+              b.style.background = 'var(--teal-700)';
+              b.style.color = 'var(--gray-0)';
+              b.style.borderColor = 'var(--teal-700)';
+            } else {
+              b.style.background = '';
+              b.style.color = '';
+              b.style.borderColor = '';
+            }
+          });
+          document.querySelectorAll('.story-card').forEach(function (card) {
+            var cat = card.getAttribute('data-story-cat');
+            var show = (filter === 'all' || filter === cat);
+            card.style.display = show ? '' : 'none';
+          });
         });
       });
-    });
+    }).catch(function (e) { console.error('소식 목록 로드 실패', e); });
+  }
+
+  // ── 상세 페이지 ──
+  var stTitleEl = document.getElementById('st-title');
+  if (stTitleEl) {
+    var stParams = new URLSearchParams(window.location.search);
+    var stId = stParams.get('id') || '1';
+    loadStories().then(function (stories) {
+      var sorted = stories.slice().sort(function (a, b) { return new Date(a.date) - new Date(b.date); });
+      var idx = sorted.findIndex(function (x) { return String(x.id) === String(stId); });
+      var s = idx >= 0 ? sorted[idx] : sorted[0];
+      if (!s) return;
+
+      document.getElementById('st-category').textContent = s.category;
+      document.getElementById('st-title').textContent = s.title;
+      document.getElementById('st-date').textContent = fmtDate(s.date);
+      document.getElementById('st-views').textContent = s.views;
+      var bodyEl = document.getElementById('st-body');
+      var paragraphs = (s.body || s.summary || '').split(/\n\n+/);
+      bodyEl.innerHTML = paragraphs.map(function (p) {
+        return '<p style="margin: 0 0 20px; color: var(--text-secondary);">' + p.replace(/\n/g, '<br>') + '</p>';
+      }).join('');
+
+      var prevS = sorted[idx - 1];
+      var nextS = sorted[idx + 1];
+      var prevLink = document.getElementById('st-prev-link');
+      var nextLink = document.getElementById('st-next-link');
+      if (prevS) {
+        prevLink.href = 'story-detail.html?id=' + encodeURIComponent(prevS.id);
+        document.getElementById('st-prev-title').textContent = prevS.title;
+      } else if (prevLink) { prevLink.style.display = 'none'; }
+      if (nextS) {
+        nextLink.href = 'story-detail.html?id=' + encodeURIComponent(nextS.id);
+        document.getElementById('st-next-title').textContent = nextS.title;
+      } else if (nextLink) { nextLink.style.display = 'none'; }
+
+      document.title = s.title + ' - BZ STORY';
+    }).catch(function (e) { console.error('소식 상세 로드 실패', e); });
   }
 })();
