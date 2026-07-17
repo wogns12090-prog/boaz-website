@@ -13,7 +13,7 @@
 
   function reviewImageHTML(r, aspectStyle) {
     if (r.image) {
-      return '<div style="' + aspectStyle + ' background-image: url(' + r.image + '); background-size: cover; background-position: center;"></div>';
+      return '<div style="' + aspectStyle + ' width: 100%; height: 100%; min-height: 100px; background-color: var(--teal-200); background-image: url(' + r.image + '); background-size: cover; background-position: center;"></div>';
     }
     return '<div style="' + aspectStyle + ' background: linear-gradient(135deg, var(--teal-300), var(--teal-600)); display: flex; align-items: center; justify-content: center;">' +
       '<span style="position: absolute; bottom: 10px; right: 12px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.35); padding: 3px 8px; border-radius: 4px;">REVIEW PHOTO</span>' +
@@ -44,7 +44,7 @@
   // ── 목록 페이지 카드 HTML (가로형) ──
   function listCardHTML(r) {
     var imgArea = r.image
-      ? '<div style="background-image: url(' + r.image + '); background-size: cover; background-position: center;"></div>'
+      ? '<div style="width: 100%; height: 100%; min-height: 120px; background-color: var(--teal-200); background-image: url(' + r.image + '); background-size: cover; background-position: center;"></div>'
       : '<div style="background: linear-gradient(135deg, var(--teal-300), var(--teal-600)); display: flex; align-items: center; justify-content: center; color: var(--gray-0);">' +
           '<svg fill="none" height="36" stroke="currentColor" stroke-width="1.25" style="opacity:0.7" viewBox="0 0 24 24" width="36"><rect height="14" rx="2" width="18" x="3" y="4"></rect><path d="M7 8h4M7 12h6M15 8h2M15 12h2"></path></svg>' +
         '</div>';
@@ -161,9 +161,12 @@
       var imgBox = document.getElementById('rv-image');
       if (imgBox) {
         if (r.image) {
+          imgBox.style.backgroundColor = 'var(--teal-200)';
           imgBox.style.backgroundImage = 'url(' + r.image + ')';
           imgBox.style.backgroundSize = 'cover';
           imgBox.style.backgroundPosition = 'center';
+        } else {
+          imgBox.hidden = true;
         }
       }
       var bodyEl = document.getElementById('rv-body');
