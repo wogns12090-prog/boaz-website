@@ -11,13 +11,20 @@
     return d.replace(/-/g, '.');
   }
 
+  function reviewImageHTML(r, aspectStyle) {
+    if (r.image) {
+      return '<div style="' + aspectStyle + ' background-image: url(' + r.image + '); background-size: cover; background-position: center;"></div>';
+    }
+    return '<div style="' + aspectStyle + ' background: linear-gradient(135deg, var(--teal-300), var(--teal-600)); display: flex; align-items: center; justify-content: center;">' +
+      '<span style="position: absolute; bottom: 10px; right: 12px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.35); padding: 3px 8px; border-radius: 4px;">REVIEW PHOTO</span>' +
+      '</div>';
+  }
+
   // ── 홈 캐러셀 카드 HTML ──
   function homeCardHTML(r) {
     return '' +
       '<a href="review-detail.html?id=' + encodeURIComponent(r.id) + '" style="display: block; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; transition: box-shadow var(--duration-base) var(--ease-out); color: inherit;">' +
-        '<div style="aspect-ratio: 16 / 10; position: relative; background: linear-gradient(135deg, var(--teal-300), var(--teal-600)); display: flex; align-items: center; justify-content: center;">' +
-          '<span style="position: absolute; bottom: 10px; right: 12px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.35); padding: 3px 8px; border-radius: 4px;">REVIEW PHOTO</span>' +
-        '</div>' +
+        reviewImageHTML(r, 'aspect-ratio: 16 / 10; position: relative;') +
         '<div style="padding: 20px 22px;">' +
           '<div style="display:flex; align-items:center; gap:8px;">' +
             '<span style="font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--teal-700);">' + r.rating.toFixed(1) + '</span>' +
@@ -36,12 +43,15 @@
 
   // ── 목록 페이지 카드 HTML (가로형) ──
   function listCardHTML(r) {
+    var imgArea = r.image
+      ? '<div style="background-image: url(' + r.image + '); background-size: cover; background-position: center;"></div>'
+      : '<div style="background: linear-gradient(135deg, var(--teal-300), var(--teal-600)); display: flex; align-items: center; justify-content: center; color: var(--gray-0);">' +
+          '<svg fill="none" height="36" stroke="currentColor" stroke-width="1.25" style="opacity:0.7" viewBox="0 0 24 24" width="36"><rect height="14" rx="2" width="18" x="3" y="4"></rect><path d="M7 8h4M7 12h6M15 8h2M15 12h2"></path></svg>' +
+        '</div>';
     return '' +
       '<a href="review-detail.html?id=' + encodeURIComponent(r.id) + '" style="display: block; color: inherit;">' +
         '<article class="card" style="display: grid; grid-template-columns: 160px 1fr; overflow: hidden; height: 100%;">' +
-          '<div style="background: linear-gradient(135deg, var(--teal-300), var(--teal-600)); display: flex; align-items: center; justify-content: center; color: var(--gray-0);">' +
-            '<svg fill="none" height="36" stroke="currentColor" stroke-width="1.25" style="opacity:0.7" viewBox="0 0 24 24" width="36"><rect height="14" rx="2" width="18" x="3" y="4"></rect><path d="M7 8h4M7 12h6M15 8h2M15 12h2"></path></svg>' +
-          '</div>' +
+          imgArea +
           '<div style="padding: 20px 22px; display: flex; flex-direction: column;">' +
             '<div style="display:flex; align-items:center; gap:8px;">' +
               '<span style="font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--teal-700);">' + r.rating.toFixed(1) + '</span>' +
@@ -148,6 +158,14 @@
       document.getElementById('rv-industry').textContent = r.industry;
       document.getElementById('rv-region').textContent = r.region;
       document.getElementById('rv-date').textContent = fmtDate(r.date);
+      var imgBox = document.getElementById('rv-image');
+      if (imgBox) {
+        if (r.image) {
+          imgBox.style.backgroundImage = 'url(' + r.image + ')';
+          imgBox.style.backgroundSize = 'cover';
+          imgBox.style.backgroundPosition = 'center';
+        }
+      }
       var bodyEl = document.getElementById('rv-body');
       var paragraphs = (r.body || r.summary || '').split(/\n\n+/);
       bodyEl.innerHTML = paragraphs.map(function (p) {
