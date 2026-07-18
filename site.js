@@ -11,7 +11,7 @@
     return d.replace(/-/g, '.');
   }
 
-  // ── 일반 텍스트 본문 → 문단 HTML ──
+  // ── 일반 텍스트 본문 → 문단 HTML (폴백용) ──
   function renderPlainBody(text) {
     if (!text) return '';
     var blocks = text.split(/\n\s*\n/);
@@ -22,17 +22,26 @@
     }).join('');
   }
 
-  // ── 본문 사진 갤러리 HTML ──
-  function renderBodyGallery(images) {
-    if (!images || !images.length) return '';
-    var items = images.map(function (item) {
-      if (!item || !item.img) return '';
-      return '<figure style="margin: 0;">' +
-        '<img src="' + item.img + '" alt="' + (item.caption || '') + '" loading="lazy" style="width: 100%; height: auto; border-radius: var(--radius-lg); display: block;">' +
-        (item.caption ? '<figcaption style="margin-top: 8px; font-size: 13px; color: var(--text-tertiary); text-align: center;">' + item.caption + '</figcaption>' : '') +
-        '</figure>';
+  // ── 글/사진 블록 목록 → HTML (원하는 순서대로 섞어서 배치 가능) ──
+  function renderContentBlocks(blocks, fallbackText) {
+    if (!blocks || !blocks.length) {
+      return renderPlainBody(fallbackText || '');
+    }
+    return blocks.map(function (block) {
+      if (!block) return '';
+      if (block.type === 'image') {
+        if (!block.img) return '';
+        return '<figure style="margin: 28px 0;">' +
+          '<img src="' + block.img + '" alt="' + (block.caption || '') + '" loading="lazy" style="width: 100%; height: auto; border-radius: var(--radius-xl); display: block;">' +
+          (block.caption ? '<figcaption style="margin-top: 8px; font-size: 13px; color: var(--text-tertiary); text-align: center;">' + block.caption + '</figcaption>' : '') +
+          '</figure>';
+      }
+      if (block.type === 'text') {
+        if (!block.value) return '';
+        return '<p style="margin: 0 0 20px; color: var(--text-secondary);">' + block.value.replace(/\n/g, '<br>') + '</p>';
+      }
+      return '';
     }).join('');
-    return '<div style="margin: 28px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">' + items + '</div>';
   }
 
   function reviewImageHTML(r, aspectStyle) {
@@ -195,7 +204,7 @@
         }
       }
       var bodyEl = document.getElementById('rv-body');
-      bodyEl.innerHTML = renderPlainBody(r.body || r.summary || '') + renderBodyGallery(r.bodyImages);
+      bodyEl.innerHTML = renderContentBlocks(r.content, r.body || r.summary);
       var replyBlock = document.getElementById('rv-reply-block');
       if (r.reply && r.reply.trim()) {
         document.getElementById('rv-reply-text').textContent = r.reply;
@@ -353,7 +362,7 @@
         }
       }
       var bodyEl = document.getElementById('st-body');
-      bodyEl.innerHTML = renderPlainBody(s.body || s.summary || '') + renderBodyGallery(s.bodyImages);
+      bodyEl.innerHTML = renderContentBlocks(s.content, s.body || s.summary);
 
       var prevS = sorted[idx - 1];
       var nextS = sorted[idx + 1];
