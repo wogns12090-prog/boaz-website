@@ -11,27 +11,28 @@
     return d.replace(/-/g, '.');
   }
 
-  // ── 간단 마크다운 → HTML 변환 (본문 중간 사진 삽입 지원) ──
-  function renderMarkdownBody(md) {
-    if (!md) return '';
-    var blocks = md.split(/\n\s*\n/);
+  // ── 일반 텍스트 본문 → 문단 HTML ──
+  function renderPlainBody(text) {
+    if (!text) return '';
+    var blocks = text.split(/\n\s*\n/);
     return blocks.map(function (block) {
       block = block.trim();
       if (!block) return '';
-      var imgOnly = block.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
-      if (imgOnly) {
-        return '<figure style="margin: 28px 0;"><img src="' + imgOnly[2] + '" alt="' + imgOnly[1] + '" loading="lazy" style="width: 100%; height: auto; border-radius: var(--radius-xl); display: block;">' +
-          (imgOnly[1] ? '<figcaption style="margin-top: 8px; font-size: 13px; color: var(--text-tertiary); text-align: center;">' + imgOnly[1] + '</figcaption>' : '') +
-          '</figure>';
-      }
-      var html = block
-        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy" style="max-width: 100%; height: auto; border-radius: var(--radius-lg); display: block; margin: 12px 0;">')
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-        .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
-        .replace(/\*([^*]+)\*/g, '<i>$1</i>')
-        .replace(/\n/g, '<br>');
-      return '<p style="margin: 0 0 20px; color: var(--text-secondary);">' + html + '</p>';
+      return '<p style="margin: 0 0 20px; color: var(--text-secondary);">' + block.replace(/\n/g, '<br>') + '</p>';
     }).join('');
+  }
+
+  // ── 본문 사진 갤러리 HTML ──
+  function renderBodyGallery(images) {
+    if (!images || !images.length) return '';
+    var items = images.map(function (item) {
+      if (!item || !item.img) return '';
+      return '<figure style="margin: 0;">' +
+        '<img src="' + item.img + '" alt="' + (item.caption || '') + '" loading="lazy" style="width: 100%; height: auto; border-radius: var(--radius-lg); display: block;">' +
+        (item.caption ? '<figcaption style="margin-top: 8px; font-size: 13px; color: var(--text-tertiary); text-align: center;">' + item.caption + '</figcaption>' : '') +
+        '</figure>';
+    }).join('');
+    return '<div style="margin: 28px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">' + items + '</div>';
   }
 
   function reviewImageHTML(r, aspectStyle) {
@@ -194,7 +195,7 @@
         }
       }
       var bodyEl = document.getElementById('rv-body');
-      bodyEl.innerHTML = renderMarkdownBody(r.body || r.summary || '');
+      bodyEl.innerHTML = renderPlainBody(r.body || r.summary || '') + renderBodyGallery(r.bodyImages);
       var replyBlock = document.getElementById('rv-reply-block');
       if (r.reply && r.reply.trim()) {
         document.getElementById('rv-reply-text').textContent = r.reply;
@@ -352,7 +353,7 @@
         }
       }
       var bodyEl = document.getElementById('st-body');
-      bodyEl.innerHTML = renderMarkdownBody(s.body || s.summary || '');
+      bodyEl.innerHTML = renderPlainBody(s.body || s.summary || '') + renderBodyGallery(s.bodyImages);
 
       var prevS = sorted[idx - 1];
       var nextS = sorted[idx + 1];
