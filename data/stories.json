@@ -95,7 +95,8 @@
         },
         {
           "type": "image",
-          "img": "/assets/uploads/울산광역시-새소식-썸네일-2.jpg"
+          "img": "/assets/uploads/울산광역시-새소식-썸네일-2.jpg",
+          "caption": "test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1"
         }
       ]
     }
