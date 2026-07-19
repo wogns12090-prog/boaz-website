@@ -60,9 +60,9 @@ collections:
               - {label: "작성자 (예: 김OO 팀장)", name: "author", widget: "string"}
               - {label: "업종", name: "industry", widget: "string"}
               - {label: "지역", name: "region", widget: "string"}
-              - {label: "날짜", name: "date", widget: "date", format: "YYYY-MM-DD"}
+              - {label: "날짜", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false}
               - {label: "관리자 답글 (선택, 비워두면 안 보임)", name: "reply", widget: "text", required: false}
-              - {label: "답글 날짜 (선택)", name: "replyDate", widget: "date", required: false, format: "YYYY-MM-DD"}
+              - {label: "답글 날짜 (선택)", name: "replyDate", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: false}
 
   - name: "stories"
     label: "BZ STORY (소식)"
@@ -99,5 +99,5 @@ collections:
                     fields:
                       - {label: "사진", name: "img", widget: "image"}
                       - {label: "설명 (선택)", name: "caption", widget: "string", required: false}
-              - {label: "날짜", name: "date", widget: "date", format: "YYYY-MM-DD"}
+              - {label: "날짜", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false}
               - {label: "조회수 (숫자만, 처음엔 0으로 시작해도 됨)", name: "views", widget: "string", default: "0"}
