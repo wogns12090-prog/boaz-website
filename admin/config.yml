@@ -16,7 +16,7 @@ backend:
 # Better Decap + Bridge logo (optional)
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 # Add site links in Decap CMS (optional)
-site_url: https://boaz-website.netlify.app
+site_url: https://wogns12090-prog.github.io/boaz-website
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
