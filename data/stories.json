@@ -80,6 +80,24 @@
       "body": "울산광역시로부터 「2024 우수 환경기업」 인증을 획득했습니다.\n\n지속적인 기술개발과 지역사회 기여가 인정받은 결과이며, 앞으로도 최선을 다하겠습니다.",
       "date": "2024-07-12",
       "views": "892"
+    },
+    {
+      "views": "0",
+      "id": "10",
+      "image": "/assets/uploads/stories/보아스환경기술-원형-이미지.png",
+      "title": "test1",
+      "category": "회사소식",
+      "summary": "test1test1test1",
+      "content": [
+        {
+          "type": "text",
+          "value": "test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1"
+        },
+        {
+          "type": "image",
+          "img": "/assets/uploads/울산광역시-새소식-썸네일-2.jpg"
+        }
+      ]
     }
   ]
 }
