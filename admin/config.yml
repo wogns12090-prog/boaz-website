@@ -19,7 +19,7 @@ logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 site_url: https://wogns12090-prog.github.io/boaz-website
 
 media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
+public_folder: "assets/uploads"
 
 collections:
   - name: "reviews"
@@ -35,7 +35,7 @@ collections:
             summary: "{{fields.title}} — {{fields.author}} ({{fields.rating}}점)"
             fields:
               - {label: "ID (숫자, 겹치지 않게)", name: "id", widget: "string"}
-              - {label: "사진 (선택, 안 올리면 기본 배경 사용)", name: "image", widget: "image", required: false, media_folder: "/assets/uploads/reviews", public_folder: "/assets/uploads/reviews"}
+              - {label: "사진 (선택, 안 올리면 기본 배경 사용)", name: "image", widget: "image", required: false, media_folder: "assets/uploads/reviews", public_folder: "assets/uploads/reviews"}
               - {label: "별점 (1~5)", name: "rating", widget: "number", value_type: "float", min: 1, max: 5, step: 0.1}
               - {label: "제목", name: "title", widget: "string"}
               - {label: "요약 (목록 카드에 짧게 보이는 글)", name: "summary", widget: "text"}
@@ -78,7 +78,7 @@ collections:
             fields:
               - {label: "ID (숫자, 겹치지 않게)", name: "id", widget: "string"}
               - {label: "카테고리", name: "category", widget: "select", options: ["환경뉴스", "회사소식"]}
-              - {label: "사진 (선택, 안 올리면 기본 배경 사용)", name: "image", widget: "image", required: false, media_folder: "/assets/uploads/stories", public_folder: "/assets/uploads/stories"}
+              - {label: "사진 (선택, 안 올리면 기본 배경 사용)", name: "image", widget: "image", required: false, media_folder: "assets/uploads/stories", public_folder: "assets/uploads/stories"}
               - {label: "제목", name: "title", widget: "string"}
               - {label: "요약 (목록 카드에 짧게 보이는 글)", name: "summary", widget: "text"}
               - label: "본문 (글/사진 블록을 원하는 순서로 추가하세요)"
