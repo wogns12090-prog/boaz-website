@@ -84,7 +84,7 @@
     {
       "views": "0",
       "id": "10",
-      "image": "/assets/uploads/stories/보아스환경기술-원형-이미지.png",
+      "image": "assets/uploads/stories/보아스환경기술-원형-이미지.png",
       "title": "test1",
       "category": "회사소식",
       "summary": "test1test1test1",
@@ -95,7 +95,7 @@
         },
         {
           "type": "image",
-          "img": "/assets/uploads/울산광역시-새소식-썸네일-2.jpg",
+          "img": "assets/uploads/울산광역시-새소식-썸네일-2.jpg",
           "caption": "test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1test1"
         }
       ]
