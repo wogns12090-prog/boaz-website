@@ -118,6 +118,24 @@
       "id": "10",
       "image": "/assets/uploads/stories/울산광역시-새소식-썸네일.jpg",
       "category": "회사소식"
+    },
+    {
+      "views": "0",
+      "id": "11",
+      "category": "환경뉴스",
+      "image": "/assets/uploads/stories/보아스환경기술-원형-이미지.png",
+      "title": "test2222222222",
+      "summary": "test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222",
+      "content": [
+        {
+          "type": "text",
+          "value": "test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222test2222222222"
+        },
+        {
+          "type": "image",
+          "img": "/assets/uploads/보아스-회사-로고.png"
+        }
+      ]
     }
   ]
 }
