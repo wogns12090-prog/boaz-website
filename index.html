@@ -53,10 +53,10 @@
   a { color: var(--teal-600); text-decoration: none; }
   a:hover { color: var(--teal-700); }
   .container { max-width: var(--container-wide); margin: 0 auto; padding: 0 32px; }
-  .eyebrow { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-600); font-weight: 600; }
-  .section-title { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; margin: 8px 0 0; color: var(--text-primary); }
-  .section-lead { font-size: 15px; line-height: 1.7; color: var(--text-secondary); margin-top: 14px; max-width: 640px; }
-  .btn-view { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--teal-700); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 8px 14px; background: var(--gray-0); transition: all var(--duration-fast) var(--ease-out); }
+  .eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-600); font-weight: 600; }
+  .section-title { font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin: 10px 0 0; color: var(--text-primary); }
+  .section-lead { font-size: 17px; line-height: 1.7; color: var(--text-secondary); margin-top: 14px; max-width: 640px; }
+  .btn-view { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--teal-700); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 10px 16px; background: var(--gray-0); transition: all var(--duration-fast) var(--ease-out); }
   .btn-view:hover { background: var(--teal-50); border-color: var(--teal-600); color: var(--teal-800); }
   /* Hero slider */
   @keyframes slideKenBurns { 0% { transform: scale(1.06); } 100% { transform: scale(1.14); } }
@@ -177,7 +177,7 @@
 }
 </style></head>
 <body>
-<div id="dc-root"><div class="sc-host" data-sc-name="home"><header data-dc-tpl="11" style="position: sticky; top: 0px; z-index: 20; background: rgba(251, 250, 247, 0.94); backdrop-filter: saturate(1.2) blur(8px); border-bottom: 1px solid var(--border-subtle);">
+<div id="dc-root"><div class="sc-host" data-sc-name="home"><header data-dc-tpl="11" style="z-index: 20;">
 <div class="container" data-dc-tpl="12" style="display: flex; align-items: center; justify-content: space-between; padding-top: 18px; padding-bottom: 18px; gap: 24px;">
 <a data-dc-tpl="13" href="index.html" style="display: flex; align-items: center; gap: 12px;">
 <img alt="㈜보아스환경기술" data-dc-tpl="14" src="assets/logo.svg" style="height: 108px; width: auto; display: block;"/>
@@ -193,7 +193,7 @@
         카카오톡 상담
       </a>
 </nav>
-</div></header><section data-dc-tpl="24" id="home" style="position: relative; color: var(--gray-0); overflow: hidden; min-height: calc(100vh - 108px);">
+</div></header><section data-dc-tpl="24" id="home" style="position: relative; color: var(--gray-0); overflow: hidden; min-height: 100vh; display: flex; align-items: center;">
 <div aria-hidden="true" data-dc-tpl="25" style="position: absolute; inset: 0px; background: var(--teal-900);">
 <div class="hero-slide active" data-dc-tpl="27">
 <div class="hero-slide-img img-ph" data-dc-tpl="28" data-label="HERO IMAGE 01 · 교체 가능" style="background: url(assets/hero-1.jpg) center/cover no-repeat, linear-gradient(135deg, rgb(1, 63, 68) 0%, rgb(1, 115, 125) 55%, rgb(34, 165, 172) 100%);">
@@ -220,22 +220,24 @@
 <div data-dc-tpl="30" style="position: absolute; inset: 0px; background: linear-gradient(90deg, rgba(1, 45, 50, 0.85) 0%, rgba(1, 115, 125, 0.55) 55%, rgba(1, 115, 125, 0.35) 100%);"></div>
 </div>
 </div>
-<div class="container" data-dc-tpl="31" style="position: relative; padding-top: 140px; padding-bottom: 140px;">
-<div data-dc-tpl="32" style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 255, 255, 0.75); font-weight: 600;">BOAZ ENVIRONMENTAL TECHNOLOGY</div>
-<h1 data-dc-tpl="33" style="font-size: 54px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin: 20px 0px 0px; max-width: 900px; text-shadow: 0 2px 20px rgba(0,0,0,0.25);">사람과 자연이 하나가 되는 기술</h1>
-<p data-dc-tpl="34" style="font-size: 20px; line-height: 1.6; color: rgba(255, 255, 255, 0.9); margin-top: 22px; max-width: 720px; font-weight: 400; text-shadow: 0 1px 12px rgba(0,0,0,0.25);">
+<div class="container" data-dc-tpl="31" style="position: relative; padding-top: 190px; padding-bottom: 110px; width: 100%;">
+<div data-dc-tpl="32" style="font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 255, 255, 0.75); font-weight: 600;">BOAZ ENVIRONMENTAL TECHNOLOGY</div>
+<h1 data-dc-tpl="33" style="font-size: 72px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.18; margin: 24px 0px 0px; max-width: 1000px; text-shadow: 0 2px 20px rgba(0,0,0,0.25);">사람과 자연이 하나가 되는 기술</h1>
+<p data-dc-tpl="34" style="font-size: 23px; line-height: 1.6; color: rgba(255, 255, 255, 0.9); margin-top: 24px; max-width: 760px; font-weight: 400; text-shadow: 0 1px 12px rgba(0,0,0,0.25);">
       ㈜보아스환경기술은 대기분야 환경계측기기 전문기업으로<br data-dc-tpl="35"/>
       수년간의 연구 기술을 바탕으로 쾌적한 대기질을 위해 최적의 솔루션을 제공합니다.
     </p>
-<div data-dc-tpl="36" style="margin-top: 40px; display: flex; gap: 12px; align-items: center;">
-<a data-dc-tpl="37" href="biz-air.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; background: var(--gray-0); color: var(--teal-800); border-radius: var(--radius-md); font-size: 15px; font-weight: 600;">사업분야 보기 →</a>
-<a data-dc-tpl="38" href="greeting.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; background: rgba(255, 255, 255, 0.1); color: var(--gray-0); border: 1px solid rgba(255, 255, 255, 0.45); border-radius: var(--radius-md); font-size: 15px; font-weight: 500;">회사소개</a>
+<div data-dc-tpl="36" style="margin-top: 44px; display: flex; gap: 14px; align-items: center;">
+<a data-dc-tpl="37" href="biz-air.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 18px 32px; background: var(--gray-0); color: var(--teal-800); border-radius: var(--radius-md); font-size: 17px; font-weight: 600;">사업분야 보기 →</a>
+<a data-dc-tpl="38" href="greeting.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 18px 32px; background: rgba(255, 255, 255, 0.1); color: var(--gray-0); border: 1px solid rgba(255, 255, 255, 0.45); border-radius: var(--radius-md); font-size: 17px; font-weight: 500;">회사소개</a>
 </div>
 </div>
-<div data-dc-tpl="39" style="position: absolute; left: 0px; right: 0px; bottom: 32px; display: flex; justify-content: center; gap: 10px; z-index: 5;">
-<button aria-label="슬라이드 01" data-dc-tpl="41" style="width: 28px; height: 8px; border-radius: 999px; border: medium; padding: 0px; cursor: pointer; background: rgba(255, 255, 255, 0.95); transition: all var(--duration-base) var(--ease-out);" type="button"></button>
-<button aria-label="슬라이드 02" data-dc-tpl="41" style="width: 8px; height: 8px; border-radius: 999px; border: medium; padding: 0px; cursor: pointer; background: rgba(255, 255, 255, 0.4); transition: all var(--duration-base) var(--ease-out);" type="button"></button>
-<button aria-label="슬라이드 03" data-dc-tpl="41" style="width: 8px; height: 8px; border-radius: 999px; border: medium; padding: 0px; cursor: pointer; background: rgba(255, 255, 255, 0.4); transition: all var(--duration-base) var(--ease-out);" type="button"></button>
+<div class="hero-slidenav" data-dc-tpl="39">
+<button aria-label="이전 슬라이드" class="hero-slidenav-btn" data-dir="-1" type="button">‹</button>
+<span class="hero-slidenav-current">01</span>
+<span class="hero-slidenav-track"><span class="hero-slidenav-fill"></span></span>
+<span class="hero-slidenav-total">03</span>
+<button aria-label="다음 슬라이드" class="hero-slidenav-btn" data-dir="1" type="button">›</button>
 </div></section><section data-dc-tpl="42" id="review" style="padding: 80px 0px; background: var(--paper);">
 <div class="container" data-dc-tpl="43">
 <div data-dc-tpl="44" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; gap: 20px; flex-wrap: wrap;">
@@ -270,19 +272,19 @@
 </div>
 <div data-dc-tpl="90" style="margin-top: 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
 <div data-dc-tpl="91" style="background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px;">
-<div data-dc-tpl="92" style="font-family: var(--font-mono); font-size: 32px; font-weight: 700; color: var(--teal-700); letter-spacing: -0.02em;">2021</div>
+<div data-dc-tpl="92" style="font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: var(--teal-700); letter-spacing: -0.02em;">2021</div>
 <div data-dc-tpl="93" style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">법인 설립</div>
 </div>
 <div data-dc-tpl="94" style="background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px;">
-<div data-dc-tpl="95" style="font-family: var(--font-mono); font-size: 32px; font-weight: 700; color: var(--teal-700); letter-spacing: -0.02em;">19<span data-dc-tpl="96" style="font-size: 18px; color: var(--text-secondary); font-weight: 500;">명</span></div>
+<div data-dc-tpl="95" style="font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: var(--teal-700); letter-spacing: -0.02em;">19<span data-dc-tpl="96" style="font-size: 18px; color: var(--text-secondary); font-weight: 500;">명</span></div>
 <div data-dc-tpl="97" style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">전문 인력</div>
 </div>
 <div data-dc-tpl="98" style="background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px;">
-<div data-dc-tpl="99" style="font-family: var(--font-mono); font-size: 32px; font-weight: 700; color: var(--teal-700); letter-spacing: -0.02em;">A<span data-dc-tpl="100" style="font-size: 18px; color: var(--text-secondary); font-weight: 500;">등급</span></div>
+<div data-dc-tpl="99" style="font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: var(--teal-700); letter-spacing: -0.02em;">A<span data-dc-tpl="100" style="font-size: 18px; color: var(--text-secondary); font-weight: 500;">등급</span></div>
 <div data-dc-tpl="101" style="font-size: 13px; color: var(--text-secondary); margin-top: 4px; line-height: 1.5;">2025년 대기분야<br data-dc-tpl="102"/>용역이행능력평가</div>
 </div>
 <div data-dc-tpl="103" style="background: var(--teal-700); color: var(--gray-0); border-radius: var(--radius-xl); padding: 24px;">
-<div data-dc-tpl="104" style="font-family: var(--font-mono); font-size: 32px; font-weight: 700; letter-spacing: -0.02em;">2024</div>
+<div data-dc-tpl="104" style="font-family: var(--font-mono); font-size: 36px; font-weight: 700; letter-spacing: -0.02em;">2024</div>
 <div data-dc-tpl="105" style="font-size: 13px; color: rgba(255, 255, 255, 0.85); margin-top: 4px; line-height: 1.5;">환경일자리<br data-dc-tpl="106"/>으뜸기업 선정</div>
 </div>
 </div>
@@ -300,8 +302,8 @@
 <div data-dc-tpl="118" style="position: absolute; top: 14px; right: 14px; font-family: var(--font-mono); font-size: 11px; color: rgba(255, 255, 255, 0.9); background: rgba(0, 0, 0, 0.28); padding: 4px 10px; border-radius: var(--radius-pill); letter-spacing: 0.1em; font-weight: 600;"><span class="sc-interp">BUSINESS 01</span></div>
 </div>
 <div data-dc-tpl="119" style="padding: 28px 30px 30px;">
-<h3 data-dc-tpl="120" style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin: 0px 0px 12px;"><span class="sc-interp">대기측정 및 분석</span></h3>
-<p data-dc-tpl="121" style="font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin: 0px;"><span class="sc-interp">최신 장비와 최고의 기술로 환경오염물질을 측정하고 정확한 분석 및 솔루션 제공으로 고객만족을 이끌어냅니다.</span></p>
+<h3 data-dc-tpl="120" style="font-size: 25px; font-weight: 700; letter-spacing: -0.02em; margin: 0px 0px 14px;"><span class="sc-interp">대기측정 및 분석</span></h3>
+<p data-dc-tpl="121" style="font-size: 15.5px; line-height: 1.75; color: var(--text-secondary); margin: 0px;"><span class="sc-interp">최신 장비와 최고의 기술로 환경오염물질을 측정하고 정확한 분석 및 솔루션 제공으로 고객만족을 이끌어냅니다.</span></p>
 <div data-dc-tpl="122" style="margin-top: 20px; font-size: 13px; color: var(--teal-700); font-weight: 600;">view more →</div>
 </div>
 </a>
@@ -311,8 +313,8 @@
 <div data-dc-tpl="118" style="position: absolute; top: 14px; right: 14px; font-family: var(--font-mono); font-size: 11px; color: rgba(255, 255, 255, 0.9); background: rgba(0, 0, 0, 0.28); padding: 4px 10px; border-radius: var(--radius-pill); letter-spacing: 0.1em; font-weight: 600;"><span class="sc-interp">BUSINESS 02</span></div>
 </div>
 <div data-dc-tpl="119" style="padding: 28px 30px 30px;">
-<h3 data-dc-tpl="120" style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin: 0px 0px 12px;"><span class="sc-interp">보유장비</span></h3>
-<p data-dc-tpl="121" style="font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin: 0px;"><span class="sc-interp">사업장의 대기오염질 배출시설 및 방지시설에 대한 최신식 측정장비와 분석장비를 보유하고 있습니다.</span></p>
+<h3 data-dc-tpl="120" style="font-size: 25px; font-weight: 700; letter-spacing: -0.02em; margin: 0px 0px 14px;"><span class="sc-interp">보유장비</span></h3>
+<p data-dc-tpl="121" style="font-size: 15.5px; line-height: 1.75; color: var(--text-secondary); margin: 0px;"><span class="sc-interp">사업장의 대기오염질 배출시설 및 방지시설에 대한 최신식 측정장비와 분석장비를 보유하고 있습니다.</span></p>
 <div data-dc-tpl="122" style="margin-top: 20px; font-size: 13px; color: var(--teal-700); font-weight: 600;">view more →</div>
 </div>
 </a>
@@ -322,8 +324,8 @@
 <div data-dc-tpl="118" style="position: absolute; top: 14px; right: 14px; font-family: var(--font-mono); font-size: 11px; color: rgba(255, 255, 255, 0.9); background: rgba(0, 0, 0, 0.28); padding: 4px 10px; border-radius: var(--radius-pill); letter-spacing: 0.1em; font-weight: 600;"><span class="sc-interp">BUSINESS 03</span></div>
 </div>
 <div data-dc-tpl="119" style="padding: 28px 30px 30px;">
-<h3 data-dc-tpl="120" style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin: 0px 0px 12px;"><span class="sc-interp">관련기관</span></h3>
-<p data-dc-tpl="121" style="font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin: 0px;"><span class="sc-interp">㈜보아스환경기술은 많은 관련기관과 함께 쾌적한 환경을 위해 끊임없이 연구합니다.</span></p>
+<h3 data-dc-tpl="120" style="font-size: 25px; font-weight: 700; letter-spacing: -0.02em; margin: 0px 0px 14px;"><span class="sc-interp">관련기관</span></h3>
+<p data-dc-tpl="121" style="font-size: 15.5px; line-height: 1.75; color: var(--text-secondary); margin: 0px;"><span class="sc-interp">㈜보아스환경기술은 많은 관련기관과 함께 쾌적한 환경을 위해 끊임없이 연구합니다.</span></p>
 <div data-dc-tpl="122" style="margin-top: 20px; font-size: 13px; color: var(--teal-700); font-weight: 600;">view more →</div>
 </div>
 </a>
@@ -344,8 +346,8 @@
 <div data-dc-tpl="134" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.9); padding: 4px 10px; border-radius: var(--radius-pill);">공지</div>
 </div>
 <div data-dc-tpl="135" style="padding: 22px 24px 24px;">
-<h3 data-dc-tpl="136" style="font-size: 17px; font-weight: 600; margin: 0px 0px 10px; line-height: 1.45; letter-spacing: -0.01em;">대기배출구 시료채취 안전관리 가이드라인</h3>
-<p data-dc-tpl="137" style="font-size: 13.5px; line-height: 1.65; color: var(--text-secondary); margin: 0px;">대기배출구 시료채취 작업자 안전을 위한 필수 가이드라인을 안내드립니다.</p>
+<h3 data-dc-tpl="136" style="font-size: 19px; font-weight: 600; margin: 0px 0px 12px; line-height: 1.45; letter-spacing: -0.01em;">대기배출구 시료채취 안전관리 가이드라인</h3>
+<p data-dc-tpl="137" style="font-size: 14.5px; line-height: 1.7; color: var(--text-secondary); margin: 0px;">대기배출구 시료채취 작업자 안전을 위한 필수 가이드라인을 안내드립니다.</p>
 <div data-dc-tpl="138" style="margin-top: 18px; font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">2025.03.14</div>
 </div>
 </article>
@@ -354,8 +356,8 @@
 <div data-dc-tpl="141" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.9); padding: 4px 10px; border-radius: var(--radius-pill);">수상</div>
 </div>
 <div data-dc-tpl="142" style="padding: 22px 24px 24px;">
-<h3 data-dc-tpl="143" style="font-size: 17px; font-weight: 600; margin: 0px 0px 10px; line-height: 1.45; letter-spacing: -0.01em;">2024 환경일자리 으뜸기업 선정</h3>
-<p data-dc-tpl="144" style="font-size: 13.5px; line-height: 1.65; color: var(--text-secondary); margin: 0px;">환경부가 주관하는 '2024 환경일자리 으뜸기업'에 보아스환경기술이 선정되었습니다.</p>
+<h3 data-dc-tpl="143" style="font-size: 19px; font-weight: 600; margin: 0px 0px 12px; line-height: 1.45; letter-spacing: -0.01em;">2024 환경일자리 으뜸기업 선정</h3>
+<p data-dc-tpl="144" style="font-size: 14.5px; line-height: 1.7; color: var(--text-secondary); margin: 0px;">환경부가 주관하는 '2024 환경일자리 으뜸기업'에 보아스환경기술이 선정되었습니다.</p>
 <div data-dc-tpl="145" style="margin-top: 18px; font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">2024.08.28</div>
 </div>
 </article>
@@ -364,230 +366,36 @@
 <div data-dc-tpl="148" style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.9); padding: 4px 10px; border-radius: var(--radius-pill);">안내</div>
 </div>
 <div data-dc-tpl="149" style="padding: 22px 24px 24px;">
-<h3 data-dc-tpl="150" style="font-size: 17px; font-weight: 600; margin: 0px 0px 10px; line-height: 1.45; letter-spacing: -0.01em;">GHP 대기배출시설 허가·신고 관련 안내</h3>
-<p data-dc-tpl="151" style="font-size: 13.5px; line-height: 1.65; color: var(--text-secondary); margin: 0px;">인증저감장치 미부착 시설의 허가·신고 절차 및 개선기간 부여 관련 안내사항입니다.</p>
+<h3 data-dc-tpl="150" style="font-size: 19px; font-weight: 600; margin: 0px 0px 12px; line-height: 1.45; letter-spacing: -0.01em;">GHP 대기배출시설 허가·신고 관련 안내</h3>
+<p data-dc-tpl="151" style="font-size: 14.5px; line-height: 1.7; color: var(--text-secondary); margin: 0px;">인증저감장치 미부착 시설의 허가·신고 절차 및 개선기간 부여 관련 안내사항입니다.</p>
 <div data-dc-tpl="152" style="margin-top: 18px; font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">2024.10.17</div>
 </div>
 </article>
 </div>
 </div></section><section data-dc-tpl="153" id="customer" style="padding: 80px 0px; background: var(--paper);">
 <div class="container" data-dc-tpl="154">
-<div data-dc-tpl="155" style="text-align: center; margin-bottom: 44px;">
+<div data-dc-tpl="155" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; gap: 20px; flex-wrap: wrap;">
+<div data-dc-tpl="155b">
 <div class="eyebrow" data-dc-tpl="156">CUSTOMER</div>
 <h2 class="section-title" data-dc-tpl="157" style="margin-top: 10px;">고객사</h2>
-<p class="section-lead" data-dc-tpl="158" style="margin: 14px auto 0px;">보아스환경기술이 함께한 산업체 고객사입니다.</p>
+<p class="section-lead" data-dc-tpl="158" style="margin: 14px 0 0;">보아스환경기술이 함께한 산업체 고객사입니다.</p>
 </div>
-<div data-dc-tpl="159" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 0px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; background: var(--gray-0);">
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
+<a class="btn-view" href="customers.html">전체보기</a>
 </div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">에팩</span></div>
+<div id="home-customers-grid" data-dc-tpl="159" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 0px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; background: var(--gray-0);">
 </div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">GS엔텍</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">SK가스</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">SK에코프라임</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">고려아연</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">대륙금속</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">삼양사</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">세진</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">에스엠랩</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">에어프로덕츠</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">에이치엘비에너지</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">케이디탱크터미널</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">클린코리아</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">한국동서발전</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">한국보팍터미날</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">한국특장차</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">한덕화학</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">현대모비스</span></div>
-</div>
-<div data-dc-tpl="161" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px); position: relative;">
-<div data-dc-tpl="162" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="163" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="164" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="165" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="166"></path></svg>
-</div>
-<div data-dc-tpl="167" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">효성화학탱크터미널</span></div>
-</div>
-</div>
-<div data-dc-tpl="168" style="margin-top: 12px; font-size: 11px; font-family: var(--font-mono); color: var(--text-tertiary); text-align: right; letter-spacing: 0.05em;">LOGO PLACEHOLDER · 관리자 페이지에서 로고 이미지 업로드 시 자동 표시</div>
 </div></section><section data-dc-tpl="169" id="contractor" style="padding: 80px 0px; background: var(--surface-sunken);">
 <div class="container" data-dc-tpl="170">
-<div data-dc-tpl="171" style="text-align: center; margin-bottom: 44px;">
+<div data-dc-tpl="171" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; gap: 20px; flex-wrap: wrap;">
+<div data-dc-tpl="171b">
 <div class="eyebrow" data-dc-tpl="172">CONTRACTOR</div>
 <h2 class="section-title" data-dc-tpl="173" style="margin-top: 10px;">협력사</h2>
-<p class="section-lead" data-dc-tpl="174" style="margin: 14px auto 0px;">보아스환경기술과 함께하는 협력 파트너입니다.</p>
+<p class="section-lead" data-dc-tpl="174" style="margin: 14px 0 0;">보아스환경기술과 함께하는 협력 파트너입니다.</p>
 </div>
-<div data-dc-tpl="175" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 0px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; background: var(--gray-0);">
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
+<a class="btn-view" href="partners.html">전체보기</a>
 </div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">IYF 국제청소년연합</span></div>
+<div id="home-partners-grid" data-dc-tpl="175" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 0px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; background: var(--gray-0);">
 </div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">KEMTI</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">경일통상</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">리가스</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">바이테크</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">세일국제무역</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">시바타 코리아</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">에이치피아이</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">에코시스텍</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">엘앤비코리아</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">와이앤제이ENG</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">울산미담타임즈</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">이룸환경기술</span></div>
-</div>
-<div data-dc-tpl="177" style="min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);">
-<div data-dc-tpl="178" style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">
-<svg data-dc-tpl="179" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20"><rect data-dc-tpl="180" height="14" rx="2" width="18" x="3" y="4"></rect><circle cx="9" cy="10" data-dc-tpl="181" r="1.4"></circle><path d="m3 16 5-4 4 3 3-2 6 5" data-dc-tpl="182"></path></svg>
-</div>
-<div data-dc-tpl="183" style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;"><span class="sc-interp">한국퍼킨엘머 울산대리점</span></div>
-</div>
-</div>
-<div data-dc-tpl="184" style="margin-top: 12px; font-size: 11px; font-family: var(--font-mono); color: var(--text-tertiary); text-align: right; letter-spacing: 0.05em;">LOGO PLACEHOLDER · 관리자 페이지에서 로고 이미지 업로드 시 자동 표시</div>
 </div></section><section data-dc-tpl="185" style="background: var(--teal-800); color: var(--gray-0); padding: 56px 0px;">
 <div class="container" data-dc-tpl="186" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;">
 <div data-dc-tpl="187">

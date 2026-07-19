@@ -1,0 +1,23 @@
+{
+  "customers": [
+    { "name": "에팩", "logo": "", "url": "", "order": 1, "visible": true, "showOnMain": true },
+    { "name": "GS엔텍", "logo": "", "url": "", "order": 2, "visible": true, "showOnMain": true },
+    { "name": "SK가스", "logo": "", "url": "", "order": 3, "visible": true, "showOnMain": true },
+    { "name": "SK에코프라임", "logo": "", "url": "", "order": 4, "visible": true, "showOnMain": true },
+    { "name": "고려아연", "logo": "", "url": "", "order": 5, "visible": true, "showOnMain": true },
+    { "name": "대륙금속", "logo": "", "url": "", "order": 6, "visible": true, "showOnMain": true },
+    { "name": "삼양사", "logo": "", "url": "", "order": 7, "visible": true, "showOnMain": true },
+    { "name": "세진", "logo": "", "url": "", "order": 8, "visible": true, "showOnMain": true },
+    { "name": "에스엠랩", "logo": "", "url": "", "order": 9, "visible": true, "showOnMain": true },
+    { "name": "에어프로덕츠", "logo": "", "url": "", "order": 10, "visible": true, "showOnMain": true },
+    { "name": "에이치엘비에너지", "logo": "", "url": "", "order": 11, "visible": true, "showOnMain": true },
+    { "name": "케이디탱크터미널", "logo": "", "url": "", "order": 12, "visible": true, "showOnMain": true },
+    { "name": "클린코리아", "logo": "", "url": "", "order": 13, "visible": true, "showOnMain": true },
+    { "name": "한국동서발전", "logo": "", "url": "", "order": 14, "visible": true, "showOnMain": true },
+    { "name": "한국보팍터미날", "logo": "", "url": "", "order": 15, "visible": true, "showOnMain": true },
+    { "name": "한국특장차", "logo": "", "url": "", "order": 16, "visible": true, "showOnMain": true },
+    { "name": "한덕화학", "logo": "", "url": "", "order": 17, "visible": true, "showOnMain": true },
+    { "name": "현대모비스", "logo": "", "url": "", "order": 18, "visible": true, "showOnMain": true },
+    { "name": "효성화학탱크터미널", "logo": "", "url": "", "order": 19, "visible": true, "showOnMain": true }
+  ]
+}
