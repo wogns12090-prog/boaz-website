@@ -90,6 +90,18 @@
         {
           "type": "image",
           "img": "/assets/uploads/보아스-회사-로고.png"
+        },
+        {
+          "type": "text",
+          "value": "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
+        },
+        {
+          "type": "image",
+          "img": "/assets/uploads/울산광역시-새소식-썸네일-2.jpg"
+        },
+        {
+          "type": "text",
+          "value": "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttestttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
         }
       ],
       "bodyImages": [
