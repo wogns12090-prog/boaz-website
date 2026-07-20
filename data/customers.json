@@ -1,23 +1,620 @@
 {
   "customers": [
-    { "name": "에팩", "logo": "", "url": "", "order": 1, "visible": true, "showOnMain": true },
-    { "name": "GS엔텍", "logo": "", "url": "", "order": 2, "visible": true, "showOnMain": true },
-    { "name": "SK가스", "logo": "", "url": "", "order": 3, "visible": true, "showOnMain": true },
-    { "name": "SK에코프라임", "logo": "", "url": "", "order": 4, "visible": true, "showOnMain": true },
-    { "name": "고려아연", "logo": "", "url": "", "order": 5, "visible": true, "showOnMain": true },
-    { "name": "대륙금속", "logo": "", "url": "", "order": 6, "visible": true, "showOnMain": true },
-    { "name": "삼양사", "logo": "", "url": "", "order": 7, "visible": true, "showOnMain": true },
-    { "name": "세진", "logo": "", "url": "", "order": 8, "visible": true, "showOnMain": true },
-    { "name": "에스엠랩", "logo": "", "url": "", "order": 9, "visible": true, "showOnMain": true },
-    { "name": "에어프로덕츠", "logo": "", "url": "", "order": 10, "visible": true, "showOnMain": true },
-    { "name": "에이치엘비에너지", "logo": "", "url": "", "order": 11, "visible": true, "showOnMain": true },
-    { "name": "케이디탱크터미널", "logo": "", "url": "", "order": 12, "visible": true, "showOnMain": true },
-    { "name": "클린코리아", "logo": "", "url": "", "order": 13, "visible": true, "showOnMain": true },
-    { "name": "한국동서발전", "logo": "", "url": "", "order": 14, "visible": true, "showOnMain": true },
-    { "name": "한국보팍터미날", "logo": "", "url": "", "order": 15, "visible": true, "showOnMain": true },
-    { "name": "한국특장차", "logo": "", "url": "", "order": 16, "visible": true, "showOnMain": true },
-    { "name": "한덕화학", "logo": "", "url": "", "order": 17, "visible": true, "showOnMain": true },
-    { "name": "현대모비스", "logo": "", "url": "", "order": 18, "visible": true, "showOnMain": true },
-    { "name": "효성화학탱크터미널", "logo": "", "url": "", "order": 19, "visible": true, "showOnMain": true }
+    {
+      "name": "에팩",
+      "logo": "assets/logos/customers/에팩.jpg",
+      "url": "",
+      "order": 1,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "GS엔텍",
+      "logo": "assets/logos/customers/GS엔텍.png",
+      "url": "",
+      "order": 2,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "SK가스",
+      "logo": "",
+      "url": "",
+      "order": 3,
+      "visible": false,
+      "showOnMain": true
+    },
+    {
+      "name": "SK에코프라임",
+      "logo": "assets/logos/customers/SK에코프라임.png",
+      "url": "",
+      "order": 4,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "고려아연",
+      "logo": "assets/logos/customers/고려아연.png",
+      "url": "",
+      "order": 5,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "대륙금속",
+      "logo": "assets/logos/customers/대륙금속.jpg",
+      "url": "",
+      "order": 6,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "삼양사",
+      "logo": "assets/logos/customers/삼양사.png",
+      "url": "",
+      "order": 7,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "세진",
+      "logo": "assets/logos/customers/세진.png",
+      "url": "",
+      "order": 8,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "에스엠랩",
+      "logo": "assets/logos/customers/에스엠랩.jpg",
+      "url": "",
+      "order": 9,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "에어프로덕츠",
+      "logo": "assets/logos/customers/에어프로덕츠.png",
+      "url": "",
+      "order": 10,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "에이치엘비에너지",
+      "logo": "assets/logos/customers/에이치엘비에너지.png",
+      "url": "",
+      "order": 11,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "케이디탱크터미널",
+      "logo": "assets/logos/customers/케이디탱크터미널.png",
+      "url": "",
+      "order": 12,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "클린코리아",
+      "logo": "assets/logos/customers/클린코리아.png",
+      "url": "",
+      "order": 13,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "한국동서발전",
+      "logo": "",
+      "url": "",
+      "order": 14,
+      "visible": false,
+      "showOnMain": true
+    },
+    {
+      "name": "한국보팍터미날",
+      "logo": "",
+      "url": "",
+      "order": 15,
+      "visible": false,
+      "showOnMain": true
+    },
+    {
+      "name": "한국특장차",
+      "logo": "assets/logos/customers/한국특장차.png",
+      "url": "",
+      "order": 16,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "한덕화학",
+      "logo": "assets/logos/customers/한덕화학.png",
+      "url": "",
+      "order": 17,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "현대모비스",
+      "logo": "assets/logos/customers/현대모비스.jpg",
+      "url": "",
+      "order": 18,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "효성화학탱크터미널",
+      "logo": "",
+      "url": "",
+      "order": 19,
+      "visible": false,
+      "showOnMain": true
+    },
+    {
+      "name": "금정 온산지점",
+      "logo": "assets/logos/customers/금정 온산지점.png",
+      "url": "",
+      "order": 20,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "대경피씨아이",
+      "logo": "assets/logos/customers/대경피씨아이.png",
+      "url": "",
+      "order": 21,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "이너스",
+      "logo": "assets/logos/customers/이너스.png",
+      "url": "",
+      "order": 22,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "SK멀티유틸리티",
+      "logo": "assets/logos/customers/SK멀티유틸리티.png",
+      "url": "",
+      "order": 23,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "강림인슈",
+      "logo": "assets/logos/customers/강림인슈.jpg",
+      "url": "",
+      "order": 24,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "강림중공업",
+      "logo": "assets/logos/customers/강림중공업.png",
+      "url": "",
+      "order": 25,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "극동유화",
+      "logo": "assets/logos/customers/극동유화.png",
+      "url": "",
+      "order": 26,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "농협사료",
+      "logo": "assets/logos/customers/농협사료.gif",
+      "url": "",
+      "order": 27,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "다원알로이",
+      "logo": "assets/logos/customers/다원알로이.png",
+      "url": "",
+      "order": 28,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "대양이엔아이",
+      "logo": "assets/logos/customers/대양이엔아이.png",
+      "url": "",
+      "order": 29,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "대한스텐레스파이프",
+      "logo": "assets/logos/customers/대한스텐레스파이프.jpg",
+      "url": "",
+      "order": 30,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "대협테크",
+      "logo": "assets/logos/customers/대협테크.png",
+      "url": "",
+      "order": 31,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "동남유화",
+      "logo": "assets/logos/customers/동남유화.png",
+      "url": "",
+      "order": 32,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "동신산업",
+      "logo": "assets/logos/customers/동신산업.jpg",
+      "url": "",
+      "order": 33,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "롯데호텔",
+      "logo": "assets/logos/customers/롯데호텔.png",
+      "url": "",
+      "order": 34,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "범우",
+      "logo": "assets/logos/customers/범우.jpg",
+      "url": "",
+      "order": 35,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "부승화학",
+      "logo": "assets/logos/customers/부승화학.gif",
+      "url": "",
+      "order": 36,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "세이브존",
+      "logo": "assets/logos/customers/세이브존.png",
+      "url": "",
+      "order": 37,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "신화이디테크",
+      "logo": "assets/logos/customers/신화이디테크.png",
+      "url": "",
+      "order": 38,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "신화테크",
+      "logo": "assets/logos/customers/신화테크.jpg",
+      "url": "",
+      "order": 39,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "에스에이치팩",
+      "logo": "assets/logos/customers/에스에이치팩.jpg",
+      "url": "",
+      "order": 40,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "엑소루브",
+      "logo": "assets/logos/customers/엑소루브.svg",
+      "url": "",
+      "order": 41,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "엔나노텍",
+      "logo": "assets/logos/customers/엔나노텍.png",
+      "url": "",
+      "order": 42,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "엘앤피케미칼",
+      "logo": "assets/logos/customers/엘앤피케미칼.png",
+      "url": "",
+      "order": 43,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "엘에스켐",
+      "logo": "assets/logos/customers/엘에스켐.png",
+      "url": "",
+      "order": 44,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "오성테크 울산공장",
+      "logo": "assets/logos/customers/오성테크 울산공장.png",
+      "url": "",
+      "order": 45,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "울산공업학원울산대학교병원",
+      "logo": "assets/logos/customers/울산공업학원울산대학교병원.png",
+      "url": "",
+      "order": 46,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "울산광역시교육연구정보원",
+      "logo": "assets/logos/customers/울산광역시교육연구정보원.png",
+      "url": "",
+      "order": 47,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "울산에너지터미널",
+      "logo": "assets/logos/customers/울산에너지터미널.png",
+      "url": "",
+      "order": 48,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "울산엔지니어링",
+      "logo": "assets/logos/customers/울산엔지니어링.jpg",
+      "url": "",
+      "order": 49,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "웨스트레이크코리아",
+      "logo": "assets/logos/customers/웨스트레이크코리아.png",
+      "url": "",
+      "order": 50,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "유인",
+      "logo": "assets/logos/customers/유인.png",
+      "url": "",
+      "order": 51,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "정우의료재단 더프라우병원",
+      "logo": "assets/logos/customers/정우의료재단 더프라우병원.webp",
+      "url": "",
+      "order": 52,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "제이엠씨",
+      "logo": "assets/logos/customers/제이엠씨.png",
+      "url": "",
+      "order": 53,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "조선선재",
+      "logo": "assets/logos/customers/조선선재.jpg",
+      "url": "",
+      "order": 54,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "씨엠원",
+      "logo": "assets/logos/customers/씨엠원.jpg",
+      "url": "",
+      "order": 55,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "칼텍",
+      "logo": "assets/logos/customers/칼텍.jpg",
+      "url": "",
+      "order": 56,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "캠허브탱크터미널",
+      "logo": "assets/logos/customers/캠허브탱크터미널.png",
+      "url": "",
+      "order": 57,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "케이에스케미칼",
+      "logo": "assets/logos/customers/케이에스케미칼.png",
+      "url": "",
+      "order": 58,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "케이오씨",
+      "logo": "assets/logos/customers/케이오씨.jpg",
+      "url": "",
+      "order": 59,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "한국가스공사",
+      "logo": "assets/logos/customers/한국가스공사.jpg",
+      "url": "",
+      "order": 60,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "한국건강관리협회",
+      "logo": "assets/logos/customers/한국건강관리협회.png",
+      "url": "",
+      "order": 61,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "한국신소재산업",
+      "logo": "assets/logos/customers/한국신소재산업.png",
+      "url": "",
+      "order": 62,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "한양인더스트리",
+      "logo": "assets/logos/customers/한양인더스트리.png",
+      "url": "",
+      "order": 63,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "한융금속",
+      "logo": "assets/logos/customers/한융금속.gif",
+      "url": "",
+      "order": 64,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "핸디즈(스타즈호텔)",
+      "logo": "assets/logos/customers/핸디즈(스타즈호텔).png",
+      "url": "",
+      "order": 65,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "현대오일터미널",
+      "logo": "assets/logos/customers/현대오일터미널.png",
+      "url": "",
+      "order": 66,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "홍인화학",
+      "logo": "assets/logos/customers/홍인화학.png",
+      "url": "",
+      "order": 67,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "효성화학",
+      "logo": "assets/logos/customers/효성화학.webp",
+      "url": "",
+      "order": 68,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "울산광역시교육청",
+      "logo": "assets/logos/customers/울산광역시교육청.jpg",
+      "url": "",
+      "order": 69,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "국일인토트",
+      "logo": "assets/logos/customers/국일인토트.png",
+      "url": "",
+      "order": 70.0,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "누보",
+      "logo": "assets/logos/customers/누보.png",
+      "url": "",
+      "order": 71.0,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "디씨엠",
+      "logo": "assets/logos/customers/디씨엠.png",
+      "url": "",
+      "order": 72.0,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "티이씨",
+      "logo": "assets/logos/customers/티이씨.png",
+      "url": "",
+      "order": 73.0,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "피유코어",
+      "logo": "assets/logos/customers/피유코어.png",
+      "url": "",
+      "order": 74.0,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "하나로마트",
+      "logo": "assets/logos/customers/하나로마트.png",
+      "url": "",
+      "order": 75.0,
+      "visible": true,
+      "showOnMain": true
+    },
+    {
+      "name": "우영산업 울산공장",
+      "logo": "",
+      "url": "",
+      "order": 76.0,
+      "visible": false,
+      "showOnMain": true
+    },
+    {
+      "name": "울산시설공단",
+      "logo": "assets/logos/customers/울산시설공단.png",
+      "url": "",
+      "order": 77.0,
+      "visible": true,
+      "showOnMain": true
+    }
   ]
 }

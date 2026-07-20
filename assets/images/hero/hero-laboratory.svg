@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="labSky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#02434B"/>
+      <stop offset="55%" stop-color="#01737D"/>
+      <stop offset="100%" stop-color="#013F44"/>
+    </linearGradient>
+    <radialGradient id="labGlow" cx="65%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#89E3E9" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#89E3E9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#CFF3F5" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#CFF3F5" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#labSky)"/>
+  <rect width="1920" height="1080" fill="url(#labGlow)"/>
+
+  <!-- 분자/입자 점 패턴 -->
+  <g fill="#BDEFF2" opacity="0.35">
+    <circle cx="180" cy="180" r="4"/>
+    <circle cx="260" cy="230" r="3"/>
+    <circle cx="220" cy="300" r="3"/>
+    <circle cx="1700" cy="200" r="4"/>
+    <circle cx="1760" cy="260" r="3"/>
+    <circle cx="1640" cy="320" r="3"/>
+    <circle cx="300" cy="820" r="3"/>
+    <circle cx="360" cy="880" r="4"/>
+    <circle cx="1600" cy="840" r="4"/>
+    <circle cx="1680" cy="900" r="3"/>
+  </g>
+  <g stroke="#BDEFF2" stroke-opacity="0.25" stroke-width="1.5">
+    <path d="M180 180 L260 230 L220 300"/>
+    <path d="M1700 200 L1760 260 L1640 320"/>
+    <path d="M300 820 L360 880"/>
+    <path d="M1600 840 L1680 900"/>
+  </g>
+
+  <!-- 정밀 측정 격자(수평/수직 얇은 라인) -->
+  <g stroke="#BDEFF2" stroke-opacity="0.06" stroke-width="1">
+    <path d="M0 150 H1920 M0 350 H1920 M0 550 H1920 M0 750 H1920 M0 950 H1920"/>
+  </g>
+
+  <!-- 분석 장비 실루엣 (본체) -->
+  <g transform="translate(720,520)">
+    <rect x="0" y="0" width="480" height="230" rx="18" fill="#03565F"/>
+    <rect x="0" y="0" width="480" height="46" rx="18" fill="#0A6B75"/>
+    <circle cx="440" cy="23" r="7" fill="#7CE0E6"/>
+    <rect x="26" y="70" width="200" height="130" rx="10" fill="#012F34"/>
+    <rect x="250" y="70" width="200" height="60" rx="8" fill="#08484F"/>
+    <rect x="250" y="140" width="200" height="60" rx="8" fill="#08484F"/>
+    <!-- 도어 손잡이 -->
+    <rect x="205" y="130" width="10" height="40" rx="4" fill="#7CE0E6" opacity="0.8"/>
+  </g>
+  <!-- 장비 받침대 -->
+  <rect x="760" y="750" width="400" height="26" rx="6" fill="#02434B"/>
+  <rect x="800" y="776" width="40" height="80" fill="#02434B"/>
+  <rect x="1080" y="776" width="40" height="80" fill="#02434B"/>
+
+  <!-- 유리기구(비커/플라스크) 실루엣 -->
+  <g transform="translate(1280,600)" fill="url(#glass)" stroke="#CFF3F5" stroke-opacity="0.55" stroke-width="2">
+    <path d="M20 0 H80 V60 L120 190 Q100 220 50 220 Q0 220 -20 190 L20 60 Z"/>
+  </g>
+  <g transform="translate(1430,660)" fill="url(#glass)" stroke="#CFF3F5" stroke-opacity="0.55" stroke-width="2">
+    <path d="M0 0 H70 L86 130 Q50 160 -16 130 Z"/>
+  </g>
+  <g transform="translate(560,660)" fill="url(#glass)" stroke="#CFF3F5" stroke-opacity="0.5" stroke-width="2">
+    <rect x="0" y="0" width="64" height="110" rx="6"/>
+    <rect x="6" y="46" width="52" height="58" fill="#7CE0E6" opacity="0.35"/>
+  </g>
+
+  <!-- 데이터/그래프 오버레이 -->
+  <polyline points="1360,900 1410,870 1450,890 1500,840 1550,860 1600,810 1650,830" fill="none" stroke="#DFFBFC" stroke-width="3" stroke-opacity="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 하단 그라데이션 마감 -->
+  <rect x="0" y="920" width="1920" height="160" fill="#012B2F" opacity="0.55"/>
+</svg>
