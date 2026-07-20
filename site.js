@@ -105,11 +105,6 @@
     '.eq-card-name { font-size: 15.5px; font-weight: 700; margin: 9px 0 0; letter-spacing: -0.01em; color: var(--text-primary); line-height: 1.4; }',
     '.eq-card-desc { font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; margin: 8px 0 0; }',
     /* ─ 제작·관리용 안내 문구는 방문자 화면에 노출하지 않음 (관리자 CMS 기능 자체는 유지) ─ */
-    '.admin-tag { display: none !important; }',
-    '.admin-wrap { border-style: solid !important; border-color: var(--border-subtle) !important; }',
-    '.admin-note-box { display: none !important; }',
-    '.admin-placeholder-note { display: none !important; }',
-    '.img-ph::after { display: none !important; content: none !important; }',
     /* ─ 새로 추가되는 카드 fade-in ─ */
     '@keyframes fadeInUpCard { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }',
     '.fade-in-card { animation: fadeInUpCard 380ms ease both; }',
@@ -302,13 +297,20 @@
     }).join('');
   }
 
-  // ── 사진 블록 하나 → HTML (forceAspect: 2단 배치용 비율 고정) ──
+  // ── 사진 블록 하나 → HTML (forceAspect: 2단 배치용, 잘리지 않도록 contain 사용) ──
   function imageBlockHTML(block, forceAspect) {
     if (!block || !block.img) return '';
-    var imgStyle = 'width: 100%; height: auto; border-radius: var(--radius-xl); display: block;';
-    if (forceAspect) imgStyle += ' aspect-ratio: 4 / 3; object-fit: cover;';
+    var img = '<img src="' + block.img + '" alt="' + (block.caption || '') + '" loading="lazy" style="' +
+      (forceAspect
+        ? 'max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;'
+        : 'width: 100%; height: auto; border-radius: var(--radius-xl); display: block;') +
+      '">';
+    // 2장 나란히 배치 시에도 이미지 원본이 잘리지 않도록 contain + 중립 배경 박스로 감싸 레터박스 처리
+    var mediaHTML = forceAspect
+      ? '<div style="aspect-ratio: 4 / 3; background: var(--gray-50); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; overflow: hidden;">' + img + '</div>'
+      : img;
     return '<figure style="margin: ' + (forceAspect ? '0' : '28px 0') + ';">' +
-      '<img src="' + block.img + '" alt="' + (block.caption || '') + '" loading="lazy" style="' + imgStyle + '">' +
+      mediaHTML +
       (block.caption ? '<figcaption style="margin-top: 8px; font-size: 13px; color: var(--text-tertiary); text-align: center; overflow-wrap: anywhere;">' + block.caption + '</figcaption>' : '') +
       '</figure>';
   }
@@ -724,10 +726,14 @@
   }
   var catMap = { '환경뉴스': 'env', '회사소식': 'company' };
 
+  // 글자가 포함된 포스터·안내문·캐릭터 이미지는 잘리지 않도록 contain, 단순 현장사진은 cover
+  var STORY_CONTAIN_IDS = { '22': 1, '21': 1, '17': 1, '1': 1, '2': 1, '14': 1, '15': 1, '16': 1 };
   function storyCardHTML(s) {
     var cat = catMap[s.category] || 'env';
+    var fit = STORY_CONTAIN_IDS[String(s.id)] ? 'contain' : 'cover';
+    var imgBg = fit === 'contain' ? 'var(--gray-50)' : 'var(--teal-200)';
     var imgArea = s.image
-      ? '<div style="aspect-ratio: 16 / 11; position: relative; background-color: var(--teal-200); background-image: url(' + s.image + '); background-size: cover; background-position: center;">'
+      ? '<div style="aspect-ratio: 16 / 11; position: relative; background-color: ' + imgBg + '; background-image: url(' + s.image + '); background-size: ' + fit + '; background-repeat: no-repeat; background-position: center;">'
       : '<div style="aspect-ratio: 16 / 11; background: linear-gradient(135deg, var(--teal-100), var(--teal-300)); position: relative;">';
     return '' +
       '<a class="story-card" data-story-cat="' + cat + '" href="story-detail.html?id=' + encodeURIComponent(s.id) + '" style="display: block; color: inherit;">' +

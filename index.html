@@ -63,16 +63,7 @@
   .hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 900ms var(--ease-out); }
   .hero-slide.active { opacity: 1; }
   .hero-slide-img { position: absolute; inset: 0; animation: slideKenBurns 8s linear infinite alternate; }
-  /* Placeholder image utility */
   .img-ph { position: relative; overflow: hidden; }
-  .img-ph::after {
-    content: attr(data-label);
-    position: absolute; bottom: 10px; right: 12px;
-    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: rgba(255,255,255,0.85); background: rgba(0,0,0,0.35);
-    padding: 3px 8px; border-radius: 999px; font-weight: 600;
-    font-family: var(--font-mono);
-  }
 </style><style data-site="1">
 /* ─── Responsive (mobile / tablet) ─── */
 @media (max-width: 900px) {
@@ -263,7 +254,7 @@
 <a class="btn-view" data-dc-tpl="78" href="org.html">조직도</a>
 </div>
 </div>
-<div class="img-ph" data-dc-tpl="79" data-label="COMPANY IMAGE · 교체 가능" style="aspect-ratio: 4 / 3; border-radius: var(--radius-2xl); background: linear-gradient(135deg, var(--teal-700) 0%, var(--teal-500) 50%, var(--teal-300) 100%); position: relative; overflow: hidden; box-shadow: var(--shadow-md);">
+<div class="img-ph" data-dc-tpl="79" style="aspect-ratio: 4 / 3; border-radius: var(--radius-2xl); background: linear-gradient(135deg, var(--teal-700) 0%, var(--teal-500) 50%, var(--teal-300) 100%); position: relative; overflow: hidden; box-shadow: var(--shadow-md);">
 <div aria-hidden="true" data-dc-tpl="80" style="position: absolute; inset: 0px; background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.2), transparent 55%);"></div>
 <div data-dc-tpl="81" style="position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.4);">
 <svg data-dc-tpl="82" fill="none" height="120" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewbox="0 0 24 24" width="120"><path d="M3 21h18" data-dc-tpl="83"></path><path d="M5 21V7l8-4v18" data-dc-tpl="84"></path><path d="M19 21V11l-6-4" data-dc-tpl="85"></path><path d="M9 9v.01" data-dc-tpl="86"></path><path d="M9 12v.01" data-dc-tpl="87"></path><path d="M9 15v.01" data-dc-tpl="88"></path><path d="M9 18v.01" data-dc-tpl="89"></path></svg>
@@ -276,8 +267,8 @@
 <div data-dc-tpl="93" style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">법인 설립</div>
 </div>
 <div data-dc-tpl="94" style="background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px;">
-<div data-dc-tpl="95" style="font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: var(--teal-700); letter-spacing: -0.02em;">19<span data-dc-tpl="96" style="font-size: 18px; color: var(--text-secondary); font-weight: 500;">명</span></div>
-<div data-dc-tpl="97" style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">전문 인력</div>
+<div data-dc-tpl="95" style="font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: var(--teal-700); letter-spacing: -0.02em;">43<span data-dc-tpl="96" style="font-size: 18px; color: var(--text-secondary); font-weight: 500;">개</span></div>
+<div data-dc-tpl="97" style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">측정·분석 가능 항목</div>
 </div>
 <div data-dc-tpl="98" style="background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px;">
 <div data-dc-tpl="99" style="font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: var(--teal-700); letter-spacing: -0.02em;">A<span data-dc-tpl="100" style="font-size: 18px; color: var(--text-secondary); font-weight: 500;">등급</span></div>
@@ -297,7 +288,7 @@
 </div>
 <div data-dc-tpl="113" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
 <a data-dc-tpl="115" href="biz-air.html" style="display: block; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; color: inherit;">
-<div class="img-ph" data-dc-tpl="116" data-label="BUSINESS IMAGE · 교체 가능" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, rgb(1, 115, 125) 0%, rgb(34, 165, 172) 100%); position: relative;">
+<div class="img-ph" data-dc-tpl="116" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, rgb(1, 115, 125) 0%, rgb(34, 165, 172) 100%); position: relative;">
 <div data-dc-tpl="117" style="position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.7);"><svg fill="none" height="80" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" viewbox="0 0 24 24" width="80"><path d="M3 8h13a3 3 0 1 0-3-3"></path><path d="M3 12h17a3 3 0 1 1-3 3"></path><path d="M3 16h11"></path></svg></div>
 <div data-dc-tpl="118" style="position: absolute; top: 14px; right: 14px; font-family: var(--font-mono); font-size: 11px; color: rgba(255, 255, 255, 0.9); background: rgba(0, 0, 0, 0.28); padding: 4px 10px; border-radius: var(--radius-pill); letter-spacing: 0.1em; font-weight: 600;"><span class="sc-interp">BUSINESS 01</span></div>
 </div>
@@ -308,7 +299,7 @@
 </div>
 </a>
 <a data-dc-tpl="115" href="biz-equipment.html" style="display: block; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; color: inherit;">
-<div class="img-ph" data-dc-tpl="116" data-label="BUSINESS IMAGE · 교체 가능" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, rgb(2, 75, 83) 0%, rgb(1, 115, 125) 100%); position: relative;">
+<div class="img-ph" data-dc-tpl="116" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, rgb(2, 75, 83) 0%, rgb(1, 115, 125) 100%); position: relative;">
 <div data-dc-tpl="117" style="position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.7);"><svg fill="none" height="80" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" viewbox="0 0 24 24" width="80"><path d="M10 2v7.31"></path><path d="M14 9.3V2"></path><path d="M8.5 2h7"></path><path d="M14 9.3a6.5 6.5 0 1 1-4 0"></path></svg></div>
 <div data-dc-tpl="118" style="position: absolute; top: 14px; right: 14px; font-family: var(--font-mono); font-size: 11px; color: rgba(255, 255, 255, 0.9); background: rgba(0, 0, 0, 0.28); padding: 4px 10px; border-radius: var(--radius-pill); letter-spacing: 0.1em; font-weight: 600;"><span class="sc-interp">BUSINESS 02</span></div>
 </div>
@@ -319,7 +310,7 @@
 </div>
 </a>
 <a data-dc-tpl="115" href="biz-partners.html" style="display: block; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; color: inherit;">
-<div class="img-ph" data-dc-tpl="116" data-label="BUSINESS IMAGE · 교체 가능" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, rgb(10, 90, 99) 0%, rgb(77, 189, 196) 100%); position: relative;">
+<div class="img-ph" data-dc-tpl="116" style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, rgb(10, 90, 99) 0%, rgb(77, 189, 196) 100%); position: relative;">
 <div data-dc-tpl="117" style="position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.7);"><svg fill="none" height="80" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" viewbox="0 0 24 24" width="80"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path></svg></div>
 <div data-dc-tpl="118" style="position: absolute; top: 14px; right: 14px; font-family: var(--font-mono); font-size: 11px; color: rgba(255, 255, 255, 0.9); background: rgba(0, 0, 0, 0.28); padding: 4px 10px; border-radius: var(--radius-pill); letter-spacing: 0.1em; font-weight: 600;"><span class="sc-interp">BUSINESS 03</span></div>
 </div>

@@ -67,10 +67,6 @@
   .nav-link.active { color: var(--teal-700); background: var(--teal-50); }
   .subnav a { padding: 10px 16px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; color: var(--text-secondary); border: 1px solid var(--border-subtle); background: var(--gray-0); }
   .subnav a.active { background: var(--teal-700); color: var(--gray-0); border-color: var(--teal-700); }
-  .admin-tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; color: var(--teal-700); background: var(--teal-50); border: 1px solid var(--teal-100); border-radius: var(--radius-pill); vertical-align: middle; font-family: var(--font-sans); text-transform: uppercase; }
-  .admin-tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal-600); }
-  .admin-wrap { position: relative; }
-  .admin-wrap > .admin-tag { position: absolute; top: -12px; right: 12px; z-index: 2; background: var(--gray-0); }
 </style><style data-site="1">
 /* ─── Responsive (mobile / tablet) ─── */
 @media (max-width: 900px) {
@@ -191,8 +187,7 @@
         카카오톡 상담
       </a>
 </nav>
-</div></header><section class="admin-wrap" data-dc-tpl="24" style="position: relative; background: linear-gradient(135deg, var(--teal-800) 0%, var(--teal-600) 100%); color: var(--gray-0); overflow: hidden; min-height: 320px; display: flex; align-items: center;">
-<span class="admin-tag" data-dc-tpl="25" style="position: absolute; top: 16px; right: 24px; z-index: 3; background: rgba(255, 255, 255, 0.92);">이미지 교체 가능 · 배너 배경</span>
+</div></header><section data-dc-tpl="24" style="position: relative; background: linear-gradient(135deg, var(--teal-800) 0%, var(--teal-600) 100%); color: var(--gray-0); overflow: hidden; min-height: 320px; display: flex; align-items: center;">
 <div aria-hidden="true" data-dc-tpl="26" style="position: absolute; inset: 0px; background-image: linear-gradient(135deg, rgba(1, 63, 68, 0.82) 0%, rgba(1, 115, 125, 0.7) 100%), radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 45%); background-size: cover; background-position: center center;"></div>
 <div aria-hidden="true" data-dc-tpl="27" style="position: absolute; inset: 0px; opacity: 0.35; background: repeating-linear-gradient(90deg, transparent 0 120px, rgba(255, 255, 255, 0.05) 120px 121px);"></div>
 <div aria-hidden="true" data-dc-tpl="28" style="position: absolute; right: -40px; bottom: -40px; width: 280px; height: 280px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 50%;"></div>
@@ -229,8 +224,7 @@
 <img alt="㈜보아스환경기술 관련기관 관계도" data-dc-tpl="313" loading="lazy" src="assets/images/partners/related-institutions-diagram.svg" style="width: 100%; height: auto; display: block; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--gray-0);">
 </div>
 <h3 class="section-title" data-dc-tpl="321" style="margin-bottom: 20px; font-size: 20px;">관련 기관</h3>
-<div class="admin-wrap" data-dc-tpl="322" style="position: relative;">
-<span class="admin-tag" data-dc-tpl="323">관리자 편집 가능 · 로고 &amp; 링크</span>
+<div data-dc-tpl="322" style="position: relative;">
 <div data-dc-tpl="324" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
 <a class="scp0" data-dc-tpl="326" href="https://www.me.go.kr" rel="noopener" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 28px 20px; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); text-decoration: none; color: inherit;" target="_blank">
 <div data-dc-tpl="333" style="text-align: center;">

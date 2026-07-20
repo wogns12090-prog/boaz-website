@@ -1,18 +1,17 @@
 {
   "partners": [
-    { "name": "IYF 국제청소년연합", "logo": "", "url": "", "order": 1, "visible": true, "showOnMain": true },
-    { "name": "KEMTI", "logo": "", "url": "", "order": 2, "visible": true, "showOnMain": true },
-    { "name": "경일통상", "logo": "", "url": "", "order": 3, "visible": true, "showOnMain": true },
-    { "name": "리가스", "logo": "", "url": "", "order": 4, "visible": true, "showOnMain": true },
-    { "name": "바이테크", "logo": "", "url": "", "order": 5, "visible": true, "showOnMain": true },
-    { "name": "세일국제무역", "logo": "", "url": "", "order": 6, "visible": true, "showOnMain": true },
-    { "name": "시바타 코리아", "logo": "", "url": "", "order": 7, "visible": true, "showOnMain": true },
-    { "name": "에이치피아이", "logo": "", "url": "", "order": 8, "visible": true, "showOnMain": true },
-    { "name": "에코시스텍", "logo": "", "url": "", "order": 9, "visible": true, "showOnMain": true },
-    { "name": "엘앤비코리아", "logo": "", "url": "", "order": 10, "visible": true, "showOnMain": true },
-    { "name": "와이앤제이ENG", "logo": "", "url": "", "order": 11, "visible": true, "showOnMain": true },
-    { "name": "울산미담타임즈", "logo": "", "url": "", "order": 12, "visible": true, "showOnMain": true },
-    { "name": "이룸환경기술", "logo": "", "url": "", "order": 13, "visible": true, "showOnMain": true },
-    { "name": "한국퍼킨엘머 울산대리점", "logo": "", "url": "", "order": 14, "visible": true, "showOnMain": true }
+    { "name": "IYF 국제청소년연합", "logo": "assets/logos/partners/IYF_국제청소년연합.jpg", "url": "", "order": 1, "visible": true, "showOnMain": true },
+    { "name": "KEMTI", "logo": "assets/logos/partners/KEMTI.jpg", "url": "", "order": 2, "visible": true, "showOnMain": true },
+    { "name": "경일통상", "logo": "assets/logos/partners/경일통상.jpg", "url": "", "order": 3, "visible": true, "showOnMain": true },
+    { "name": "리가스", "logo": "assets/logos/partners/리가스.jpg", "url": "", "order": 4, "visible": true, "showOnMain": true },
+    { "name": "바이테크", "logo": "assets/logos/partners/바이테크.jpg", "url": "", "order": 5, "visible": true, "showOnMain": true },
+    { "name": "세일국제무역", "logo": "assets/logos/partners/세일국제무역.jpg", "url": "", "order": 6, "visible": true, "showOnMain": true },
+    { "name": "시바타 코리아", "logo": "assets/logos/partners/시바타_코리아.jpg", "url": "", "order": 7, "visible": true, "showOnMain": true },
+    { "name": "에이치피아이", "logo": "assets/logos/partners/에이치피아이.jpg", "url": "", "order": 8, "visible": true, "showOnMain": true },
+    { "name": "에코시스텍", "logo": "assets/logos/partners/에코시스텍.jpg", "url": "", "order": 9, "visible": true, "showOnMain": true },
+    { "name": "엘앤비코리아", "logo": "assets/logos/partners/엘앤비코리아.jpg", "url": "", "order": 10, "visible": true, "showOnMain": true },
+    { "name": "와이앤제이ENG", "logo": "assets/logos/partners/와이앤제이ENG.jpg", "url": "", "order": 11, "visible": true, "showOnMain": true },
+    { "name": "이룸환경기술", "logo": "assets/logos/partners/이룸환경기술.jpg", "url": "", "order": 12, "visible": true, "showOnMain": true },
+    { "name": "한국퍼킨엘머 울산대리점", "logo": "assets/logos/partners/한국퍼킨엘머_울산대리점.jpg", "url": "", "order": 13, "visible": true, "showOnMain": true }
   ]
 }
