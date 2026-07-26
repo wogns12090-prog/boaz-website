@@ -53,7 +53,7 @@
     '@media (max-width: 900px) { .company-card-grid { grid-template-columns: repeat(3, 1fr); } }',
     '@media (max-width: 560px) { .company-card-grid { grid-template-columns: repeat(2, 1fr); } }',
     '.company-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 220px; padding: 22px 16px; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg, 12px); color: inherit; text-align: center; }',
-    '.company-card-media { width: 100%; height: 112px; display: flex; align-items: center; justify-content: center; background: var(--gray-50); border-radius: var(--radius-md, 8px); padding: 10px; box-sizing: border-box; }',
+    '.company-card-media { width: 100%; height: 112px; display: flex; align-items: center; justify-content: center; background: #FFFFFF; border-radius: var(--radius-md, 8px); padding: 10px; box-sizing: border-box; }',
     '.company-card-media img { max-width: 100%; max-height: 100%; object-fit: contain; }',
     '.company-card-ph { width: 52px; height: 52px; border-radius: var(--radius-md); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); }',
     '.company-card-name { font-size: 13px; font-weight: 500; color: var(--text-primary); letter-spacing: -0.01em; overflow-wrap: anywhere; }',
@@ -149,11 +149,15 @@
     '.sub-hero .page-title { text-shadow: 0 2px 16px rgba(0,0,0,0.35); }',
     '@media (max-width: 900px) { .sub-hero { min-height: 340px; } }',
     '@media (max-width: 560px) { .sub-hero { min-height: 260px; } .sub-hero .container { padding-top: 64px; padding-bottom: 40px; } }',
+    /* ─ 업무절차 반응형 ─ */
+    '@media (max-width: 900px) { .process-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 24px 16px !important; } .process-arrow { display: none !important; } }',
+    '@media (max-width: 560px) { .process-grid { grid-template-columns: repeat(2, 1fr) !important; } }',
+    '@media (max-width: 360px) { .process-grid { grid-template-columns: 1fr !important; } }',
     /* ─ 보유장비 카드: 기존 홈페이지(boazet.com) 비율 기준 재설계 ─ */
     '.eq-panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }',
     '@media (max-width: 760px) { .eq-panel { grid-template-columns: 1fr; } }',
     '.eq-card { display: flex; overflow: hidden; }',
-    '.eq-card-img { flex: 0 0 168px; width: 168px; height: 168px; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); background: var(--gray-50); overflow: hidden; }',
+    '.eq-card-img { flex: 0 0 168px; width: 168px; height: 168px; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); background: #FFFFFF; overflow: hidden; }',
     '.eq-card-img img { width: 100%; height: 100%; object-fit: contain; padding: 18px; box-sizing: border-box; }',
     '@media (max-width: 560px) { .eq-card-img { flex: 0 0 120px; width: 120px; height: 120px; } .eq-card-img img { padding: 12px; } }',
     '.eq-card-body { padding: 20px 22px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }',
@@ -1007,7 +1011,7 @@
   // 메인페이지 셀 HTML — 기존 하드코딩 그리드와 동일한 마크업/스타일 재사용 (로고 표시 크기 약 2배)
   function mainCompanyCellHTML(item) {
     var mediaHTML = item.logo
-      ? '<div style="width: 128px; height: 128px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; background: var(--gray-50); border-radius: var(--radius-md, 8px); box-sizing: border-box; padding: 12px;"><img src="' + item.logo + '" alt="' + item.name + '" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;"></div>'
+      ? '<div style="width: 128px; height: 128px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; background: #FFFFFF; border-radius: var(--radius-md, 8px); box-sizing: border-box; padding: 12px;"><img src="' + item.logo + '" alt="' + item.name + '" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;"></div>'
       : '<div style="width: 96px; height: 96px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">' + companyPlaceholderIcon + '</div>';
     var bg = item.logo ? '' : 'background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);';
     var inner = '<div style="min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; ' + bg + '">' +
