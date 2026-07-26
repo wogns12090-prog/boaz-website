@@ -92,6 +92,35 @@
     '.cert-modal-body { overflow: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; align-items: center; background: var(--gray-50); }',
     '.cert-modal-body img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }',
     '@media (max-width: 560px) { .cert-modal-overlay { padding: 0; } .cert-modal-panel { max-height: 100vh; height: 100%; border-radius: 0; } }',
+    /* ─ 사업분야 큰 이미지 슬라이더 ─ */
+    '.biz-slider { position: relative; max-width: 1560px; margin: 0 auto; }',
+    '.biz-slider-viewport { overflow: hidden; border-radius: 6px; }',
+    '.biz-slider-track { display: flex; transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1); }',
+    '.biz-slide { min-width: 100%; display: grid; grid-template-columns: 60% 40%; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: 6px; overflow: hidden; }',
+    '.biz-slide-img { position: relative; height: 590px; overflow: hidden; }',
+    '.biz-slide-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }',
+    '.biz-slide-badge { position: absolute; top: 18px; left: 20px; font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.95); background: rgba(0,0,0,0.45); padding: 5px 14px; border-radius: 999px; letter-spacing: 0.1em; font-weight: 600; z-index: 2; }',
+    '.biz-slide-body { display: flex; flex-direction: column; justify-content: center; padding: 48px 52px; }',
+    '.biz-slide-title { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 20px; color: var(--text-primary); }',
+    '.biz-slide-desc { font-size: 16px; line-height: 1.8; color: var(--text-secondary); margin: 0; }',
+    '.biz-slide-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 32px; font-size: 15px; font-weight: 600; color: var(--teal-700); padding: 12px 24px; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--gray-0); transition: all 200ms ease; }',
+    '.biz-slide-link:hover { background: var(--teal-50); border-color: var(--teal-600); color: var(--teal-800); }',
+    '.biz-slider-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 28px; }',
+    '.biz-slider-btn { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--border-default); background: var(--gray-0); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; transition: all 200ms ease; }',
+    '.biz-slider-btn:hover { background: var(--teal-50); border-color: var(--teal-600); color: var(--teal-700); }',
+    '.biz-slider-dots { display: flex; gap: 8px; }',
+    '.biz-dot { width: 10px; height: 10px; border-radius: 50%; border: none; background: var(--border-default); cursor: pointer; padding: 0; transition: all 200ms ease; }',
+    '.biz-dot.active { background: var(--teal-600); width: 28px; border-radius: 5px; }',
+    '@media (max-width: 900px) { .biz-slide { grid-template-columns: 1fr; } .biz-slide-img { height: 300px; } .biz-slide-body { padding: 28px 24px 32px; } .biz-slide-title { font-size: 24px; } .biz-slide-desc { font-size: 15px; } .biz-slide-link { margin-top: 24px; } }',
+    '@media (max-width: 560px) { .biz-slide-img { height: 260px; } .biz-slide-body { padding: 22px 20px 28px; } .biz-slide-title { font-size: 21px; } }',
+    /* ─ 서브페이지 공통 히어로 배너 ─ */
+    '.sub-hero { position: relative; overflow: hidden; min-height: 510px; display: flex; align-items: center; color: var(--gray-0); }',
+    '.sub-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; }',
+    '.sub-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,68,73,0.48) 0%, rgba(0,68,73,0.20) 34%, rgba(0,68,73,0.00) 64%); }',
+    '.sub-hero .container { position: relative; z-index: 2; padding-top: 90px; padding-bottom: 72px; width: 100%; }',
+    '.sub-hero .page-title { text-shadow: 0 2px 16px rgba(0,0,0,0.35); }',
+    '@media (max-width: 900px) { .sub-hero { min-height: 420px; } }',
+    '@media (max-width: 560px) { .sub-hero { min-height: 320px; } .sub-hero .container { padding-top: 70px; padding-bottom: 50px; } }',
     /* ─ 보유장비 카드: 기존 홈페이지(boazet.com) 비율 기준 재설계 ─ */
     '.eq-panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }',
     '@media (max-width: 760px) { .eq-panel { grid-template-columns: 1fr; } }',
@@ -694,6 +723,32 @@
     });
     show(idx);
     startTimer();
+  }
+
+  // ─── 사업분야 슬라이더 ───
+  var bizSlider = document.getElementById('biz-slider');
+  if (bizSlider) {
+    var bizSlides = bizSlider.querySelectorAll('.biz-slide');
+    var bizTrack = bizSlider.querySelector('.biz-slider-track');
+    var bizDots = bizSlider.querySelectorAll('.biz-dot');
+    var bizIdx = 0;
+    function showBiz(n) {
+      bizIdx = ((n % bizSlides.length) + bizSlides.length) % bizSlides.length;
+      bizTrack.style.transform = 'translateX(-' + (bizIdx * 100) + '%)';
+      bizSlides.forEach(function (s, i) { s.classList.toggle('active', i === bizIdx); });
+      bizDots.forEach(function (d, i) { d.classList.toggle('active', i === bizIdx); });
+    }
+    bizSlider.querySelectorAll('.biz-slider-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        showBiz(bizIdx + parseInt(btn.getAttribute('data-biz-dir'), 10));
+      });
+    });
+    bizDots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        showBiz(parseInt(dot.getAttribute('data-biz-dot'), 10));
+      });
+    });
+    showBiz(0);
   }
 
   // ─── 보유장비 탭 (측정장비 / 분석장비) ───
