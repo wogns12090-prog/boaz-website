@@ -24,13 +24,19 @@
     'html.has-hero header { position: fixed; top: 0; left: 0; right: 0; width: 100%; background: linear-gradient(180deg, rgba(1,45,50,0.55) 0%, rgba(1,45,50,0.18) 100%); backdrop-filter: saturate(1.1) blur(6px); border-bottom: 1px solid rgba(255,255,255,0.14); transition: background 260ms ease, border-color 260ms ease; }',
     'html.has-hero header.is-scrolled { background: rgba(251,250,247,0.94); backdrop-filter: saturate(1.2) blur(8px); border-bottom-color: var(--border-subtle); }',
     'html.has-hero header nav > a, html.has-hero header .nav-item > a, html.has-hero header img[alt*="보아스"] { transition: color 260ms ease, filter 260ms ease; }',
-    /* ─ 히어로 슬라이드 번호 표시 ─ */
-    '.hero-slidenav { position: absolute; right: 40px; bottom: 40px; z-index: 6; display: flex; align-items: center; gap: 14px; padding: 10px 18px; background: rgba(1, 45, 50, 0.45); backdrop-filter: blur(6px); border-radius: 999px; color: rgba(255,255,255,0.95); font-family: var(--font-mono); font-size: 13px; font-weight: 600; }',
-    '.hero-slidenav-track { position: relative; width: 90px; height: 2px; background: rgba(255,255,255,0.3); border-radius: 999px; overflow: hidden; display: inline-block; }',
-    '.hero-slidenav-fill { position: absolute; inset: 0; width: 33.33%; background: rgba(255,255,255,0.95); transition: width 400ms ease; }',
+    /* ─ 히어로 슬라이드 번호 + 진행 게이지 ─ */
+    '.hero-slidenav { position: absolute; right: 40px; bottom: 40px; z-index: 6; display: flex; align-items: center; gap: 10px; padding: 10px 18px; background: rgba(1, 45, 50, 0.45); backdrop-filter: blur(6px); border-radius: 999px; color: rgba(255,255,255,0.95); font-family: var(--font-mono); font-size: 13px; font-weight: 600; }',
     '.hero-slidenav-btn { width: 26px; height: 26px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.35); background: transparent; color: rgba(255,255,255,0.95); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 15px; line-height: 1; padding: 0; }',
     '.hero-slidenav-btn:hover { background: rgba(255,255,255,0.18); }',
-    '@media (max-width: 900px) { .hero-slidenav { right: 20px; bottom: 20px; padding: 8px 14px; gap: 10px; } .hero-slidenav-track { width: 56px; } }',
+    '.hero-gauge-group { display: flex; align-items: center; gap: 6px; }',
+    '.hero-gauge { display: flex; align-items: center; gap: 4px; cursor: pointer; padding: 4px 0; }',
+    '.hero-gauge-num { display: none; }',
+    '.hero-gauge-bar { width: 28px; height: 2px; background: rgba(255,255,255,0.25); border-radius: 999px; overflow: hidden; position: relative; }',
+    '.hero-gauge-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: rgba(255,255,255,0.95); border-radius: 999px; }',
+    '.hero-gauge.active .hero-gauge-fill { animation: heroGaugeFill 3s linear forwards; }',
+    '.hero-gauge.done .hero-gauge-fill { width: 100%; }',
+    '@keyframes heroGaugeFill { 0% { width: 0; } 100% { width: 100%; } }',
+    '@media (max-width: 900px) { .hero-slidenav { right: 20px; bottom: 20px; padding: 8px 14px; gap: 8px; } .hero-gauge-bar { width: 22px; } }',
     '@media (max-width: 560px) { .hero-slidenav { right: 12px; bottom: 12px; } }',
     /* ─ 히어로 스크롤 유도 표시 ─ */
     '.scroll-hint { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 6; cursor: pointer; color: rgba(255,255,255,0.85); }',
@@ -92,6 +98,28 @@
     '.cert-modal-body { overflow: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; align-items: center; background: var(--gray-50); }',
     '.cert-modal-body img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }',
     '@media (max-width: 560px) { .cert-modal-overlay { padding: 0; } .cert-modal-panel { max-height: 100vh; height: 100%; border-radius: 0; } }',
+    /* ─ 모바일 햄버거 메뉴 ─ */
+    '.mob-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 6px; color: var(--text-secondary); z-index: 22; }',
+    'html.has-hero header:not(.is-scrolled) .mob-menu-btn { color: rgba(255,255,255,0.92); }',
+    '@media (max-width: 900px) { .mob-menu-btn { display: flex; align-items: center; justify-content: center; } }',
+    '.mob-sidebar { position: fixed; top: 0; right: 0; bottom: 0; width: 300px; max-width: 85vw; background: var(--gray-0); z-index: 100; transform: translateX(100%); transition: transform 320ms cubic-bezier(0.4,0,0.2,1); box-shadow: -4px 0 24px rgba(0,0,0,0.15); display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; }',
+    '.mob-sidebar.open { transform: translateX(0); }',
+    '.mob-backdrop { position: fixed; inset: 0; background: rgba(1,20,22,0.5); z-index: 99; opacity: 0; pointer-events: none; transition: opacity 280ms ease; }',
+    '.mob-backdrop.open { opacity: 1; pointer-events: auto; }',
+    '.mob-sidebar-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border-subtle); }',
+    '.mob-sidebar-close { background: none; border: none; cursor: pointer; padding: 4px; font-size: 22px; line-height: 1; color: var(--text-tertiary); }',
+    '.mob-sidebar-close:hover { color: var(--text-primary); }',
+    '.mob-sidebar-nav { padding: 12px 0; flex: 1; }',
+    '.mob-nav-item { border-bottom: 1px solid var(--border-subtle); }',
+    '.mob-nav-link { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; font-size: 15px; font-weight: 600; color: var(--text-primary); cursor: pointer; background: none; border: none; width: 100%; text-align: left; font-family: inherit; }',
+    'a.mob-nav-link:hover { background: var(--teal-50); color: var(--teal-700); }',
+    '.mob-nav-link .mob-arrow { font-size: 12px; color: var(--text-tertiary); transition: transform 200ms ease; }',
+    '.mob-nav-item.open .mob-arrow { transform: rotate(180deg); }',
+    '.mob-sub-menu { max-height: 0; overflow: hidden; transition: max-height 280ms ease; }',
+    '.mob-nav-item.open .mob-sub-menu { max-height: 300px; }',
+    '.mob-sub-menu a { display: block; padding: 11px 20px 11px 36px; font-size: 14px; color: var(--text-secondary); }',
+    '.mob-sub-menu a:hover { background: var(--teal-50); color: var(--teal-700); }',
+    '.mob-sidebar-kakao { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 12px 20px 20px; padding: 12px 0; background: rgb(254,229,0); color: rgb(25,25,25); border-radius: var(--radius-md); font-size: 14px; font-weight: 600; }',
     /* ─ 사업분야 큰 이미지 슬라이더 ─ */
     '.biz-slider { position: relative; max-width: 1560px; margin: 0 auto; }',
     '.biz-slider-viewport { overflow: hidden; border-radius: 6px; }',
@@ -114,13 +142,13 @@
     '@media (max-width: 900px) { .biz-slide { grid-template-columns: 1fr; } .biz-slide-img { height: 300px; } .biz-slide-body { padding: 28px 24px 32px; } .biz-slide-title { font-size: 24px; } .biz-slide-desc { font-size: 15px; } .biz-slide-link { margin-top: 24px; } }',
     '@media (max-width: 560px) { .biz-slide-img { height: 260px; } .biz-slide-body { padding: 22px 20px 28px; } .biz-slide-title { font-size: 21px; } }',
     /* ─ 서브페이지 공통 히어로 배너 ─ */
-    '.sub-hero { position: relative; overflow: hidden; min-height: 510px; display: flex; align-items: center; color: var(--gray-0); }',
+    '.sub-hero { position: relative; overflow: hidden; min-height: 416px; display: flex; align-items: center; color: var(--gray-0); }',
     '.sub-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; }',
     '.sub-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,68,73,0.48) 0%, rgba(0,68,73,0.20) 34%, rgba(0,68,73,0.00) 64%); }',
-    '.sub-hero .container { position: relative; z-index: 2; padding-top: 90px; padding-bottom: 72px; width: 100%; }',
+    '.sub-hero .container { position: relative; z-index: 2; padding-top: 80px; padding-bottom: 60px; width: 100%; }',
     '.sub-hero .page-title { text-shadow: 0 2px 16px rgba(0,0,0,0.35); }',
-    '@media (max-width: 900px) { .sub-hero { min-height: 420px; } }',
-    '@media (max-width: 560px) { .sub-hero { min-height: 320px; } .sub-hero .container { padding-top: 70px; padding-bottom: 50px; } }',
+    '@media (max-width: 900px) { .sub-hero { min-height: 340px; } }',
+    '@media (max-width: 560px) { .sub-hero { min-height: 260px; } .sub-hero .container { padding-top: 64px; padding-bottom: 40px; } }',
     /* ─ 보유장비 카드: 기존 홈페이지(boazet.com) 비율 기준 재설계 ─ */
     '.eq-panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }',
     '@media (max-width: 760px) { .eq-panel { grid-template-columns: 1fr; } }',
@@ -678,51 +706,57 @@
   var slidenav = document.querySelector('.hero-slidenav');
   if (slides.length > 1) {
     var idx = 0;
-    for (var i = 0; i < slides.length; i++) {
-      if (slides[i].classList.contains('active')) idx = i;
-    }
     var timer = null;
-    var paused = false;
     var HERO_INTERVAL = 3000;
-    var navCurrentEl = slidenav ? slidenav.querySelector('.hero-slidenav-current') : null;
-    var navTotalEl = slidenav ? slidenav.querySelector('.hero-slidenav-total') : null;
-    var navFillEl = slidenav ? slidenav.querySelector('.hero-slidenav-fill') : null;
-    function pad2(n) { return n < 10 ? '0' + n : String(n); }
-    if (navTotalEl) navTotalEl.textContent = pad2(slides.length);
-    function show(n) {
-      idx = (n + slides.length) % slides.length;
+    var gauges = slidenav ? slidenav.querySelectorAll('.hero-gauge') : [];
+
+    function showHero(n) {
+      idx = ((n % slides.length) + slides.length) % slides.length;
       slides.forEach(function (s, i) { s.classList.toggle('active', i === idx); });
-      if (navCurrentEl) navCurrentEl.textContent = pad2(idx + 1);
-      if (navFillEl) navFillEl.style.width = ((idx + 1) / slides.length * 100) + '%';
+      gauges.forEach(function (g, i) {
+        var fill = g.querySelector('.hero-gauge-fill');
+        g.classList.remove('active', 'done');
+        if (fill) { fill.style.animation = 'none'; fill.offsetHeight; fill.style.animation = ''; fill.style.width = ''; }
+        if (i < idx) { g.classList.add('done'); }
+        if (i === idx) { g.classList.add('active'); }
+      });
     }
-    function stopTimer() {
-      if (timer) { clearInterval(timer); timer = null; }
+
+    function stopHeroTimer() {
+      if (timer) { clearTimeout(timer); timer = null; }
     }
-    function startTimer() {
-      stopTimer();
-      if (paused || document.hidden) return;
-      timer = setInterval(function () { show(idx + 1); }, HERO_INTERVAL);
+
+    function startHeroTimer() {
+      stopHeroTimer();
+      timer = setTimeout(function () {
+        if (document.hidden) return;
+        showHero(idx + 1);
+        startHeroTimer();
+      }, HERO_INTERVAL);
     }
+
     if (slidenav) {
       Array.prototype.forEach.call(slidenav.querySelectorAll('.hero-slidenav-btn'), function (btn) {
         btn.addEventListener('click', function () {
-          show(idx + parseInt(btn.getAttribute('data-dir'), 10));
-          startTimer();
+          showHero(idx + parseInt(btn.getAttribute('data-dir'), 10));
+          startHeroTimer();
+        });
+      });
+      gauges.forEach(function (g) {
+        g.addEventListener('click', function () {
+          showHero(parseInt(g.getAttribute('data-hero-gauge'), 10));
+          startHeroTimer();
         });
       });
     }
-    var heroEl = document.getElementById('home');
-    if (heroEl) {
-      heroEl.addEventListener('mouseenter', function () { paused = true; stopTimer(); });
-      heroEl.addEventListener('mouseleave', function () { paused = false; startTimer(); });
-    }
-    // 탭이 백그라운드로 가면 타이머를 멈춰 불필요한 전환이 쌓이지 않도록 함
+
     document.addEventListener('visibilitychange', function () {
-      if (document.hidden) stopTimer();
-      else startTimer();
+      if (document.hidden) { stopHeroTimer(); }
+      else { showHero(idx); startHeroTimer(); }
     });
-    show(idx);
-    startTimer();
+
+    showHero(0);
+    startHeroTimer();
   }
 
   // ─── 사업분야 슬라이더 ───
@@ -1094,4 +1128,128 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   }
   initCertificateLightbox();
+
+  // ── 서브페이지 메뉴 클릭 시 자동 스크롤 ──
+  (function initSubnavScroll() {
+    var subnav = document.querySelector('.subnav');
+    if (!subnav) return;
+
+    // 페이지 로드 시 sessionStorage 확인 후 스크롤
+    if (sessionStorage.getItem('subnav-scroll')) {
+      sessionStorage.removeItem('subnav-scroll');
+      requestAnimationFrame(function () {
+        var main = document.querySelector('main');
+        if (!main) return;
+        var top = main.getBoundingClientRect().top + window.pageYOffset - 100;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    }
+
+    // subnav 링크 클릭 시 sessionStorage에 플래그 저장
+    var links = subnav.querySelectorAll('a[href]');
+    links.forEach(function (a) {
+      if (a.classList.contains('active')) return;
+      a.addEventListener('click', function () {
+        sessionStorage.setItem('subnav-scroll', '1');
+      });
+    });
+  })();
+
+  // ── 모바일 햄버거 메뉴 ──
+  (function initMobileMenu() {
+    var header = document.querySelector('header');
+    if (!header) return;
+    var nav = header.querySelector('nav');
+    if (!nav) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'mob-menu-btn';
+    btn.setAttribute('aria-label', '메뉴 열기');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    nav.parentNode.appendChild(btn);
+
+    var backdrop = document.createElement('div');
+    backdrop.className = 'mob-backdrop';
+    document.body.appendChild(backdrop);
+
+    var sidebar = document.createElement('div');
+    sidebar.className = 'mob-sidebar';
+    sidebar.setAttribute('role', 'dialog');
+    sidebar.setAttribute('aria-label', '모바일 메뉴');
+
+    var menuItems = [
+      { label: '회사소개', children: [
+        { label: '인사말 및 연혁', href: 'greeting.html' },
+        { label: '조직도', href: 'org.html' },
+        { label: '고객사', href: 'customers.html' },
+        { label: '협력사', href: 'partners.html' }
+      ]},
+      { label: '사업분야', children: [
+        { label: '대기측정 및 분석', href: 'biz-air.html' },
+        { label: '보유장비 현황', href: 'biz-equipment.html' },
+        { label: '관련기관', href: 'biz-partners.html' }
+      ]},
+      { label: 'BZ STORY', href: 'story.html' },
+      { label: 'BZ 이용후기', href: 'review.html' }
+    ];
+
+    var html = '<div class="mob-sidebar-head">' +
+      '<img src="assets/logo.svg" alt="보아스환경기술" style="height: 48px;">' +
+      '<button class="mob-sidebar-close" aria-label="닫기">&times;</button>' +
+      '</div><nav class="mob-sidebar-nav">';
+
+    menuItems.forEach(function (item) {
+      if (item.children) {
+        html += '<div class="mob-nav-item">' +
+          '<button class="mob-nav-link">' + item.label + '<span class="mob-arrow">▾</span></button>' +
+          '<div class="mob-sub-menu">';
+        item.children.forEach(function (child) {
+          html += '<a href="' + child.href + '">' + child.label + '</a>';
+        });
+        html += '</div></div>';
+      } else {
+        html += '<div class="mob-nav-item"><a class="mob-nav-link" href="' + item.href + '">' + item.label + '</a></div>';
+      }
+    });
+
+    html += '</nav>' +
+      '<a class="mob-sidebar-kakao" href="https://pf.kakao.com/_tnRdG" target="_blank" rel="noopener">' +
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.86 1.87 5.36 4.68 6.78L5.5 21.5c-.1.3.24.55.5.37L10.6 19.1c.46.05.93.08 1.4.08 5.52 0 10-3.58 10-8s-4.48-8-10-8z"/></svg>' +
+      '카카오톡 상담</a>';
+
+    sidebar.innerHTML = html;
+    document.body.appendChild(sidebar);
+
+    var closeBtn = sidebar.querySelector('.mob-sidebar-close');
+    var accordions = sidebar.querySelectorAll('.mob-nav-item button.mob-nav-link');
+
+    function openMenu() {
+      sidebar.classList.add('open');
+      backdrop.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      backdrop.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && sidebar.classList.contains('open')) closeMenu();
+    });
+
+    accordions.forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        var parent = toggle.parentElement;
+        parent.classList.toggle('open');
+      });
+    });
+  })();
+
 })();
