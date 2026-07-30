@@ -208,23 +208,39 @@
     /* ─ 팝업(공지) 창 ─ */
     '.popup-overlay { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(1,20,22,0.55); opacity: 0; pointer-events: none; transition: opacity 220ms ease; }',
     '.popup-overlay.open { opacity: 1; pointer-events: auto; }',
-    '.popup-panel { width: 100%; max-width: 460px; max-height: calc(100vh - 48px); display: flex; flex-direction: column; background: var(--gray-0); border-radius: var(--radius-xl, 16px); overflow: hidden; box-shadow: 0 24px 60px -20px rgba(0,0,0,0.45); transform: translateY(14px) scale(0.985); transition: transform 260ms var(--ease-out, ease); }',
+    '.popup-panel { width: 100%; max-width: 460px; max-height: 88vh; display: flex; flex-direction: column; background: var(--gray-0); border-radius: var(--radius-xl, 16px); overflow: hidden; box-shadow: 0 24px 60px -20px rgba(0,0,0,0.45); transform: translateY(14px) scale(0.985); transition: transform 260ms var(--ease-out, ease); }',
     '.popup-overlay.open .popup-panel { transform: none; }',
-    '.popup-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 22px 24px 0; }',
-    '.popup-title { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); line-height: 1.35; margin: 0; }',
-    '.popup-close { flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 2px 4px; font-size: 24px; line-height: 1; color: var(--text-tertiary); }',
+    /* 제목은 가운데 정렬. 닫기 버튼을 absolute로 빼서 제목이 여러 줄이어도 중앙이 유지되고,
+       제목 좌우에 닫기 버튼 폭만큼 여백(52px)을 둬서 서로 겹치지 않게 한다. */
+    '.popup-head { position: relative; flex: 0 0 auto; padding: 22px 52px 0; }',
+    /* 제목 크기: PC 21px → 23px (측정값 +2px). 각 페이지의 전역 h2 !important 규칙이
+       팝업 제목까지 덮어쓰지 않도록 !important로 팝업 CSS가 우선하도록 고정. */
+    '.popup-title { font-size: 23px !important; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); line-height: 1.35; margin: 0; text-align: center; overflow-wrap: anywhere; }',
+    '.popup-close { position: absolute; top: 16px; right: 14px; background: none; border: none; cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 26px; line-height: 1; color: var(--text-tertiary); }',
     '.popup-close:hover { color: var(--text-primary); }',
-    '.popup-body { overflow-y: auto; padding: 14px 24px 4px; }',
-    '.popup-img { display: block; width: 100%; height: auto; border-radius: var(--radius-md, 8px); margin-bottom: 16px; }',
+    /* 콘텐츠 영역만 세로 스크롤. flex 자식이므로 min-height:0이 없으면 축소되지 않아 스크롤이 생기지 않는다. */
+    '.popup-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 16px 24px 4px; }',
+    '.popup-images { display: flex; flex-direction: column; gap: 14px; margin-bottom: 16px; }',
+    '.popup-img { display: block; width: auto; max-width: 100%; height: auto; margin: 0 auto; border-radius: var(--radius-md, 8px); }',
     '.popup-text { font-size: 16px; line-height: 1.75; color: var(--text-secondary); margin: 0; white-space: pre-line; overflow-wrap: anywhere; }',
     '.popup-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; padding: 12px 22px; background: var(--teal-700); color: var(--gray-0); border-radius: var(--radius-md, 8px); font-size: 16px; font-weight: 600; }',
     '.popup-link:hover { background: var(--teal-800); color: var(--gray-0); }',
-    '.popup-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; padding: 14px 24px; border-top: 1px solid var(--border-subtle); background: var(--gray-50); }',
+    /* 하단은 항상 보이도록 고정(flex-shrink: 0) */
+    '.popup-foot { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 24px; border-top: 1px solid var(--border-subtle); background: var(--gray-50); }',
     '.popup-hide { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; color: var(--text-secondary); cursor: pointer; user-select: none; }',
     '.popup-hide input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--teal-700); }',
     '.popup-dismiss { background: none; border: 1px solid var(--border-default); border-radius: var(--radius-md, 8px); padding: 9px 18px; font-family: inherit; font-size: 15px; font-weight: 600; color: var(--text-primary); cursor: pointer; }',
     '.popup-dismiss:hover { background: var(--gray-0); border-color: var(--teal-600); color: var(--teal-800); }',
-    '@media (max-width: 560px) { .popup-overlay { padding: 16px; align-items: flex-end; } .popup-panel { max-height: calc(100vh - 32px); } .popup-title { font-size: 19px; } .popup-foot { flex-direction: column-reverse; align-items: stretch; } .popup-dismiss { width: 100%; } }',
+    /* ─ 여러 팝업 이동(한 번에 하나씩 표시) ─ 팝업이 1개면 JS가 이 영역을 만들지 않는다. */
+    '.popup-nav { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 16px; border-top: 1px solid var(--border-subtle); }',
+    '.popup-nav-btn { min-width: 44px; height: 40px; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; background: var(--gray-0); border: 1px solid var(--border-default); border-radius: var(--radius-md, 8px); font-family: inherit; font-size: 15px; font-weight: 600; color: var(--text-primary); cursor: pointer; }',
+    '.popup-nav-btn:hover:not(:disabled) { background: var(--teal-50); border-color: var(--teal-600); color: var(--teal-800); }',
+    '.popup-nav-btn:disabled { opacity: 0.4; cursor: default; }',
+    '.popup-count { font-family: var(--font-mono); font-size: 15px; font-weight: 600; color: var(--text-secondary); }',
+    '.popup-closeall { background: none; border: none; font-family: inherit; font-size: 14px; color: var(--text-tertiary); text-decoration: underline; cursor: pointer; padding: 6px 4px; }',
+    '.popup-closeall:hover { color: var(--text-primary); }',
+    /* 모바일: 상하 안전 여백 확보, 버튼은 손가락으로 누르기 쉬운 크기 유지 */
+    '@media (max-width: 560px) { .popup-overlay { padding: 14px; align-items: center; } .popup-panel { max-height: 84vh; } .popup-title { font-size: 21px !important; } .popup-head { padding: 18px 52px 0; } .popup-body { padding: 14px 18px 4px; } .popup-foot { flex-direction: column-reverse; align-items: stretch; padding: 12px 18px; } .popup-dismiss { width: 100%; height: 44px; } .popup-nav { padding: 10px 12px; } .popup-nav-btn { height: 44px; min-width: 52px; } }',
     '@media (prefers-reduced-motion: reduce) { .popup-overlay, .popup-panel { transition: none !important; } }',
     /* ─ 업무절차 반응형 ─ */
     '@media (max-width: 900px) { .process-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 24px 16px !important; } .process-arrow { display: none !important; } }',
@@ -1296,13 +1312,14 @@
   })();
 
   // ── 팝업(공지) 창 ──
-  // data/popup.json을 읽어 조건이 맞을 때만 표시한다.
-  // 파일이 없거나 enabled가 false면 아무것도 하지 않는다.
+  // data/popup.json의 팝업 목록을 읽어 조건을 만족하는 팝업만 표시한다.
+  // 활성 팝업이 여러 개면 한 번에 하나씩 보여주고 이전/다음으로 이동한다.
+  // 파일이 없거나 표시할 팝업이 없으면 아무 동작도 하지 않는다.
   (function initPopup() {
     var STORE_KEY = 'boaz-popup-hidden';
 
-    // "YYYY-MM-DD"를 로컬 시간대 기준 날짜로 만든다.
-    // new Date("2026-07-30")은 UTC 자정으로 해석되어 KST에서는 그날 09:00이 되므로,
+    // ── 날짜: "YYYY-MM-DD"를 로컬 시간대 기준으로 만든다 ──
+    // new Date("2026-07-30")은 UTC 자정으로 해석되어 KST에서는 그날 09:00이 되므로
     // 로컬 자정과 비교하면 시작일 당일 내내 "아직 시작 안 됨"으로 잘못 판정된다.
     function localDate(str, endOfDay) {
       var m = String(str).trim().match(/^(\d{4})-(\d{2})-(\d{2})/);
@@ -1315,38 +1332,17 @@
       var now = new Date();
       var start = p.startDate ? localDate(p.startDate, false) : null;
       var end = p.endDate ? localDate(p.endDate, true) : null;
-      if (start && now < start) return false;   // 시작일 00:00:00.000부터 표시
-      if (end && now > end) return false;       // 종료일 23:59:59.999까지 표시
+      if (start && now < start) return false;   // 시작일 00:00:00.000부터
+      if (end && now > end) return false;       // 종료일 23:59:59.999까지
       return true;
     }
     // enabled가 문자열 "false"/"0"으로 저장돼도 안전하게 처리
     function isOn(v) {
+      if (v === undefined || v === null) return false;
       if (typeof v === 'string') return !/^(false|0|no|off|)$/i.test(v.trim());
       return !!v;
     }
-    // 콘텐츠가 바뀌면 이전 '오늘 하루 보지 않기' 기록이 새 팝업을 막지 않도록
-    // 실질 내용으로 지문(fingerprint)을 만든다.
-    function fingerprint(p) {
-      var raw = [p.title, p.body, p.image, p.linkLabel, p.linkUrl, p.startDate, p.endDate].join('');
-      var h = 5381;
-      for (var i = 0; i < raw.length; i++) { h = ((h << 5) + h + raw.charCodeAt(i)) | 0; }
-      return (h >>> 0).toString(36);
-    }
-    function isSuppressed(fp) {
-      try {
-        var raw = window.localStorage.getItem(STORE_KEY);
-        if (!raw) return false;
-        var s = JSON.parse(raw);
-        return s && s.fp === fp && Date.now() < s.until;
-      } catch (e) { return false; }
-    }
-    function suppressToday(fp) {
-      try {
-        var end = new Date(); end.setHours(23, 59, 59, 999);
-        window.localStorage.setItem(STORE_KEY, JSON.stringify({ fp: fp, until: end.getTime() }));
-      } catch (e) { /* 시크릿 모드 등에서 저장 실패는 무시 */ }
-    }
-    // 이미지·링크 경로를 현재 문서 기준으로 해석한다.
+    // 경로를 현재 문서 기준으로 해석한다.
     // 앞에 '/'가 붙은 경로는 GitHub Pages 프로젝트 경로(/boaz-website/)를 벗어나므로
     // 선행 슬래시를 떼고 문서 기준으로 다시 해석한다. 전체 URL은 그대로 둔다.
     function resolveAssetUrl(u) {
@@ -1365,22 +1361,117 @@
       return /^[\w./?#&=%~-]/.test(s) ? resolveAssetUrl(s) : '';
     }
 
+    // ── 하위 호환 정규화 ──
+    // 새 구조:   { "popups": [ {id, enabled, order, title, content, images:[{src,alt}], ...} ] }
+    // 옛 구조:   { enabled, title, body, image, linkLabel, linkUrl, width, ... }  ← 단일 팝업
+    // 옛 필드명을 새 이름으로 옮겨 담아 기존에 등록된 팝업도 그대로 표시된다.
+    function normalizeImages(raw, single) {
+      var list = [];
+      if (Array.isArray(raw)) {
+        raw.forEach(function (it) {
+          if (!it) return;
+          if (typeof it === 'string') { list.push({ src: it, alt: '' }); }
+          else if (it.src) { list.push({ src: it.src, alt: it.alt || '' }); }
+          else if (it.image) { list.push({ src: it.image, alt: it.alt || '' }); }
+        });
+      } else if (typeof raw === 'string' && raw) {
+        list.push({ src: raw, alt: '' });
+      }
+      // 옛 단일 image 필드
+      if (!list.length && typeof single === 'string' && single) {
+        list.push({ src: single, alt: '' });
+      }
+      return list;
+    }
+    function normalize(data) {
+      var arr;
+      if (data && Array.isArray(data.popups)) arr = data.popups;
+      else if (Array.isArray(data)) arr = data;
+      else if (data && typeof data === 'object') arr = [data];   // 옛 단일 팝업 구조
+      else arr = [];
+
+      return arr.map(function (p, i) {
+        p = p || {};
+        return {
+          id: String(p.id || p.slug || ('popup-' + (i + 1))),
+          enabled: isOn(p.enabled),
+          order: (p.order === 0 || p.order) ? Number(p.order) : (i + 1),
+          // 제목은 앞뒤 공백을 떼어낸다. 가운데 정렬이므로 수동으로 넣은 정렬용 공백이
+          // 남아 있으면 오히려 중심이 어긋난다.
+          title: String(p.title || '').trim(),
+          content: p.content || p.body || '',
+          images: normalizeImages(p.images, p.image),
+          buttonText: p.buttonText || p.linkLabel || '',
+          buttonUrl: p.buttonUrl || p.linkUrl || '',
+          startDate: p.startDate || '',
+          endDate: p.endDate || '',
+          showOn: p.showOn || 'home',
+          maxWidth: parseInt(p.maxWidth || p.width, 10) || 460
+        };
+      });
+    }
+
+    // ── 팝업별 '오늘 하루 보지 않기' ──
+    // { "<popup id>": { fp: "<콘텐츠 지문>", until: <시각> }, ... }
+    // 팝업마다 독립이라 1번을 숨겨도 2번은 표시된다.
+    // 옛 형식({fp, until} 단일 객체)이 남아 있어도 오류 없이 무시된다.
+    function readStore() {
+      try {
+        var raw = window.localStorage.getItem(STORE_KEY);
+        if (!raw) return {};
+        var s = JSON.parse(raw);
+        if (!s || typeof s !== 'object' || Array.isArray(s)) return {};
+        if (s.fp && s.until) return {};   // 옛 단일 팝업 형식 → 무시
+        return s;
+      } catch (e) { return {}; }
+    }
+    function writeStore(store) {
+      try { window.localStorage.setItem(STORE_KEY, JSON.stringify(store)); }
+      catch (e) { /* 시크릿 모드 등 저장 실패는 무시 */ }
+    }
+    // 제목·본문·이미지·버튼·기간이 바뀌면 지문이 달라져
+    // 이전 숨김 기록이 새 내용을 막지 않는다.
+    function fingerprint(p) {
+      var raw = [p.title, p.content, JSON.stringify(p.images), p.buttonText,
+                 p.buttonUrl, p.startDate, p.endDate].join('|');
+      var h = 5381;
+      for (var i = 0; i < raw.length; i++) { h = ((h << 5) + h + raw.charCodeAt(i)) | 0; }
+      return (h >>> 0).toString(36);
+    }
+    function isSuppressed(p, store) {
+      var s = store[p.id];
+      return !!(s && s.fp === fingerprint(p) && Date.now() < s.until);
+    }
+    function suppressToday(p, store) {
+      var end = new Date(); end.setHours(23, 59, 59, 999);
+      store[p.id] = { fp: fingerprint(p), until: end.getTime() };
+      writeStore(store);
+    }
+
     fetch('data/popup.json', { cache: 'no-store' })
       .then(function (r) {
         if (!r.ok) throw new Error('popup.json 응답 ' + r.status + ' (' + r.url + ')');
         return r.json();
       })
-      .then(function (p) {
-        if (!p) return;
-        if (!isOn(p.enabled)) return;
-        if (!inDateRange(p)) return;
-        if (isSuppressed(fingerprint(p))) return;
-        // showOn: 'home'(기본) = 메인페이지만, 'all' = 모든 페이지
+      .then(function (data) {
+        var store = readStore();
         var isHome = !!document.getElementById('home');
-        if ((p.showOn || 'home') !== 'all' && !isHome) return;
-        if (!p.title && !p.body && !p.image) return;
 
-        var fp = fingerprint(p);
+        var list = normalize(data)
+          .filter(function (p) {
+            if (!p.enabled) return false;
+            if (!inDateRange(p)) return false;
+            if (p.showOn !== 'all' && !isHome) return false;      // 'home' = 메인만
+            if (!p.title && !p.content && !p.images.length) return false;
+            if (isSuppressed(p, store)) return false;
+            return true;
+          })
+          // 관리자에서 정한 표시 순서 적용 (같으면 원래 순서 유지)
+          .sort(function (a, b) { return a.order - b.order; });
+
+        if (!list.length) return;
+
+        var idx = 0;
         var lastFocused = document.activeElement;
 
         var overlay = document.createElement('div');
@@ -1389,82 +1480,135 @@
         panel.className = 'popup-panel';
         panel.setAttribute('role', 'dialog');
         panel.setAttribute('aria-modal', 'true');
-        if (p.width) panel.style.maxWidth = parseInt(p.width, 10) + 'px';
-
-        // 머리말
-        var head = document.createElement('div');
-        head.className = 'popup-head';
-        var h = document.createElement('h2');
-        h.className = 'popup-title';
-        h.id = 'popup-title';
-        h.textContent = p.title || '';
         panel.setAttribute('aria-labelledby', 'popup-title');
-        var closeBtn = document.createElement('button');
-        closeBtn.className = 'popup-close';
-        closeBtn.type = 'button';
-        closeBtn.setAttribute('aria-label', '팝업 닫기');
-        closeBtn.innerHTML = '&times;';
-        head.appendChild(h);
-        head.appendChild(closeBtn);
-        panel.appendChild(head);
-
-        // 본문
-        var body = document.createElement('div');
-        body.className = 'popup-body';
-        if (p.image) {
-          var img = document.createElement('img');
-          img.className = 'popup-img';
-          img.src = resolveAssetUrl(p.image);
-          img.alt = p.title || '공지 이미지';
-          // 이미지가 없으면 자리만 차지하지 않도록 숨기고 콘솔에 원인을 남긴다
-          img.addEventListener('error', function () {
-            img.style.display = 'none';
-            if (window.console) console.error('[팝업] 이미지를 불러올 수 없습니다:', img.src);
-          });
-          body.appendChild(img);
-        }
-        if (p.body) {
-          var txt = document.createElement('p');
-          txt.className = 'popup-text';
-          txt.textContent = p.body;   // textContent + white-space: pre-line → 줄바꿈 유지
-          body.appendChild(txt);
-        }
-        var url = safeUrl(p.linkUrl);
-        if (url && p.linkLabel) {
-          var a = document.createElement('a');
-          a.className = 'popup-link';
-          a.href = url;
-          a.textContent = p.linkLabel;
-          if (/^https?:\/\//i.test(url)) { a.target = '_blank'; a.rel = 'noopener'; }
-          body.appendChild(a);
-        }
-        panel.appendChild(body);
-
-        // 바닥글: 오늘 하루 보지 않기 + 닫기
-        var foot = document.createElement('div');
-        foot.className = 'popup-foot';
-        var label = document.createElement('label');
-        label.className = 'popup-hide';
-        var cb = document.createElement('input');
-        cb.type = 'checkbox';
-        var span = document.createElement('span');
-        span.textContent = '오늘 하루 보지 않기';
-        label.appendChild(cb);
-        label.appendChild(span);
-        var dismiss = document.createElement('button');
-        dismiss.className = 'popup-dismiss';
-        dismiss.type = 'button';
-        dismiss.textContent = '닫기';
-        foot.appendChild(label);
-        foot.appendChild(dismiss);
-        panel.appendChild(foot);
-
         overlay.appendChild(panel);
-        document.body.appendChild(overlay);
 
-        function close() {
-          // '오늘 하루 보지 않기'를 체크했을 때만 저장하고, 지금 본 콘텐츠의 지문을 함께 남긴다
-          if (cb.checked) suppressToday(fp);
+        // 팝업 하나를 패널 안에 그린다 (여러 개일 때는 같은 패널을 갈아끼운다)
+        function render() {
+          var p = list[idx];
+          panel.style.maxWidth = p.maxWidth + 'px';
+          panel.innerHTML = '';
+
+          // 머리말: 제목(가운데) + 닫기 버튼(우측 상단 absolute)
+          var head = document.createElement('div');
+          head.className = 'popup-head';
+          var h = document.createElement('h2');
+          h.className = 'popup-title';
+          h.id = 'popup-title';
+          h.textContent = p.title || '';
+          var closeBtn = document.createElement('button');
+          closeBtn.className = 'popup-close';
+          closeBtn.type = 'button';
+          closeBtn.setAttribute('aria-label', '팝업 닫기');
+          closeBtn.innerHTML = '&times;';
+          head.appendChild(h);
+          head.appendChild(closeBtn);
+          panel.appendChild(head);
+
+          // 본문: 이미지 여러 장을 등록 순서대로 세로 표시한 뒤 글 → 버튼
+          var body = document.createElement('div');
+          body.className = 'popup-body';
+          if (p.images.length) {
+            var wrap = document.createElement('div');
+            wrap.className = 'popup-images';
+            p.images.forEach(function (im, n) {
+              var img = document.createElement('img');
+              img.className = 'popup-img';
+              img.src = resolveAssetUrl(im.src);
+              img.alt = im.alt || (p.title ? p.title + ' 이미지 ' + (n + 1) : '공지 이미지 ' + (n + 1));
+              img.loading = n === 0 ? 'eager' : 'lazy';
+              img.addEventListener('error', function () {
+                img.style.display = 'none';
+                if (window.console) console.error('[팝업] 이미지를 불러올 수 없습니다:', img.src);
+              });
+              wrap.appendChild(img);
+            });
+            body.appendChild(wrap);
+          }
+          if (p.content) {
+            var txt = document.createElement('p');
+            txt.className = 'popup-text';
+            txt.textContent = p.content;   // textContent + white-space: pre-line → 줄바꿈 유지
+            body.appendChild(txt);
+          }
+          var url = safeUrl(p.buttonUrl);
+          if (url && p.buttonText) {
+            var a = document.createElement('a');
+            a.className = 'popup-link';
+            a.href = url;
+            a.textContent = p.buttonText;
+            if (/^https?:\/\//i.test(url)) { a.target = '_blank'; a.rel = 'noopener'; }
+            a.addEventListener('click', function () { closeAll(); });
+            body.appendChild(a);
+          }
+          panel.appendChild(body);
+
+          // 이전/다음 이동 — 팝업이 2개 이상일 때만 만든다
+          if (list.length > 1) {
+            var nav = document.createElement('div');
+            nav.className = 'popup-nav';
+            var prev = document.createElement('button');
+            prev.className = 'popup-nav-btn';
+            prev.type = 'button';
+            prev.textContent = '‹ 이전';
+            prev.disabled = idx === 0;
+            var count = document.createElement('span');
+            count.className = 'popup-count';
+            count.textContent = (idx + 1) + ' / ' + list.length;
+            count.setAttribute('aria-live', 'polite');
+            var next = document.createElement('button');
+            next.className = 'popup-nav-btn';
+            next.type = 'button';
+            next.textContent = '다음 ›';
+            next.disabled = idx === list.length - 1;
+            prev.addEventListener('click', function () { if (idx > 0) { idx--; render(); } });
+            next.addEventListener('click', function () { if (idx < list.length - 1) { idx++; render(); } });
+            nav.appendChild(prev);
+            nav.appendChild(count);
+            nav.appendChild(next);
+            panel.appendChild(nav);
+          }
+
+          // 하단: 오늘 하루 보지 않기 + 닫기 (+ 여러 개면 전체 닫기)
+          var foot = document.createElement('div');
+          foot.className = 'popup-foot';
+          var label = document.createElement('label');
+          label.className = 'popup-hide';
+          var cb = document.createElement('input');
+          cb.type = 'checkbox';
+          var span = document.createElement('span');
+          span.textContent = '오늘 하루 보지 않기';
+          label.appendChild(cb);
+          label.appendChild(span);
+          var right = document.createElement('div');
+          right.style.cssText = 'display: flex; align-items: center; gap: 10px;';
+          if (list.length > 1) {
+            var closeAllBtn = document.createElement('button');
+            closeAllBtn.className = 'popup-closeall';
+            closeAllBtn.type = 'button';
+            closeAllBtn.textContent = '전체 닫기';
+            closeAllBtn.addEventListener('click', function () {
+              if (cb.checked) suppressToday(p, store);   // 지금 보고 있는 팝업만 체크 상태 반영
+              closeAll();
+            });
+            right.appendChild(closeAllBtn);
+          }
+          var dismiss = document.createElement('button');
+          dismiss.className = 'popup-dismiss';
+          dismiss.type = 'button';
+          dismiss.textContent = '닫기';
+          dismiss.addEventListener('click', function () { closeCurrent(cb.checked); });
+          right.appendChild(dismiss);
+          foot.appendChild(label);
+          foot.appendChild(right);
+          panel.appendChild(foot);
+
+          closeBtn.addEventListener('click', function () { closeCurrent(cb.checked); });
+          body.scrollTop = 0;
+          closeBtn.focus();
+        }
+
+        function teardown() {
           overlay.classList.remove('open');
           document.body.style.overflow = '';
           document.removeEventListener('keydown', onKey);
@@ -1473,30 +1617,34 @@
           }, 240);
           if (lastFocused && lastFocused.focus) lastFocused.focus();
         }
-        function onKey(e) { if (e.key === 'Escape') close(); }
-
-        closeBtn.addEventListener('click', close);
-        dismiss.addEventListener('click', close);
-        overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
-        document.addEventListener('keydown', onKey);
-        // 링크를 누르면 이동하므로 팝업도 닫아 둔다
-        if (url && p.linkLabel) {
-          panel.querySelector('.popup-link').addEventListener('click', function () { close(); });
+        // 현재 팝업만 닫는다. 남은 팝업이 있으면 다음 팝업으로 넘어간다.
+        function closeCurrent(hideToday) {
+          if (hideToday) suppressToday(list[idx], store);
+          list.splice(idx, 1);
+          if (!list.length) { teardown(); return; }
+          if (idx > list.length - 1) idx = list.length - 1;
+          render();
         }
+        function closeAll() { teardown(); }
+        // ESC는 항상 '지금 보고 있는 팝업'만 닫는다 (체크 상태는 반영하지 않음)
+        function onKey(e) { if (e.key === 'Escape') closeCurrent(false); }
 
+        overlay.addEventListener('click', function (e) { if (e.target === overlay) closeCurrent(false); });
+        document.addEventListener('keydown', onKey);
+
+        document.body.appendChild(overlay);
+        render();
         // rAF에 의존하지 않고 강제 리플로우로 초기 상태를 확정한 뒤 여는 클래스를 붙인다
         // (백그라운드 탭처럼 프레임이 그려지지 않는 상황에서도 팝업이 열린 상태가 됨)
         overlay.offsetHeight;
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
-        closeBtn.focus();
       })
       // 방문자 화면에는 아무것도 띄우지 않고, 개발자 콘솔에만 원인을 남긴다
       .catch(function (e) {
         if (window.console) console.error('[팝업] 표시 실패:', e && e.message ? e.message : e);
       });
   })();
-
   // ── 모바일 햄버거 메뉴 ──
   (function initMobileMenu() {
     var header = document.querySelector('header');
