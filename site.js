@@ -18,15 +18,15 @@
     '.nav-item.has-sub:hover .nav-submenu-wrap, .nav-item.has-sub:focus-within .nav-submenu-wrap { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }',
     '.nav-submenu { background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg, 12px); box-shadow: var(--shadow-md, 0 16px 32px -12px rgba(0,0,0,0.18)); }',
     '.nav-submenu-inner { display: flex; flex-direction: column; padding: 6px; min-width: 168px; }',
-    '.nav-submenu-inner a { padding: 10px 18px; border-radius: 8px; font-size: 14px; color: var(--text-secondary); white-space: nowrap; text-align: center; }',
+    '.nav-submenu-inner a { padding: 10px 18px; border-radius: 8px; font-size: 16px; color: var(--text-secondary); white-space: nowrap; text-align: center; }',
     '.nav-submenu-inner a:hover { background: var(--teal-50); color: var(--teal-700); }',
     /* ─ 히어로 오버레이 헤더 (메인페이지 전용, 스크롤 시 불투명하게 전환) ─ */
     'html.has-hero header { position: fixed; top: 0; left: 0; right: 0; width: 100%; background: linear-gradient(180deg, rgba(1,45,50,0.55) 0%, rgba(1,45,50,0.18) 100%); backdrop-filter: saturate(1.1) blur(6px); border-bottom: 1px solid rgba(255,255,255,0.14); transition: background 260ms ease, border-color 260ms ease; }',
     'html.has-hero header.is-scrolled { background: rgba(251,250,247,0.94); backdrop-filter: saturate(1.2) blur(8px); border-bottom-color: var(--border-subtle); }',
     'html.has-hero header nav > a, html.has-hero header .nav-item > a, html.has-hero header img[alt*="보아스"] { transition: color 260ms ease, filter 260ms ease; }',
     /* ─ 히어로 슬라이드 번호 + 진행 게이지 ─ */
-    '.hero-slidenav { position: absolute; right: 40px; bottom: 40px; z-index: 6; display: flex; align-items: center; gap: 10px; padding: 10px 18px; background: rgba(1, 45, 50, 0.45); backdrop-filter: blur(6px); border-radius: 999px; color: rgba(255,255,255,0.95); font-family: var(--font-mono); font-size: 13px; font-weight: 600; }',
-    '.hero-slidenav-btn { width: 26px; height: 26px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.35); background: transparent; color: rgba(255,255,255,0.95); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 15px; line-height: 1; padding: 0; }',
+    '.hero-slidenav { position: absolute; right: 40px; bottom: 40px; z-index: 6; display: flex; align-items: center; gap: 10px; padding: 10px 18px; background: rgba(1, 45, 50, 0.45); backdrop-filter: blur(6px); border-radius: 999px; color: rgba(255,255,255,0.95); font-family: var(--font-mono); font-size: 15px; font-weight: 600; }',
+    '.hero-slidenav-btn { width: 26px; height: 26px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.35); background: transparent; color: rgba(255,255,255,0.95); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 17px; line-height: 1; padding: 0; }',
     '.hero-slidenav-btn:hover { background: rgba(255,255,255,0.18); }',
     '.hero-gauge-group { display: flex; align-items: center; gap: 6px; }',
     '.hero-gauge { display: flex; align-items: center; gap: 4px; cursor: pointer; padding: 4px 0; }',
@@ -42,58 +42,66 @@
     '.scroll-hint { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 6; cursor: pointer; color: rgba(255,255,255,0.85); }',
     '.scroll-hint-mouse { width: 26px; height: 42px; border: 2px solid rgba(255,255,255,0.75); border-radius: 999px; display: flex; justify-content: center; padding-top: 7px; box-sizing: border-box; }',
     '.scroll-hint-dot { width: 4px; height: 8px; border-radius: 999px; background: rgba(255,255,255,0.95); animation: scrollHintMove 1.6s ease infinite; }',
-    '.scroll-hint-label { font-size: 11px; letter-spacing: 0.2em; font-weight: 600; }',
+    '.scroll-hint-label { font-size: 13px; letter-spacing: 0.2em; font-weight: 600; }',
     '@keyframes scrollHintMove { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(14px); opacity: 0; } 100% { transform: translateY(0); opacity: 0; } }',
     '@media (max-width: 900px) { .scroll-hint { display: none; } }',
     /* ─ 푸터 3단 그리드: 모바일에서 세로로 쌓이도록 보정 (기존 반응형 규칙 누락 보완) ─ */
     '@media (max-width: 900px) { footer [style*="grid-template-columns: 1.3fr 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 32px !important; } }',
     /* ─ 고객사·협력사 서브페이지 카드 그리드 ─ */
-    '.company-card-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }',
-    '@media (max-width: 1100px) { .company-card-grid { grid-template-columns: repeat(5, 1fr); } }',
-    '@media (max-width: 900px) { .company-card-grid { grid-template-columns: repeat(3, 1fr); } }',
-    '@media (max-width: 560px) { .company-card-grid { grid-template-columns: repeat(2, 1fr); } }',
-    '.company-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 220px; padding: 22px 16px; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg, 12px); color: inherit; text-align: center; }',
-    '.company-card-media { width: 100%; height: 112px; display: flex; align-items: center; justify-content: center; background: #FFFFFF; border-radius: var(--radius-md, 8px); padding: 10px; box-sizing: border-box; }',
+    /* 9차: 로고 표시 크기 1.5배 — 열 수를 6→4로 줄여 셀 폭을 넓히고 로고 박스 높이 112→168px */
+    '.company-card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }',
+    '@media (max-width: 1100px) { .company-card-grid { grid-template-columns: repeat(3, 1fr); } }',
+    '@media (max-width: 900px) { .company-card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }',
+    '@media (max-width: 560px) { .company-card-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }',
+    '.company-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 300px; padding: 28px 20px; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg, 12px); color: inherit; text-align: center; }',
+    '.company-card-media { width: 100%; height: 168px; display: flex; align-items: center; justify-content: center; background: #FFFFFF; border-radius: var(--radius-md, 8px); padding: 12px; box-sizing: border-box; }',
+    '@media (max-width: 560px) { .company-card { min-height: 220px; padding: 20px 14px; } .company-card-media { height: 118px; } }',
     '.company-card-media img { max-width: 100%; max-height: 100%; object-fit: contain; }',
     '.company-card-ph { width: 52px; height: 52px; border-radius: var(--radius-md); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); }',
-    '.company-card-name { font-size: 13px; font-weight: 500; color: var(--text-primary); letter-spacing: -0.01em; overflow-wrap: anywhere; }',
+    '.company-card-name { font-size: 15px; font-weight: 500; color: var(--text-primary); letter-spacing: -0.01em; overflow-wrap: anywhere; }',
     /* ─ 메인 고객사·협력사 10개 슬라이더(페이지당 최대 5×2) ─ */
     '.company-slide-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0px; background: var(--gray-0); }',
     '@media (max-width: 1100px) { .company-slide-grid { grid-template-columns: repeat(4, 1fr); } }',
     '@media (max-width: 900px) { .company-slide-grid { grid-template-columns: repeat(3, 1fr); } }',
     '@media (max-width: 560px) { .company-slide-grid { grid-template-columns: repeat(2, 1fr); } }',
+    /* 로고 박스는 192px을 상한으로 두되 셀이 좁아지면 함께 줄어든다(브레이크포인트별 수치 불필요). */
+    '.company-slide-logo { width: min(192px, 100%) !important; height: auto !important; aspect-ratio: 1 / 1; }',
+    '@media (max-width: 900px) { .company-slide-cell { min-height: 230px !important; padding: 18px !important; } }',
+    '@media (max-width: 560px) { .company-slide-cell { min-height: 190px !important; padding: 14px !important; } }',
     /* ─ 홈 이용후기 카드: 이미지/텍스트 영역 고정 비율, 카드 높이 통일 ─ */
     '.review-card { display: flex; flex-direction: column; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; color: inherit; transition: box-shadow var(--duration-base) var(--ease-out); }',
     '.review-card:hover { box-shadow: 0 8px 20px -10px rgba(0,0,0,0.18); }',
     '.review-card-media { flex: 0 0 176px; height: 176px; background-color: var(--teal-200); background-size: cover; background-position: center; background-repeat: no-repeat; }',
     '.review-card-media-ph { background: linear-gradient(135deg, var(--teal-300), var(--teal-600)); position: relative; }',
-    '.review-card-media-tag { position: absolute; bottom: 10px; right: 12px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.35); padding: 3px 8px; border-radius: 4px; }',
+    '.review-card-media-tag { position: absolute; bottom: 10px; right: 12px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.35); padding: 3px 8px; border-radius: 4px; }',
     '.review-card-body { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; padding: 22px 24px; }',
-    '.review-card-title { font-size: 17px; font-weight: 600; margin: 10px 0 8px; line-height: 1.4; letter-spacing: -0.01em; color: var(--text-primary); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }',
-    '.review-card-summary { font-size: 14px; line-height: 1.6; color: var(--text-secondary); margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }',
-    '.review-card-meta { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; color: var(--text-tertiary); }',
+    '.review-card-title { font-size: 19px; font-weight: 600; margin: 10px 0 8px; line-height: 1.4; letter-spacing: -0.01em; color: var(--text-primary); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }',
+    '.review-card-summary { font-size: 16px; line-height: 1.6; color: var(--text-secondary); margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }',
+    '.review-card-meta { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 14px; color: var(--text-tertiary); }',
     '@media (max-width: 560px) { .review-card-media { flex-basis: 150px; height: 150px; } }',
     /* ─ 홈 미니 캐러셀(이용후기/최근소식) 공통: fade+슬라이드 전환, 좌우 버튼 안 잘림 ─ */
     '.review-carousel { position: relative; overflow: visible; }',
     '.review-track { display: flex; overflow: hidden; }',
     '.review-track > * { min-width: 0; }',
     /* ─ 등록증 및 인증서 카드 + 확대보기 모달 ─ */
-    '.cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }',
+    /* 9차: 인증서 썸네일 1.5배 — 최소 열 폭 220→330px (한 줄 표시 개수가 줄어들며 썸네일이 커짐) */
+    '.cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 28px; }',
+    '@media (max-width: 560px) { .cert-grid { grid-template-columns: 1fr; gap: 20px; } }',
     '.cert-card { all: unset; cursor: zoom-in; display: block; text-align: left; width: 100%; box-sizing: border-box; border-radius: var(--radius-xl); background: var(--gray-0); border: 1px solid var(--border-subtle); overflow: hidden; transition: box-shadow 160ms ease, transform 160ms ease; }',
     '.cert-card:hover { box-shadow: 0 10px 24px -12px rgba(0,0,0,0.22); transform: translateY(-2px); }',
     '.cert-card-thumb { aspect-ratio: 3 / 4; background: var(--gray-50); overflow: hidden; }',
     '.cert-card-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }',
     '.cert-card-body { padding: 16px 18px 18px; }',
-    '.cert-card-title { font-size: 14.5px; font-weight: 600; letter-spacing: -0.01em; color: var(--text-primary); }',
-    '.cert-card-hint { font-size: 12px; color: var(--text-tertiary); margin-top: 4px; }',
+    '.cert-card-title { font-size: 16.5px; font-weight: 600; letter-spacing: -0.01em; color: var(--text-primary); }',
+    '.cert-card-hint { font-size: 14px; color: var(--text-tertiary); margin-top: 4px; }',
     '.cert-modal-overlay { position: fixed; inset: 0; background: rgba(1,20,22,0.82); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 40px 20px; opacity: 0; pointer-events: none; transition: opacity 200ms ease; }',
     '.cert-modal-overlay.open { opacity: 1; pointer-events: auto; }',
     '.cert-modal-panel { max-width: 880px; max-height: 88vh; width: 100%; background: var(--gray-0); border-radius: var(--radius-xl); overflow: hidden; display: flex; flex-direction: column; }',
     '.cert-modal-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--border-subtle); }',
-    '.cert-modal-title { font-size: 15px; font-weight: 700; color: var(--text-primary); }',
+    '.cert-modal-title { font-size: 17px; font-weight: 700; color: var(--text-primary); }',
     '.cert-modal-actions { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }',
-    '.cert-modal-pdf-link { font-size: 13px; color: var(--teal-700); font-weight: 600; white-space: nowrap; }',
-    '.cert-modal-close { cursor: pointer; background: none; border: none; font-size: 22px; line-height: 1; color: var(--text-tertiary); padding: 4px; }',
+    '.cert-modal-pdf-link { font-size: 15px; color: var(--teal-700); font-weight: 600; white-space: nowrap; }',
+    '.cert-modal-close { cursor: pointer; background: none; border: none; font-size: 24px; line-height: 1; color: var(--text-tertiary); padding: 4px; }',
     '.cert-modal-close:hover { color: var(--text-primary); }',
     '.cert-modal-body { overflow: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; align-items: center; background: var(--gray-50); }',
     '.cert-modal-body img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }',
@@ -107,48 +115,96 @@
     '.mob-backdrop { position: fixed; inset: 0; background: rgba(1,20,22,0.5); z-index: 99; opacity: 0; pointer-events: none; transition: opacity 280ms ease; }',
     '.mob-backdrop.open { opacity: 1; pointer-events: auto; }',
     '.mob-sidebar-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border-subtle); }',
-    '.mob-sidebar-close { background: none; border: none; cursor: pointer; padding: 4px; font-size: 22px; line-height: 1; color: var(--text-tertiary); }',
+    '.mob-sidebar-close { background: none; border: none; cursor: pointer; padding: 4px; font-size: 24px; line-height: 1; color: var(--text-tertiary); }',
     '.mob-sidebar-close:hover { color: var(--text-primary); }',
     '.mob-sidebar-nav { padding: 12px 0; flex: 1; }',
     '.mob-nav-item { border-bottom: 1px solid var(--border-subtle); }',
-    '.mob-nav-link { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; font-size: 15px; font-weight: 600; color: var(--text-primary); cursor: pointer; background: none; border: none; width: 100%; text-align: left; font-family: inherit; }',
+    '.mob-nav-link { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; font-size: 17px; font-weight: 600; color: var(--text-primary); cursor: pointer; background: none; border: none; width: 100%; text-align: left; font-family: inherit; }',
     'a.mob-nav-link:hover { background: var(--teal-50); color: var(--teal-700); }',
-    '.mob-nav-link .mob-arrow { font-size: 12px; color: var(--text-tertiary); transition: transform 200ms ease; }',
+    '.mob-nav-link .mob-arrow { font-size: 14px; color: var(--text-tertiary); transition: transform 200ms ease; }',
     '.mob-nav-item.open .mob-arrow { transform: rotate(180deg); }',
     '.mob-sub-menu { max-height: 0; overflow: hidden; transition: max-height 280ms ease; }',
     '.mob-nav-item.open .mob-sub-menu { max-height: 300px; }',
-    '.mob-sub-menu a { display: block; padding: 11px 20px 11px 36px; font-size: 14px; color: var(--text-secondary); }',
+    '.mob-sub-menu a { display: block; padding: 11px 20px 11px 36px; font-size: 16px; color: var(--text-secondary); }',
     '.mob-sub-menu a:hover { background: var(--teal-50); color: var(--teal-700); }',
-    '.mob-sidebar-kakao { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 12px 20px 20px; padding: 12px 0; background: rgb(254,229,0); color: rgb(25,25,25); border-radius: var(--radius-md); font-size: 14px; font-weight: 600; }',
+    '.mob-sidebar-kakao { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 12px 20px 20px; padding: 12px 0; background: rgb(254,229,0); color: rgb(25,25,25); border-radius: var(--radius-md); font-size: 16px; font-weight: 600; }',
     /* ─ 사업분야 큰 이미지 슬라이더 ─ */
     '.biz-slider { position: relative; max-width: 1560px; margin: 0 auto; }',
     '.biz-slider-viewport { overflow: hidden; border-radius: 6px; }',
     '.biz-slider-track { display: flex; transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1); }',
     '.biz-slide { min-width: 100%; display: grid; grid-template-columns: 60% 40%; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: 6px; overflow: hidden; }',
-    '.biz-slide-img { position: relative; height: 590px; overflow: hidden; }',
+    /* 9차: 슬라이더가 넓어져도(1240→1560px) 이미지 비율이 배율에 따라 흔들리지 않도록
+       고정 height 590px → aspect-ratio 8:5. 1560px 슬라이더에서 936x585px로 기존과 유사한 높이. */
+    '.biz-slide-img { position: relative; aspect-ratio: 8 / 5; overflow: hidden; }',
     '.biz-slide-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }',
-    '.biz-slide-badge { position: absolute; top: 18px; left: 20px; font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.95); background: rgba(0,0,0,0.45); padding: 5px 14px; border-radius: 999px; letter-spacing: 0.1em; font-weight: 600; z-index: 2; }',
+    '.biz-slide-badge { position: absolute; top: 18px; left: 20px; font-family: var(--font-mono); font-size: 14px; color: rgba(255,255,255,0.95); background: rgba(0,0,0,0.45); padding: 5px 14px; border-radius: 999px; letter-spacing: 0.1em; font-weight: 600; z-index: 2; }',
     '.biz-slide-body { display: flex; flex-direction: column; justify-content: center; padding: 48px 52px; }',
-    '.biz-slide-title { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 20px; color: var(--text-primary); }',
-    '.biz-slide-desc { font-size: 16px; line-height: 1.8; color: var(--text-secondary); margin: 0; }',
-    '.biz-slide-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 32px; font-size: 15px; font-weight: 600; color: var(--teal-700); padding: 12px 24px; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--gray-0); transition: all 200ms ease; }',
+    '.biz-slide-title { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 20px; color: var(--text-primary); }',
+    '.biz-slide-desc { font-size: 18px; line-height: 1.8; color: var(--text-secondary); margin: 0; }',
+    '.biz-slide-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 32px; font-size: 17px; font-weight: 600; color: var(--teal-700); padding: 12px 24px; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--gray-0); transition: all 200ms ease; }',
     '.biz-slide-link:hover { background: var(--teal-50); border-color: var(--teal-600); color: var(--teal-800); }',
     '.biz-slider-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 28px; }',
-    '.biz-slider-btn { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--border-default); background: var(--gray-0); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; transition: all 200ms ease; }',
+    '.biz-slider-btn { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--border-default); background: var(--gray-0); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; transition: all 200ms ease; }',
     '.biz-slider-btn:hover { background: var(--teal-50); border-color: var(--teal-600); color: var(--teal-700); }',
     '.biz-slider-dots { display: flex; gap: 8px; }',
     '.biz-dot { width: 10px; height: 10px; border-radius: 50%; border: none; background: var(--border-default); cursor: pointer; padding: 0; transition: all 200ms ease; }',
     '.biz-dot.active { background: var(--teal-600); width: 28px; border-radius: 5px; }',
-    '@media (max-width: 900px) { .biz-slide { grid-template-columns: 1fr; } .biz-slide-img { height: 300px; } .biz-slide-body { padding: 28px 24px 32px; } .biz-slide-title { font-size: 24px; } .biz-slide-desc { font-size: 15px; } .biz-slide-link { margin-top: 24px; } }',
-    '@media (max-width: 560px) { .biz-slide-img { height: 260px; } .biz-slide-body { padding: 22px 20px 28px; } .biz-slide-title { font-size: 21px; } }',
+    '@media (max-width: 900px) { .biz-slide { grid-template-columns: 1fr; } .biz-slide-img { height: 300px; } .biz-slide-body { padding: 28px 24px 32px; } .biz-slide-title { font-size: 26px; } .biz-slide-desc { font-size: 17px; } .biz-slide-link { margin-top: 24px; } }',
+    '@media (max-width: 560px) { .biz-slide-img { height: 260px; } .biz-slide-body { padding: 22px 20px 28px; } .biz-slide-title { font-size: 23px; } }',
     /* ─ 서브페이지 공통 히어로 배너 ─ */
-    '.sub-hero { position: relative; overflow: hidden; min-height: 416px; display: flex; align-items: center; color: var(--gray-0); }',
+    /* 높이를 뷰포트 폭에 비례시켜(21.9vw ≒ 32:7) 브라우저 배율이 바뀌어도 잘리는 영역이 일정하게 유지되도록 함.
+       clamp 하한 340px은 제목·브레드크럼이 들어가는 최소 높이, 상한 620px은 초광폭 화면용 안전장치. */
+    '.sub-hero { position: relative; overflow: hidden; min-height: clamp(340px, 21.9vw, 620px); display: flex; align-items: center; color: var(--gray-0); }',
     '.sub-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; }',
     '.sub-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,68,73,0.48) 0%, rgba(0,68,73,0.20) 34%, rgba(0,68,73,0.00) 64%); }',
-    '.sub-hero .container { position: relative; z-index: 2; padding-top: 80px; padding-bottom: 60px; width: 100%; }',
+    /* 9차: 제목을 아래로 내려 비주얼 세로 중앙에 가깝게 배치.
+       상하 패딩 합계(140px)를 그대로 유지하므로 8차에서 안정화한 .sub-hero 높이에는 영향 없음. */
+    '.sub-hero .container { position: relative; z-index: 2; padding-top: 110px; padding-bottom: 30px; width: 100%; }',
     '.sub-hero .page-title { text-shadow: 0 2px 16px rgba(0,0,0,0.35); }',
     '@media (max-width: 900px) { .sub-hero { min-height: 340px; } }',
-    '@media (max-width: 560px) { .sub-hero { min-height: 260px; } .sub-hero .container { padding-top: 64px; padding-bottom: 40px; } }',
+    '@media (max-width: 560px) { .sub-hero { min-height: 260px; } .sub-hero .container { padding-top: 84px; padding-bottom: 20px; } }',
+    /* ─ 메인 We Are 전체폭 배너 ─
+       배너 높이는 텍스트(약 475px) + 상하 여백으로 결정되므로, 여백을 폭에 비례하게 만들어
+       전체 높이가 폭에 비례(≒ 2.5:1)하도록 함 → 배율이 바뀌어도 배경 이미지 잘림 위치가 유지됨.
+       calc(20vw - 237.5px)의 하한 80px은 1587px 이하에서 기존 여백(80px)을 그대로 유지. */
+    '.weare-banner-inner { padding-top: clamp(80px, calc(20vw - 237.5px), 240px); padding-bottom: clamp(80px, calc(20vw - 237.5px), 240px); }',
+    /* ═══ 9차 수정 ═══ */
+    /* ─ 넓은 콘텐츠 정렬선(1560px) ─
+       메인 히어로·We Are 배너·사업분야 슬라이더가 공유하는 정렬선.
+       기본 .container(1240px)보다 넓어 문구가 왼쪽으로 이동하고 슬라이더가 커진다.
+       고정 left 값이 아니라 max-width + auto margin이므로 모든 해상도에서 자연스럽게 정렬됨. */
+    ':root { --container-hero: 1560px; }',
+    '#home > .container, .weare-banner-inner, #business > .container { max-width: var(--container-hero); }',
+    /* 좌우 여백은 화면이 넓어질수록 함께 커져 문구가 화면 끝에 붙지 않게 한다(고정 left 값 미사용). */
+    '@media (min-width: 901px) { #home > .container, .weare-banner-inner, #business > .container { padding-left: clamp(32px, 4vw, 64px); padding-right: clamp(32px, 4vw, 64px); } }',
+    /* ─ 서브페이지 제목 확대(약 2배) ─ 40px → 최대 76px. 브레드크럼과 계층 구분 유지.
+       모바일은 기존 `h1 { font-size: 28px !important }` 미디어쿼리가 우선 적용됨. */
+    '.sub-hero .page-title { font-size: clamp(34px, 4.2vw, 76px); line-height: 1.14; margin-top: 16px; }',
+    '.sub-hero .eyebrow { font-size: 15px; letter-spacing: 0.16em; }',
+    /* ─ 업무절차 아이콘 확대(PC 약 2배) ─ */
+    '.process-icon { width: 84px; height: 84px; }',
+    '.process-num { top: -6px; right: -6px; min-width: 26px; height: 26px; }',
+    '@media (min-width: 901px) { .process-icon { width: 148px; height: 148px; } .process-icon svg { width: 58px; height: 58px; } .process-num { min-width: 40px; height: 40px; font-size: 17px; top: -8px; right: -8px; } .process-step { gap: 20px !important; } }',
+    /* ─ 조직도 확대(PC 약 2배) ─ */
+    '@media (min-width: 901px) { .org-chart { max-width: 1080px; margin: 0 auto; padding: 64px 48px !important; } .org-ceo { padding: 34px 88px !important; min-width: 400px !important; } .org-ceo-role { font-size: 34px !important; } .org-ceo-tag { font-size: 15px !important; } .org-stem { height: 56px !important; } .org-branch { height: 40px !important; } .org-team-head { padding: 24px 22px !important; } .org-team-tag { font-size: 15px !important; } .org-team-name { font-size: 26px !important; } .org-team-body { padding: 26px 24px 28px !important; gap: 12px !important; } .org-team-item { font-size: 17px !important; } }',
+    /* 연결선을 팀 카드 중심에 정확히 맞춤.
+       기존 margin: 0 12.5%는 4열 그리드 중심과 어긋났다(최대 109px 오차).
+       분기 행을 팀 그리드와 동일한 4열·gap 20px로 두고, 가로선은 첫/마지막 열 중심까지만 그린다
+       → 열 중심 = calc((100% - 3*20px) / 8) 위치에서 시작·종료. */
+    '.org-branch { margin-left: 0 !important; margin-right: 0 !important; }',
+    '.org-branch > div:first-child { left: calc((100% - 60px) / 8) !important; right: calc((100% - 60px) / 8) !important; }',
+    '.org-branch > div:last-child { gap: 20px; }',
+    '@media (max-width: 900px) { .org-branch, .org-stem { display: none !important; } .org-chart { padding: 28px 20px !important; } }',
+    /* ─ 비전 3요소 확대(PC 약 1.5배) ─ */
+    '@media (min-width: 901px) { .vision-grid { gap: 28px !important; } .vision-card { padding: 46px 34px !important; } .vision-icon { width: 300px !important; margin-bottom: 28px !important; } .vision-icon svg { width: 96px; height: 96px; } .vision-tag { font-size: 16px !important; } .vision-title { font-size: 32px !important; } .vision-desc { font-size: 18px !important; } }',
+    '@media (max-width: 900px) { .vision-grid { grid-template-columns: 1fr !important; } }',
+    /* ─ 스크롤 등장(fade-up) ─
+       JS가 .reveal-ready를 붙인 뒤에만 숨기므로, JS 미실행 시에도 콘텐츠는 항상 보인다. */
+    /* 숨김 상태에는 transition을 걸지 않는다(최초 로드 시 1→0으로 사라지는 깜빡임 방지).
+       전환은 .is-visible이 붙는 순간에만 동작하므로 한 방향으로 한 번만 재생된다. */
+    'html.reveal-ready .reveal { opacity: 0; transform: translateY(26px); transition: none; }',
+    'html.reveal-ready .reveal.is-visible { opacity: 1; transform: none; transition: opacity 620ms var(--ease-out, ease), transform 620ms var(--ease-out, ease); }',
+    '@media (prefers-reduced-motion: reduce) { html.reveal-ready .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }',
     /* ─ 업무절차 반응형 ─ */
     '@media (max-width: 900px) { .process-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 24px 16px !important; } .process-arrow { display: none !important; } }',
     '@media (max-width: 560px) { .process-grid { grid-template-columns: repeat(2, 1fr) !important; } }',
@@ -157,14 +213,16 @@
     '.eq-panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }',
     '@media (max-width: 760px) { .eq-panel { grid-template-columns: 1fr; } }',
     '.eq-card { display: flex; overflow: hidden; }',
-    '.eq-card-img { flex: 0 0 168px; width: 168px; height: 168px; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); background: #FFFFFF; overflow: hidden; }',
-    '.eq-card-img img { width: 100%; height: 100%; object-fit: contain; padding: 18px; box-sizing: border-box; }',
-    '@media (max-width: 560px) { .eq-card-img { flex: 0 0 120px; width: 120px; height: 120px; } .eq-card-img img { padding: 12px; } }',
+    /* 9차: 장비 이미지 1.5배 — 정사각 168→252px, object-fit: contain 유지로 비율·잘림 없음 */
+    '.eq-card-img { flex: 0 0 252px; width: 252px; height: 252px; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); background: #FFFFFF; overflow: hidden; }',
+    '.eq-card-img img { width: 100%; height: 100%; object-fit: contain; padding: 22px; box-sizing: border-box; }',
+    '@media (max-width: 900px) { .eq-card-img { flex: 0 0 190px; width: 190px; height: 190px; } .eq-card-img img { padding: 16px; } }',
+    '@media (max-width: 560px) { .eq-card-img { flex: 0 0 132px; width: 132px; height: 132px; } .eq-card-img img { padding: 12px; } }',
     '.eq-card-body { padding: 20px 22px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }',
-    '.eq-card-model { font-family: var(--font-mono); font-size: 21px; font-weight: 700; letter-spacing: -0.01em; color: var(--teal-700); }',
-    '.eq-card-mfr { font-size: 12px; color: var(--text-tertiary); margin-top: 5px; }',
-    '.eq-card-name { font-size: 15.5px; font-weight: 700; margin: 9px 0 0; letter-spacing: -0.01em; color: var(--text-primary); line-height: 1.4; }',
-    '.eq-card-desc { font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; margin: 8px 0 0; }',
+    '.eq-card-model { font-family: var(--font-mono); font-size: 23px; font-weight: 700; letter-spacing: -0.01em; color: var(--teal-700); }',
+    '.eq-card-mfr { font-size: 14px; color: var(--text-tertiary); margin-top: 5px; }',
+    '.eq-card-name { font-size: 17.5px; font-weight: 700; margin: 9px 0 0; letter-spacing: -0.01em; color: var(--text-primary); line-height: 1.4; }',
+    '.eq-card-desc { font-size: 15.5px; color: var(--text-secondary); line-height: 1.6; margin: 8px 0 0; }',
     /* ─ 제작·관리용 안내 문구는 방문자 화면에 노출하지 않음 (관리자 CMS 기능 자체는 유지) ─ */
     /* ─ 새로 추가되는 카드 fade-in ─ */
     '@keyframes fadeInUpCard { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }',
@@ -173,10 +231,10 @@
     '@media (max-width: 900px) { header img[alt*="보아스"] { height: 92px !important; } }',
     '@media (max-width: 560px) { header img[alt*="보아스"] { height: 72px !important; } }',
     /* ─ BZ STORY 페이지네이션 버튼 ─ */
-    '.st-page-btn { min-width: 36px; height: 36px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; color: var(--text-primary); border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 13px; cursor: pointer; background: none; border: none; transition: background 140ms; }',
+    '.st-page-btn { min-width: 36px; height: 36px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; color: var(--text-primary); border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 15px; cursor: pointer; background: none; border: none; transition: background 140ms; }',
     '.st-page-btn:hover { background: var(--teal-50); }',
     '.st-page-btn.active { background: var(--teal-700); color: var(--gray-0); font-weight: 600; }',
-    '.st-page-arrow { padding: 8px 12px; font-size: 13px; color: var(--text-primary); cursor: pointer; background: none; border: none; }',
+    '.st-page-arrow { padding: 8px 12px; font-size: 15px; color: var(--text-primary); cursor: pointer; background: none; border: none; }',
     '.st-page-arrow[disabled] { color: var(--text-tertiary); opacity: 0.4; cursor: not-allowed; }',
     '#st-list-container { transition: opacity 200ms ease; }'
   ].join('\n');
@@ -372,7 +430,7 @@
       : img;
     return '<figure style="margin: ' + (forceAspect ? '0' : '28px 0') + ';">' +
       mediaHTML +
-      (block.caption ? '<figcaption style="margin-top: 8px; font-size: 13px; color: var(--text-tertiary); text-align: center; overflow-wrap: anywhere;">' + block.caption + '</figcaption>' : '') +
+      (block.caption ? '<figcaption style="margin-top: 8px; font-size: 15px; color: var(--text-tertiary); text-align: center; overflow-wrap: anywhere;">' + block.caption + '</figcaption>' : '') +
       '</figure>';
   }
 
@@ -446,9 +504,9 @@
           imgArea +
           '<div style="padding: 28px 32px; display: flex; flex-direction: column;">' +
             ratingRowHTML(r, 18, 17) +
-            '<h3 style="font-size: 20px; font-weight: 600; margin: 12px 0; line-height: 1.4; letter-spacing: -0.01em; color: var(--text-primary);">' + r.title + '</h3>' +
-            '<p style="font-size: 15.5px; line-height: 1.7; color: var(--text-secondary); margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">' + r.summary + '</p>' +
-            '<div style="margin-top: auto; padding-top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-tertiary);">' +
+            '<h3 style="font-size: 22px; font-weight: 600; margin: 12px 0; line-height: 1.4; letter-spacing: -0.01em; color: var(--text-primary);">' + r.title + '</h3>' +
+            '<p style="font-size: 17.5px; line-height: 1.7; color: var(--text-secondary); margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">' + r.summary + '</p>' +
+            '<div style="margin-top: auto; padding-top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 15px; color: var(--text-tertiary);">' +
               '<span>' + authorLineHTML(r) + '</span>' +
               '<span style="font-family: var(--font-mono);">' + fmtDate(r.date) + '</span>' +
             '</div>' +
@@ -832,12 +890,12 @@
       '<a class="story-card" data-story-cat="' + cat + '" href="story-detail.html?id=' + encodeURIComponent(s.id) + '" style="display: block; color: inherit;">' +
         '<article class="card" style="overflow: hidden; height: 100%; transition: box-shadow var(--duration-base) var(--ease-out);">' +
           imgArea +
-            '<div style="position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);">' + s.category + '</div>' +
+            '<div style="position: absolute; top: 14px; left: 14px; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal-800); background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: var(--radius-pill);">' + s.category + '</div>' +
           '</div>' +
           '<div style="padding: 26px 28px 28px;">' +
-            '<h3 style="font-size: 19px; font-weight: 600; margin: 0px 0px 12px; line-height: 1.45; letter-spacing: -0.01em; color: var(--text-primary);">' + s.title + '</h3>' +
-            '<p style="font-size: 14.5px; line-height: 1.65; color: var(--text-secondary); margin: 0 0 18px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">' + s.summary + '</p>' +
-            '<div style="display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--text-tertiary);">' +
+            '<h3 style="font-size: 21px; font-weight: 600; margin: 0px 0px 12px; line-height: 1.45; letter-spacing: -0.01em; color: var(--text-primary);">' + s.title + '</h3>' +
+            '<p style="font-size: 16.5px; line-height: 1.65; color: var(--text-secondary); margin: 0 0 18px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">' + s.summary + '</p>' +
+            '<div style="display: flex; justify-content: space-between; align-items: center; font-size: 14.5px; color: var(--text-tertiary);">' +
               '<span style="font-family: var(--font-mono);">' + fmtDate(s.date) + '</span>' +
               '<span>조회 ' + s.views + '</span>' +
             '</div>' +
@@ -1011,12 +1069,12 @@
   // 메인페이지 셀 HTML — 기존 하드코딩 그리드와 동일한 마크업/스타일 재사용 (로고 표시 크기 약 2배)
   function mainCompanyCellHTML(item) {
     var mediaHTML = item.logo
-      ? '<div style="width: 128px; height: 128px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; background: #FFFFFF; border-radius: var(--radius-md, 8px); box-sizing: border-box; padding: 12px;"><img src="' + item.logo + '" alt="' + item.name + '" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;"></div>'
+      ? '<div class="company-slide-logo" style="width: 192px; height: 192px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; background: #FFFFFF; border-radius: var(--radius-md, 8px); box-sizing: border-box; padding: 14px;"><img src="' + item.logo + '" alt="' + item.name + '" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;"></div>'
       : '<div style="width: 96px; height: 96px; border-radius: var(--radius-md); background: var(--gray-0); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); margin-bottom: 10px;">' + companyPlaceholderIcon + '</div>';
     var bg = item.logo ? '' : 'background: repeating-linear-gradient(45deg, var(--gray-50), var(--gray-50) 8px, var(--gray-0) 8px, var(--gray-0) 16px);';
-    var inner = '<div style="min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px; ' + bg + '">' +
+    var inner = '<div class="company-slide-cell" style="min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 24px; ' + bg + '">' +
         mediaHTML +
-        '<div style="color: var(--text-primary); font-size: 13px; font-weight: 500; text-align: center; letter-spacing: -0.01em;">' + item.name + '</div>' +
+        '<div style="color: var(--text-primary); font-size: 15px; font-weight: 500; text-align: center; letter-spacing: -0.01em;">' + item.name + '</div>' +
       '</div>';
     return item.url
       ? '<a href="' + item.url + '" target="_blank" rel="noopener" style="display: block; color: inherit;">' + inner + '</a>'
@@ -1157,6 +1215,63 @@
         sessionStorage.setItem('subnav-scroll', '1');
       });
     });
+  })();
+
+  // ── 스크롤 등장 효과(fade-up) ──
+  // CSS로 숨기는 것은 html.reveal-ready가 붙은 뒤부터이므로, 이 스크립트가 실행되지 않으면
+  // 콘텐츠는 처음부터 그대로 보인다. 한 번 나타난 요소는 관찰을 해제해 재등장(깜빡임)이 없다.
+  (function initScrollReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var groups = [];
+
+    // 메인페이지: 히어로(#home)를 제외한 각 섹션의 콘텐츠 블록
+    Array.prototype.forEach.call(document.querySelectorAll('section'), function (sec) {
+      if (sec.id === 'home' || sec.classList.contains('sub-hero')) return;
+      var host = sec.querySelector('.container') || sec;
+      var kids = Array.prototype.filter.call(host.children, function (el) {
+        return el.nodeType === 1 && el.offsetHeight > 0;
+      });
+      if (kids.length) groups.push(kids);
+    });
+
+    // 서브페이지 상단 제목(eyebrow · 제목 · 브레드크럼)
+    var subHero = document.querySelector('.sub-hero .container');
+    if (subHero) groups.push(Array.prototype.slice.call(subHero.children));
+
+    if (!groups.length) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+    document.documentElement.classList.add('reveal-ready');
+    groups.forEach(function (kids) {
+      kids.forEach(function (el, i) {
+        el.classList.add('reveal');
+        // 같은 묶음은 90ms 간격으로 순차 등장 (최대 4단계까지만 지연)
+        var step = Math.min(i, 4);
+        if (step) el.style.transitionDelay = (step * 90) + 'ms';
+        io.observe(el);
+      });
+    });
+
+    // 안전장치: 어떤 이유로든 관찰자 콜백이 동작하지 않은 경우(백그라운드 탭에서 로드된 뒤
+    // 복귀하지 않는 등) 화면에 들어와 있는 콘텐츠가 계속 숨겨진 상태로 남지 않게 한다.
+    setTimeout(function () {
+      Array.prototype.forEach.call(document.querySelectorAll('.reveal:not(.is-visible)'), function (el) {
+        var b = el.getBoundingClientRect();
+        if (b.top < window.innerHeight && b.bottom > 0) {
+          el.style.transitionDelay = '';
+          el.classList.add('is-visible');
+        }
+      });
+    }, 2500);
   })();
 
   // ── 모바일 햄버거 메뉴 ──

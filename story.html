@@ -53,19 +53,19 @@
   a { color: var(--teal-600); text-decoration: none; }
   a:hover { color: var(--teal-700); }
   .container { max-width: var(--container-wide); margin: 0 auto; padding: 0 32px; }
-  .eyebrow { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-600); font-weight: 600; }
-  .page-title { font-size: 40px; font-weight: 800; letter-spacing: -0.03em; margin: 12px 0 0; color: var(--gray-0); }
-  .section-title { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 24px; color: var(--text-primary); }
-  .h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px; }
-  .body-text { font-size: 15px; line-height: 1.8; color: var(--text-secondary); }
+  .eyebrow { font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-600); font-weight: 600; }
+  .page-title { font-size: 42px; font-weight: 800; letter-spacing: -0.03em; margin: 12px 0 0; color: var(--gray-0); }
+  .section-title { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 24px; color: var(--text-primary); }
+  .h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px; }
+  .body-text { font-size: 17px; line-height: 1.8; color: var(--text-secondary); }
   .card { background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); }
-  .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--teal-700); color: var(--gray-0); border-radius: var(--radius-md); font-size: 14px; font-weight: 600; border: none; cursor: pointer; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--teal-700); color: var(--gray-0); border-radius: var(--radius-md); font-size: 16px; font-weight: 600; border: none; cursor: pointer; }
   .btn-primary:hover { background: var(--teal-800); color: var(--gray-0); }
-  .btn-ghost { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: var(--gray-0); color: var(--text-primary); border: 1px solid var(--border-default); border-radius: var(--radius-md); font-size: 14px; font-weight: 500; cursor: pointer; }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: var(--gray-0); color: var(--text-primary); border: 1px solid var(--border-default); border-radius: var(--radius-md); font-size: 16px; font-weight: 500; cursor: pointer; }
   .btn-ghost:hover { background: var(--gray-50); color: var(--text-primary); }
-  .nav-link { padding: 8px 16px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; color: var(--text-secondary); }
+  .nav-link { padding: 8px 16px; border-radius: var(--radius-md); font-size: 16px; font-weight: 500; color: var(--text-secondary); }
   .nav-link.active { color: var(--teal-700); background: var(--teal-50); }
-  .subnav a { padding: 10px 16px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; color: var(--text-secondary); border: 1px solid var(--border-subtle); background: var(--gray-0); }
+  .subnav a { padding: 10px 16px; border-radius: var(--radius-md); font-size: 16px; font-weight: 500; color: var(--text-secondary); border: 1px solid var(--border-subtle); background: var(--gray-0); }
   .subnav a.active { background: var(--teal-700); color: var(--gray-0); border-color: var(--teal-700); }
 </style><style data-site="1">
 /* ─── Responsive (mobile / tablet) ─── */
@@ -75,11 +75,11 @@
   header nav a[href^="biz-air"],
   header nav a[href^="story"],
   header nav a[href^="review"] { display: none !important; }
-  header nav a[href*="pf.kakao"] { padding: 6px 10px !important; font-size: 12px !important; }
+  header nav a[href*="pf.kakao"] { padding: 6px 10px !important; font-size: 14px !important; }
   header img[alt*="보아스"] { height: 72px !important; }
   section { padding: 48px 0 !important; }
-  h1, .section-title { font-size: 26px !important; line-height: 1.25 !important; }
-  h2 { font-size: 22px !important; }
+  h1, .section-title { font-size: 28px !important; line-height: 1.25 !important; }
+  h2 { font-size: 24px !important; }
   /* Grids: any explicit 3/4 column grids collapse to 1-2 */
   [style*="grid-template-columns: repeat(3"] ,
   [style*="grid-template-columns: repeat(4"] ,
@@ -91,7 +91,7 @@
   [style*="grid-template-columns: 160px 1fr"] { grid-template-columns: 1fr !important; }
   /* Hero */
   #home { min-height: 70vh !important; }
-  #home h1 { font-size: 28px !important; }
+  #home h1 { font-size: 30px !important; }
 }
 @media (max-width: 560px) {
   [style*="grid-template-columns: repeat(3"] ,
@@ -158,7 +158,7 @@
   border-bottom: 2px solid transparent;
   color: var(--text-tertiary);
   font-family: inherit;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
   letter-spacing: -0.01em;
   cursor: pointer;
@@ -182,7 +182,7 @@
 <a class="nav-link active" data-dc-tpl="18" href="story.html">BZ STORY</a>
 <a class="nav-link" data-dc-tpl="19" href="review.html">BZ 이용후기</a>
 <div data-dc-tpl="20" style="width: 12px;"></div>
-<a data-dc-tpl="21" href="https://pf.kakao.com/_tnRdG" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgb(254, 229, 0); color: rgb(25, 25, 25); border-radius: var(--radius-md); font-size: 13px; font-weight: 600;" target="_blank">
+<a data-dc-tpl="21" href="https://pf.kakao.com/_tnRdG" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgb(254, 229, 0); color: rgb(25, 25, 25); border-radius: var(--radius-md); font-size: 15px; font-weight: 600;" target="_blank">
 <svg aria-hidden="true" data-dc-tpl="22" fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.86 1.87 5.36 4.68 6.78L5.5 21.5c-.1.3.24.55.5.37L10.6 19.1c.46.05.93.08 1.4.08 5.52 0 10-3.58 10-8s-4.48-8-10-8z" data-dc-tpl="23"></path></svg>
         카카오톡 상담
       </a>
@@ -191,9 +191,9 @@
 <div class="sub-hero-bg" style="background-image: url(assets/images/photos/sub-story.webp);"></div>
 <div class="sub-hero-overlay"></div>
 <div class="container" data-dc-tpl="30" style="position: relative; padding-top: 72px; padding-bottom: 64px; width: 100%;">
-<div data-dc-tpl="31" style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); font-weight: 600;"><span class="sc-interp">BZ STORY · 보아스 스토리</span></div>
+<div data-dc-tpl="31" style="font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); font-weight: 600;"><span class="sc-interp">BZ STORY · 보아스 스토리</span></div>
 <h1 class="page-title" data-dc-tpl="32" style="text-shadow: 0 2px 20px rgba(0,0,0,0.25);"><span class="sc-interp">보아스 스토리</span></h1>
-<nav aria-label="breadcrumb" data-dc-tpl="33" style="margin-top: 22px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255, 255, 255, 0.8);">
+<nav aria-label="breadcrumb" data-dc-tpl="33" style="margin-top: 22px; display: flex; align-items: center; gap: 8px; font-size: 15px; color: rgba(255, 255, 255, 0.8);">
 <a data-dc-tpl="34" href="index.html" style="color: rgba(255, 255, 255, 0.8);">홈</a>
 <span aria-hidden="true" data-dc-tpl="35">›</span>
 <span data-dc-tpl="36"><span class="sc-interp">BZ STORY</span></span>
@@ -205,7 +205,7 @@
 <div data-dc-tpl="470">
 <div class="eyebrow" data-dc-tpl="471">BZ STORY</div>
 <h2 class="section-title" data-dc-tpl="472" style="margin-top: 10px; margin-bottom: 6px;">보아스 스토리</h2>
-<div data-dc-tpl="473" style="font-size: 13px; color: var(--text-tertiary);">전체 <span data-dc-tpl="474" id="st-total-count" style="font-family: var(--font-mono); color: var(--teal-700); font-weight: 700;"></span>건</div>
+<div data-dc-tpl="473" style="font-size: 15px; color: var(--text-tertiary);">전체 <span data-dc-tpl="474" id="st-total-count" style="font-family: var(--font-mono); color: var(--teal-700); font-weight: 700;"></span>건</div>
 </div>
 <div data-dc-tpl="475" style="display: flex; gap: 8px;">
 <a class="btn-ghost story-filter-btn active" data-dc-tpl="476" data-filter="all" href="#" style="background: var(--teal-700); color: var(--gray-0); border-color: var(--teal-700);">전체</a>
@@ -218,11 +218,11 @@
 </div></main><section data-dc-tpl="607" style="background: var(--teal-800); color: var(--gray-0); padding: 56px 0px;">
 <div class="container" data-dc-tpl="608" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;">
 <div data-dc-tpl="609">
-<div data-dc-tpl="610" style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); font-weight: 600;">24H CONSULTING</div>
-<h2 data-dc-tpl="611" style="font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin: 10px 0px 0px;">카카오톡으로 24시간 상담하세요</h2>
-<p data-dc-tpl="612" style="font-size: 15px; color: rgba(255, 255, 255, 0.8); margin-top: 10px;">측정 문의 · 견적 · 일정 조율 — 담당자가 신속하게 안내해 드립니다.</p>
+<div data-dc-tpl="610" style="font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); font-weight: 600;">24H CONSULTING</div>
+<h2 data-dc-tpl="611" style="font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 10px 0px 0px;">카카오톡으로 24시간 상담하세요</h2>
+<p data-dc-tpl="612" style="font-size: 17px; color: rgba(255, 255, 255, 0.8); margin-top: 10px;">측정 문의 · 견적 · 일정 조율 — 담당자가 신속하게 안내해 드립니다.</p>
 </div>
-<a data-dc-tpl="613" href="https://pf.kakao.com/_tnRdG" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px; background: rgb(254, 229, 0); color: rgb(25, 25, 25); border-radius: var(--radius-md); font-size: 16px; font-weight: 700;" target="_blank">
+<a data-dc-tpl="613" href="https://pf.kakao.com/_tnRdG" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px; background: rgb(254, 229, 0); color: rgb(25, 25, 25); border-radius: var(--radius-md); font-size: 18px; font-weight: 700;" target="_blank">
 <svg aria-hidden="true" data-dc-tpl="614" fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.86 1.87 5.36 4.68 6.78L5.5 21.5c-.1.3.24.55.5.37L10.6 19.1c.46.05.93.08 1.4.08 5.52 0 10-3.58 10-8s-4.48-8-10-8z" data-dc-tpl="615"></path></svg>
       카카오톡 상담 시작
     </a>
@@ -231,12 +231,12 @@
 <div data-dc-tpl="618" style="display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 48px;">
 <div data-dc-tpl="619">
 <img alt="㈜보아스환경기술" data-dc-tpl="620" src="assets/logo.svg" style="height: 42px; width: auto; display: block; filter: brightness(0) invert(1);"/>
-<div data-dc-tpl="621" style="font-size: 11px; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.55); margin-top: 12px; font-weight: 600;">BOAZ ENVIRONMENTAL TECHNOLOGY CO., LTD.</div>
-<p data-dc-tpl="622" style="font-size: 13px; color: rgba(255, 255, 255, 0.7); line-height: 1.7; margin-top: 16px; max-width: 340px;">대기측정 및 분석 전문 기업. 자가측정 대행, 대기·악취저감 컨설팅, 인허가 자료 작성 등 종합 환경업무를 수행합니다.</p>
+<div data-dc-tpl="621" style="font-size: 13px; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.55); margin-top: 12px; font-weight: 600;">BOAZ ENVIRONMENTAL TECHNOLOGY CO., LTD.</div>
+<p data-dc-tpl="622" style="font-size: 15px; color: rgba(255, 255, 255, 0.7); line-height: 1.7; margin-top: 16px; max-width: 340px;">대기측정 및 분석 전문 기업. 자가측정 대행, 대기·악취저감 컨설팅, 인허가 자료 작성 등 종합 환경업무를 수행합니다.</p>
 </div>
 <div data-dc-tpl="623">
-<div data-dc-tpl="624" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.55); font-weight: 600; margin-bottom: 14px;">회사 정보</div>
-<div data-dc-tpl="625" style="font-size: 13px; color: rgba(255, 255, 255, 0.85); line-height: 2;">
+<div data-dc-tpl="624" style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.55); font-weight: 600; margin-bottom: 14px;">회사 정보</div>
+<div data-dc-tpl="625" style="font-size: 15px; color: rgba(255, 255, 255, 0.85); line-height: 2;">
 <div data-dc-tpl="626">상호 · ㈜보아스환경기술</div>
 <div data-dc-tpl="627">대표이사 · 류재훈</div>
 <div data-dc-tpl="628">사업자등록번호 · <span data-dc-tpl="629" style="font-family: var(--font-mono);">556-81-02077</span></div>
@@ -244,8 +244,8 @@
 </div>
 </div>
 <div data-dc-tpl="631">
-<div data-dc-tpl="632" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.55); font-weight: 600; margin-bottom: 14px;">연락처</div>
-<div data-dc-tpl="633" style="font-size: 13px; color: rgba(255, 255, 255, 0.85); line-height: 2;">
+<div data-dc-tpl="632" style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.55); font-weight: 600; margin-bottom: 14px;">연락처</div>
+<div data-dc-tpl="633" style="font-size: 15px; color: rgba(255, 255, 255, 0.85); line-height: 2;">
 <div data-dc-tpl="634">주소 · 울산광역시 남구 테크노산업로29번길 39, 에이동</div>
 <div data-dc-tpl="635">TEL · <span data-dc-tpl="636" style="font-family: var(--font-mono);">052-707-2255</span></div>
 <div data-dc-tpl="637">FAX · <span data-dc-tpl="638" style="font-family: var(--font-mono);">052-707-2266</span></div>
@@ -255,7 +255,7 @@
 </div>
 </div>
 <div data-dc-tpl="641" style="border-top: 1px solid rgba(255, 255, 255, 0.1);">
-<div class="container" data-dc-tpl="642" style="padding-top: 18px; padding-bottom: 18px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: rgba(255, 255, 255, 0.55); flex-wrap: wrap; gap: 10px;">
+<div class="container" data-dc-tpl="642" style="padding-top: 18px; padding-bottom: 18px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: rgba(255, 255, 255, 0.55); flex-wrap: wrap; gap: 10px;">
 <span data-dc-tpl="643">© 2026 Boaz Environmental Technology Co., Ltd. All rights reserved.</span>
 <span data-dc-tpl="644" style="font-family: var(--font-mono); letter-spacing: 0.05em;">대기측정 · 분석 대행업체</span>
 </div>
