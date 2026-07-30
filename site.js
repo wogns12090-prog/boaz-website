@@ -1299,49 +1299,88 @@
   // data/popup.json을 읽어 조건이 맞을 때만 표시한다.
   // 파일이 없거나 enabled가 false면 아무것도 하지 않는다.
   (function initPopup() {
-    var STORE_KEY = 'boaz-popup-hidden-until';
+    var STORE_KEY = 'boaz-popup-hidden';
 
-    function isSuppressed() {
+    // "YYYY-MM-DD"를 로컬 시간대 기준 날짜로 만든다.
+    // new Date("2026-07-30")은 UTC 자정으로 해석되어 KST에서는 그날 09:00이 되므로,
+    // 로컬 자정과 비교하면 시작일 당일 내내 "아직 시작 안 됨"으로 잘못 판정된다.
+    function localDate(str, endOfDay) {
+      var m = String(str).trim().match(/^(\d{4})-(\d{2})-(\d{2})/);
+      if (!m) return null;
+      return endOfDay
+        ? new Date(+m[1], +m[2] - 1, +m[3], 23, 59, 59, 999)
+        : new Date(+m[1], +m[2] - 1, +m[3], 0, 0, 0, 0);
+    }
+    function inDateRange(p) {
+      var now = new Date();
+      var start = p.startDate ? localDate(p.startDate, false) : null;
+      var end = p.endDate ? localDate(p.endDate, true) : null;
+      if (start && now < start) return false;   // 시작일 00:00:00.000부터 표시
+      if (end && now > end) return false;       // 종료일 23:59:59.999까지 표시
+      return true;
+    }
+    // enabled가 문자열 "false"/"0"으로 저장돼도 안전하게 처리
+    function isOn(v) {
+      if (typeof v === 'string') return !/^(false|0|no|off|)$/i.test(v.trim());
+      return !!v;
+    }
+    // 콘텐츠가 바뀌면 이전 '오늘 하루 보지 않기' 기록이 새 팝업을 막지 않도록
+    // 실질 내용으로 지문(fingerprint)을 만든다.
+    function fingerprint(p) {
+      var raw = [p.title, p.body, p.image, p.linkLabel, p.linkUrl, p.startDate, p.endDate].join('');
+      var h = 5381;
+      for (var i = 0; i < raw.length; i++) { h = ((h << 5) + h + raw.charCodeAt(i)) | 0; }
+      return (h >>> 0).toString(36);
+    }
+    function isSuppressed(fp) {
       try {
-        var until = window.localStorage.getItem(STORE_KEY);
-        return !!until && Date.now() < parseInt(until, 10);
+        var raw = window.localStorage.getItem(STORE_KEY);
+        if (!raw) return false;
+        var s = JSON.parse(raw);
+        return s && s.fp === fp && Date.now() < s.until;
       } catch (e) { return false; }
     }
-    function suppressToday() {
+    function suppressToday(fp) {
       try {
-        var end = new Date();
-        end.setHours(23, 59, 59, 999);
-        window.localStorage.setItem(STORE_KEY, String(end.getTime()));
+        var end = new Date(); end.setHours(23, 59, 59, 999);
+        window.localStorage.setItem(STORE_KEY, JSON.stringify({ fp: fp, until: end.getTime() }));
       } catch (e) { /* 시크릿 모드 등에서 저장 실패는 무시 */ }
+    }
+    // 이미지·링크 경로를 현재 문서 기준으로 해석한다.
+    // 앞에 '/'가 붙은 경로는 GitHub Pages 프로젝트 경로(/boaz-website/)를 벗어나므로
+    // 선행 슬래시를 떼고 문서 기준으로 다시 해석한다. 전체 URL은 그대로 둔다.
+    function resolveAssetUrl(u) {
+      if (!u) return '';
+      var s = String(u).trim();
+      if (/^(https?:)?\/\//i.test(s) || /^(data|mailto|tel):/i.test(s)) return s;
+      try { return new URL(s.replace(/^\/+/, ''), document.baseURI).href; }
+      catch (e) { return s.replace(/^\/+/, ''); }
     }
     // javascript: 등 위험한 주소는 버튼을 만들지 않는다
     function safeUrl(u) {
       if (!u) return '';
       var s = String(u).trim();
-      return /^(https?:\/\/|mailto:|tel:|[\w./?#-])/i.test(s) && !/^javascript:/i.test(s) ? s : '';
+      if (/^\s*javascript:/i.test(s) || /^\s*data:/i.test(s)) return '';
+      if (/^(https?:\/\/|mailto:|tel:)/i.test(s)) return s;
+      return /^[\w./?#&=%~-]/.test(s) ? resolveAssetUrl(s) : '';
     }
-    function inDateRange(p) {
-      var today = new Date(); today.setHours(0, 0, 0, 0);
-      if (p.startDate && new Date(p.startDate) > today) return false;
-      if (p.endDate) {
-        var end = new Date(p.endDate); end.setHours(23, 59, 59, 999);
-        if (end < new Date()) return false;
-      }
-      return true;
-    }
-
-    if (isSuppressed()) return;
 
     fetch('data/popup.json', { cache: 'no-store' })
-      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (r) {
+        if (!r.ok) throw new Error('popup.json 응답 ' + r.status + ' (' + r.url + ')');
+        return r.json();
+      })
       .then(function (p) {
-        if (!p || !p.enabled) return;
+        if (!p) return;
+        if (!isOn(p.enabled)) return;
         if (!inDateRange(p)) return;
+        if (isSuppressed(fingerprint(p))) return;
         // showOn: 'home'(기본) = 메인페이지만, 'all' = 모든 페이지
         var isHome = !!document.getElementById('home');
         if ((p.showOn || 'home') !== 'all' && !isHome) return;
         if (!p.title && !p.body && !p.image) return;
 
+        var fp = fingerprint(p);
         var lastFocused = document.activeElement;
 
         var overlay = document.createElement('div');
@@ -1375,8 +1414,13 @@
         if (p.image) {
           var img = document.createElement('img');
           img.className = 'popup-img';
-          img.src = p.image;
+          img.src = resolveAssetUrl(p.image);
           img.alt = p.title || '공지 이미지';
+          // 이미지가 없으면 자리만 차지하지 않도록 숨기고 콘솔에 원인을 남긴다
+          img.addEventListener('error', function () {
+            img.style.display = 'none';
+            if (window.console) console.error('[팝업] 이미지를 불러올 수 없습니다:', img.src);
+          });
           body.appendChild(img);
         }
         if (p.body) {
@@ -1419,7 +1463,8 @@
         document.body.appendChild(overlay);
 
         function close() {
-          if (cb.checked) suppressToday();
+          // '오늘 하루 보지 않기'를 체크했을 때만 저장하고, 지금 본 콘텐츠의 지문을 함께 남긴다
+          if (cb.checked) suppressToday(fp);
           overlay.classList.remove('open');
           document.body.style.overflow = '';
           document.removeEventListener('keydown', onKey);
@@ -1446,7 +1491,10 @@
         document.body.style.overflow = 'hidden';
         closeBtn.focus();
       })
-      .catch(function () { /* popup.json이 없으면 조용히 넘어감 */ });
+      // 방문자 화면에는 아무것도 띄우지 않고, 개발자 콘솔에만 원인을 남긴다
+      .catch(function (e) {
+        if (window.console) console.error('[팝업] 표시 실패:', e && e.message ? e.message : e);
+      });
   })();
 
   // ── 모바일 햄버거 메뉴 ──
