@@ -205,6 +205,27 @@
     'html.reveal-ready .reveal { opacity: 0; transform: translateY(26px); transition: none; }',
     'html.reveal-ready .reveal.is-visible { opacity: 1; transform: none; transition: opacity 620ms var(--ease-out, ease), transform 620ms var(--ease-out, ease); }',
     '@media (prefers-reduced-motion: reduce) { html.reveal-ready .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }',
+    /* ─ 팝업(공지) 창 ─ */
+    '.popup-overlay { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(1,20,22,0.55); opacity: 0; pointer-events: none; transition: opacity 220ms ease; }',
+    '.popup-overlay.open { opacity: 1; pointer-events: auto; }',
+    '.popup-panel { width: 100%; max-width: 460px; max-height: calc(100vh - 48px); display: flex; flex-direction: column; background: var(--gray-0); border-radius: var(--radius-xl, 16px); overflow: hidden; box-shadow: 0 24px 60px -20px rgba(0,0,0,0.45); transform: translateY(14px) scale(0.985); transition: transform 260ms var(--ease-out, ease); }',
+    '.popup-overlay.open .popup-panel { transform: none; }',
+    '.popup-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 22px 24px 0; }',
+    '.popup-title { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); line-height: 1.35; margin: 0; }',
+    '.popup-close { flex-shrink: 0; background: none; border: none; cursor: pointer; padding: 2px 4px; font-size: 24px; line-height: 1; color: var(--text-tertiary); }',
+    '.popup-close:hover { color: var(--text-primary); }',
+    '.popup-body { overflow-y: auto; padding: 14px 24px 4px; }',
+    '.popup-img { display: block; width: 100%; height: auto; border-radius: var(--radius-md, 8px); margin-bottom: 16px; }',
+    '.popup-text { font-size: 16px; line-height: 1.75; color: var(--text-secondary); margin: 0; white-space: pre-line; overflow-wrap: anywhere; }',
+    '.popup-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; padding: 12px 22px; background: var(--teal-700); color: var(--gray-0); border-radius: var(--radius-md, 8px); font-size: 16px; font-weight: 600; }',
+    '.popup-link:hover { background: var(--teal-800); color: var(--gray-0); }',
+    '.popup-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; padding: 14px 24px; border-top: 1px solid var(--border-subtle); background: var(--gray-50); }',
+    '.popup-hide { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; color: var(--text-secondary); cursor: pointer; user-select: none; }',
+    '.popup-hide input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--teal-700); }',
+    '.popup-dismiss { background: none; border: 1px solid var(--border-default); border-radius: var(--radius-md, 8px); padding: 9px 18px; font-family: inherit; font-size: 15px; font-weight: 600; color: var(--text-primary); cursor: pointer; }',
+    '.popup-dismiss:hover { background: var(--gray-0); border-color: var(--teal-600); color: var(--teal-800); }',
+    '@media (max-width: 560px) { .popup-overlay { padding: 16px; align-items: flex-end; } .popup-panel { max-height: calc(100vh - 32px); } .popup-title { font-size: 19px; } .popup-foot { flex-direction: column-reverse; align-items: stretch; } .popup-dismiss { width: 100%; } }',
+    '@media (prefers-reduced-motion: reduce) { .popup-overlay, .popup-panel { transition: none !important; } }',
     /* ─ 업무절차 반응형 ─ */
     '@media (max-width: 900px) { .process-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 24px 16px !important; } .process-arrow { display: none !important; } }',
     '@media (max-width: 560px) { .process-grid { grid-template-columns: repeat(2, 1fr) !important; } }',
@@ -1272,6 +1293,160 @@
         }
       });
     }, 2500);
+  })();
+
+  // ── 팝업(공지) 창 ──
+  // data/popup.json을 읽어 조건이 맞을 때만 표시한다.
+  // 파일이 없거나 enabled가 false면 아무것도 하지 않는다.
+  (function initPopup() {
+    var STORE_KEY = 'boaz-popup-hidden-until';
+
+    function isSuppressed() {
+      try {
+        var until = window.localStorage.getItem(STORE_KEY);
+        return !!until && Date.now() < parseInt(until, 10);
+      } catch (e) { return false; }
+    }
+    function suppressToday() {
+      try {
+        var end = new Date();
+        end.setHours(23, 59, 59, 999);
+        window.localStorage.setItem(STORE_KEY, String(end.getTime()));
+      } catch (e) { /* 시크릿 모드 등에서 저장 실패는 무시 */ }
+    }
+    // javascript: 등 위험한 주소는 버튼을 만들지 않는다
+    function safeUrl(u) {
+      if (!u) return '';
+      var s = String(u).trim();
+      return /^(https?:\/\/|mailto:|tel:|[\w./?#-])/i.test(s) && !/^javascript:/i.test(s) ? s : '';
+    }
+    function inDateRange(p) {
+      var today = new Date(); today.setHours(0, 0, 0, 0);
+      if (p.startDate && new Date(p.startDate) > today) return false;
+      if (p.endDate) {
+        var end = new Date(p.endDate); end.setHours(23, 59, 59, 999);
+        if (end < new Date()) return false;
+      }
+      return true;
+    }
+
+    if (isSuppressed()) return;
+
+    fetch('data/popup.json', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (p) {
+        if (!p || !p.enabled) return;
+        if (!inDateRange(p)) return;
+        // showOn: 'home'(기본) = 메인페이지만, 'all' = 모든 페이지
+        var isHome = !!document.getElementById('home');
+        if ((p.showOn || 'home') !== 'all' && !isHome) return;
+        if (!p.title && !p.body && !p.image) return;
+
+        var lastFocused = document.activeElement;
+
+        var overlay = document.createElement('div');
+        overlay.className = 'popup-overlay';
+        var panel = document.createElement('div');
+        panel.className = 'popup-panel';
+        panel.setAttribute('role', 'dialog');
+        panel.setAttribute('aria-modal', 'true');
+        if (p.width) panel.style.maxWidth = parseInt(p.width, 10) + 'px';
+
+        // 머리말
+        var head = document.createElement('div');
+        head.className = 'popup-head';
+        var h = document.createElement('h2');
+        h.className = 'popup-title';
+        h.id = 'popup-title';
+        h.textContent = p.title || '';
+        panel.setAttribute('aria-labelledby', 'popup-title');
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'popup-close';
+        closeBtn.type = 'button';
+        closeBtn.setAttribute('aria-label', '팝업 닫기');
+        closeBtn.innerHTML = '&times;';
+        head.appendChild(h);
+        head.appendChild(closeBtn);
+        panel.appendChild(head);
+
+        // 본문
+        var body = document.createElement('div');
+        body.className = 'popup-body';
+        if (p.image) {
+          var img = document.createElement('img');
+          img.className = 'popup-img';
+          img.src = p.image;
+          img.alt = p.title || '공지 이미지';
+          body.appendChild(img);
+        }
+        if (p.body) {
+          var txt = document.createElement('p');
+          txt.className = 'popup-text';
+          txt.textContent = p.body;   // textContent + white-space: pre-line → 줄바꿈 유지
+          body.appendChild(txt);
+        }
+        var url = safeUrl(p.linkUrl);
+        if (url && p.linkLabel) {
+          var a = document.createElement('a');
+          a.className = 'popup-link';
+          a.href = url;
+          a.textContent = p.linkLabel;
+          if (/^https?:\/\//i.test(url)) { a.target = '_blank'; a.rel = 'noopener'; }
+          body.appendChild(a);
+        }
+        panel.appendChild(body);
+
+        // 바닥글: 오늘 하루 보지 않기 + 닫기
+        var foot = document.createElement('div');
+        foot.className = 'popup-foot';
+        var label = document.createElement('label');
+        label.className = 'popup-hide';
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        var span = document.createElement('span');
+        span.textContent = '오늘 하루 보지 않기';
+        label.appendChild(cb);
+        label.appendChild(span);
+        var dismiss = document.createElement('button');
+        dismiss.className = 'popup-dismiss';
+        dismiss.type = 'button';
+        dismiss.textContent = '닫기';
+        foot.appendChild(label);
+        foot.appendChild(dismiss);
+        panel.appendChild(foot);
+
+        overlay.appendChild(panel);
+        document.body.appendChild(overlay);
+
+        function close() {
+          if (cb.checked) suppressToday();
+          overlay.classList.remove('open');
+          document.body.style.overflow = '';
+          document.removeEventListener('keydown', onKey);
+          setTimeout(function () {
+            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+          }, 240);
+          if (lastFocused && lastFocused.focus) lastFocused.focus();
+        }
+        function onKey(e) { if (e.key === 'Escape') close(); }
+
+        closeBtn.addEventListener('click', close);
+        dismiss.addEventListener('click', close);
+        overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+        document.addEventListener('keydown', onKey);
+        // 링크를 누르면 이동하므로 팝업도 닫아 둔다
+        if (url && p.linkLabel) {
+          panel.querySelector('.popup-link').addEventListener('click', function () { close(); });
+        }
+
+        // rAF에 의존하지 않고 강제 리플로우로 초기 상태를 확정한 뒤 여는 클래스를 붙인다
+        // (백그라운드 탭처럼 프레임이 그려지지 않는 상황에서도 팝업이 열린 상태가 됨)
+        overlay.offsetHeight;
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      })
+      .catch(function () { /* popup.json이 없으면 조용히 넘어감 */ });
   })();
 
   // ── 모바일 햄버거 메뉴 ──

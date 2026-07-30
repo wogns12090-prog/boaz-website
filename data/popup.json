@@ -1,0 +1,12 @@
+{
+  "enabled": true,
+  "title": "팝업 기능 테스트",
+  "body": "관리자 페이지에서 팝업의 제목·내용·이미지·버튼을 직접 수정할 수 있습니다.\n\n확인이 끝나면 관리자 페이지 → 팝업 관리에서 '팝업 사용'을 끄면 더 이상 표시되지 않습니다.",
+  "image": "",
+  "linkLabel": "사업분야 보기",
+  "linkUrl": "biz-air.html",
+  "startDate": "",
+  "endDate": "",
+  "showOn": "home",
+  "width": 460
+}

@@ -22,6 +22,24 @@ media_folder: "assets/uploads"
 public_folder: "assets/uploads"
 
 collections:
+  - name: "popup"
+    label: "팝업 관리"
+    files:
+      - name: "popup"
+        label: "홈페이지 팝업"
+        file: "data/popup.json"
+        fields:
+          - {label: "팝업 사용 (끄면 아무것도 안 보임)", name: "enabled", widget: "boolean", default: false}
+          - {label: "제목", name: "title", widget: "string", required: false}
+          - {label: "내용 (줄바꿈 그대로 표시됩니다)", name: "body", widget: "text", required: false}
+          - {label: "이미지 (선택)", name: "image", widget: "image", required: false, media_folder: "assets/uploads/popup", public_folder: "assets/uploads/popup"}
+          - {label: "버튼 글자 (선택, 비우면 버튼 안 보임)", name: "linkLabel", widget: "string", required: false}
+          - {label: "버튼 주소 (선택, 예: biz-air.html 또는 https://...)", name: "linkUrl", widget: "string", required: false}
+          - {label: "표시 시작일 (선택, 비우면 바로 표시)", name: "startDate", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: false}
+          - {label: "표시 종료일 (선택, 비우면 계속 표시)", name: "endDate", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: false}
+          - {label: "표시 위치", name: "showOn", widget: "select", default: "home", options: [{label: "메인페이지만", value: "home"}, {label: "모든 페이지", value: "all"}]}
+          - {label: "팝업 최대 너비 (px)", name: "width", widget: "number", value_type: "int", default: 460, min: 320, max: 720}
+
   - name: "reviews"
     label: "이용후기 (BZ REVIEW)"
     files:
