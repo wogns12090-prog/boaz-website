@@ -1,12 +1,12 @@
 {
   "enabled": true,
-  "title": "팝업 기능 테스트",
-  "body": "관리자 페이지에서 팝업의 제목·내용·이미지·버튼을 직접 수정할 수 있습니다.\n\n확인이 끝나면 관리자 페이지 → 팝업 관리에서 '팝업 사용'을 끄면 더 이상 표시되지 않습니다.",
-  "image": "",
-  "linkLabel": "사업분야 보기",
-  "linkUrl": "biz-air.html",
-  "startDate": "",
-  "endDate": "",
-  "showOn": "home",
-  "width": 460
+  "body": "용여이행 \"A\"등급 달성으로 인해 회사의 전문성을 인정받았습니다. \n26년 3월 내년도 용역이행 평가 도 제출되었고 \"S\"등급을 위해 나아 가고 있습니다.\n\n더욱더 전문성과 신뢰를 바탕으로 노력 하는 보아스환경기술이 되겠습니다. ",
+  "width": 460,
+  "endDate": "2026-07-30",
+  "startDate": "2026-07-30",
+  "linkUrl": "https://wogns12090-prog.github.io/boaz-website/story-detail.html?id=21",
+  "title": "용역이행 평가 \"A\" 등급 달성!",
+  "linkLabel": "바로보기",
+  "image": "assets/uploads/popup/스크린샷-2026-07-30-110237.png",
+  "showOn": "home"
 }
