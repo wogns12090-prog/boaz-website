@@ -21,7 +21,7 @@
     },
     {
       "enabled": true,
-      "maxWidth": 600,
+      "maxWidth": 650,
       "maxWidthMobile": 300,
       "endDate": "2026-08-01",
       "order": 2,
