@@ -53,10 +53,15 @@
     '@media (max-width: 1100px) { .company-card-grid { grid-template-columns: repeat(3, 1fr); } }',
     '@media (max-width: 900px) { .company-card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }',
     '@media (max-width: 560px) { .company-card-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }',
-    '.company-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 300px; padding: 28px 20px; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg, 12px); color: inherit; text-align: center; }',
-    '.company-card-media { width: 100%; height: 168px; display: flex; align-items: center; justify-content: center; background: #FFFFFF; border-radius: var(--radius-md, 8px); padding: 12px; box-sizing: border-box; }',
-    '@media (max-width: 560px) { .company-card { min-height: 220px; padding: 20px 14px; } .company-card-media { height: 118px; } }',
-    '.company-card-media img { max-width: 100%; max-height: 100%; object-fit: contain; }',
+    /* 카드 세로 공간을 약 50%로 축소(가로 폭은 그대로).
+       로고 박스 168→84px, 카드 최소높이 300→150px, 로고-업체명 간격 14→7px.
+       안쪽 padding을 줄여 같은 박스 안에서 로고가 차지하는 비율은 오히려 커진다. */
+    '.company-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; min-height: 150px; padding: 14px 16px; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg, 12px); color: inherit; text-align: center; }',
+    '.company-card-media { width: 100%; height: 84px; display: flex; align-items: center; justify-content: center; background: #FFFFFF; border-radius: var(--radius-md, 8px); padding: 4px; box-sizing: border-box; }',
+    '@media (max-width: 560px) { .company-card { min-height: 112px; padding: 12px 10px; gap: 6px; } .company-card-media { height: 62px; } }',
+    /* 로고는 비율 유지(contain). 원본에 여백이 많은 파일이 작아 보이는 것을 줄이려고
+       박스를 거의 꽉 채우도록 허용한다. */
+    '.company-card-media img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }',
     '.company-card-ph { width: 52px; height: 52px; border-radius: var(--radius-md); border: 1px dashed var(--border-default); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); }',
     '.company-card-name { font-size: 15px; font-weight: 500; color: var(--text-primary); letter-spacing: -0.01em; overflow-wrap: anywhere; }',
     /* ─ 메인 고객사·협력사 10개 슬라이더(페이지당 최대 5×2) ─ */
@@ -65,9 +70,11 @@
     '@media (max-width: 900px) { .company-slide-grid { grid-template-columns: repeat(3, 1fr); } }',
     '@media (max-width: 560px) { .company-slide-grid { grid-template-columns: repeat(2, 1fr); } }',
     /* 로고 박스는 192px을 상한으로 두되 셀이 좁아지면 함께 줄어든다(브레이크포인트별 수치 불필요). */
-    '.company-slide-logo { width: min(192px, 100%) !important; height: auto !important; aspect-ratio: 1 / 1; }',
-    '@media (max-width: 900px) { .company-slide-cell { min-height: 230px !important; padding: 18px !important; } }',
-    '@media (max-width: 560px) { .company-slide-cell { min-height: 190px !important; padding: 14px !important; } }',
+    /* 메인 슬라이더 로고도 같은 기준으로 축소: 192→104px, 셀 높이 300→160px */
+    '.company-slide-logo { width: min(104px, 100%) !important; height: auto !important; aspect-ratio: 1 / 1; margin-bottom: 6px !important; padding: 4px !important; }',
+    '.company-slide-cell { min-height: 160px !important; padding: 14px !important; }',
+    '@media (max-width: 900px) { .company-slide-cell { min-height: 140px !important; padding: 12px !important; } }',
+    '@media (max-width: 560px) { .company-slide-cell { min-height: 120px !important; padding: 10px !important; } .company-slide-logo { width: min(80px, 100%) !important; } }',
     /* ─ 홈 이용후기 카드: 이미지/텍스트 영역 고정 비율, 카드 높이 통일 ─ */
     '.review-card { display: flex; flex-direction: column; background: var(--gray-0); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; color: inherit; transition: box-shadow var(--duration-base) var(--ease-out); }',
     '.review-card:hover { box-shadow: 0 8px 20px -10px rgba(0,0,0,0.18); }',
@@ -206,20 +213,27 @@
     'html.reveal-ready .reveal.is-visible { opacity: 1; transform: none; transition: opacity 620ms var(--ease-out, ease), transform 620ms var(--ease-out, ease); }',
     '@media (prefers-reduced-motion: reduce) { html.reveal-ready .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }',
     /* ─ 팝업(공지) 창 ─ */
-    /* 오버레이는 스크롤 가능한 무대. 팝업이 많아 한 화면을 넘으면 세로로만 스크롤되고
-       가로 스크롤은 생기지 않는다. */
-    '.popup-overlay { position: fixed; inset: 0; z-index: 300; padding: 24px; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; background: rgba(1,20,22,0.55); opacity: 0; pointer-events: none; transition: opacity 220ms ease; }',
+    /* 오버레이는 화면에 고정. 팝업이 많아도 세로로 길게 쌓지 않고 슬라이드로 넘긴다
+       (아래로 스크롤해 다음 팝업을 찾는 구조를 쓰지 않음). */
+    '.popup-overlay { position: fixed; inset: 0; z-index: 300; padding: 20px; display: flex; align-items: center; justify-content: center; overscroll-behavior: contain; background: rgba(1,20,22,0.55); opacity: 0; pointer-events: none; transition: opacity 220ms ease; }',
     '.popup-overlay.open { opacity: 1; pointer-events: auto; }',
-    /* min-height:100% + align-content:center → 팝업이 적으면 가운데, 많으면 위에서부터 쌓이고
-       스크롤로 전부 닿을 수 있다(가운데 정렬 때문에 위쪽이 잘려 못 보는 문제 방지). */
-    '.popup-stage { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; align-content: center; gap: 20px; min-height: 100%; }',
-    /* 폭은 PC/모바일을 따로 지정. 모바일은 화면 폭에서 좌우 여백을 뺀 값을 넘지 않도록 제한. */
-    '.popup-panel { position: relative; z-index: 1; width: 100%; max-width: var(--popup-w, 460px); max-height: 88vh; display: flex; flex-direction: column; background: var(--gray-0); border-radius: var(--radius-xl, 16px); overflow: hidden; box-shadow: 0 24px 60px -20px rgba(0,0,0,0.45); transform: translateY(14px) scale(0.985); transition: transform 260ms var(--ease-out, ease); }',
+    '.popup-shell { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 100%; }',
+    '.popup-viewport { width: 100%; overflow: hidden; }',
+    '.popup-track { display: flex; will-change: transform; transition: transform 380ms var(--ease-out, ease); }',
+    '.popup-track.dragging { transition: none; }',
+    /* 한 페이지 = 뷰포트 폭 100%. 페이지 안에서 팝업을 가운데로 나란히 배치한다. */
+    '.popup-page { flex: 0 0 100%; min-width: 100%; display: flex; justify-content: center; align-items: flex-start; gap: 20px; }',
+    /* 폭·높이는 팝업별 설정을 CSS 변수로 받되, 화면을 넘지 않도록 항상 상한을 건다. */
+    '.popup-panel { position: relative; z-index: 1; flex: 0 1 auto; width: 100%; max-width: min(var(--popup-w, 600px), calc(100vw - 40px)); height: var(--popup-h, auto); max-height: min(var(--popup-h-max, 720px), calc(100dvh - 48px)); display: flex; flex-direction: column; background: var(--gray-0); border-radius: var(--radius-xl, 16px); overflow: hidden; box-shadow: 0 24px 60px -20px rgba(0,0,0,0.45); transform: translateY(14px) scale(0.985); transition: transform 260ms var(--ease-out, ease); }',
     '.popup-overlay.open .popup-panel { transform: none; }',
-    /* 팝업이 여러 개면 한 화면에 더 들어가도록 높이를 조금 낮추고, PC에서는 짝수 번째를
-       아래로 살짝 내려 서로 엇갈리게 보이도록 한다(겹치지는 않음). */
-    '.popup-stage.multi .popup-panel { max-height: 78vh; }',
-    '@media (min-width: 901px) { .popup-stage.multi .popup-panel:nth-child(even) { margin-top: 28px; } }',
+    /* ─ 슬라이드 조작부 (팝업이 한 페이지에 다 안 들어갈 때만 JS가 만든다) ─ */
+    '.popup-slider-ctl { display: flex; align-items: center; justify-content: center; gap: 14px; }',
+    '.popup-arrow { width: 44px; height: 44px; flex: 0 0 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(255,255,255,0.5); background: rgba(255,255,255,0.14); color: #fff; font-size: 20px; line-height: 1; cursor: pointer; padding: 0; }',
+    '.popup-arrow:hover { background: rgba(255,255,255,0.28); }',
+    '.popup-dots { display: flex; align-items: center; gap: 8px; }',
+    '.popup-dot { width: 10px; height: 10px; padding: 0; border: none; border-radius: 50%; background: rgba(255,255,255,0.45); cursor: pointer; transition: all 200ms ease; }',
+    '.popup-dot.active { background: #fff; width: 26px; border-radius: 5px; }',
+    '.popup-pageno { color: rgba(255,255,255,0.95); font-family: var(--font-mono); font-size: 14px; font-weight: 600; min-width: 52px; text-align: center; }',
     /* 제목은 가운데 정렬. 닫기 버튼을 absolute로 빼서 제목이 여러 줄이어도 중앙이 유지되고,
        제목 좌우에 닫기 버튼 폭만큼 여백(52px)을 둬서 서로 겹치지 않게 한다. */
     '.popup-head { position: relative; flex: 0 0 auto; padding: 22px 52px 0; }',
@@ -241,8 +255,8 @@
     '.popup-hide input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--teal-700); }',
     '.popup-dismiss { background: none; border: 1px solid var(--border-default); border-radius: var(--radius-md, 8px); padding: 9px 18px; font-family: inherit; font-size: 15px; font-weight: 600; color: var(--text-primary); cursor: pointer; }',
     '.popup-dismiss:hover { background: var(--gray-0); border-color: var(--teal-600); color: var(--teal-800); }',
-    /* 모바일: 좌우 16px 여백 확보, 폭은 화면을 넘지 않게 제한, X 버튼은 누르기 쉬운 크기 유지 */
-    '@media (max-width: 560px) { .popup-overlay { padding: 16px; } .popup-stage { gap: 14px; } .popup-panel { max-width: min(var(--popup-w-m, 340px), calc(100vw - 32px)); max-height: 84vh; } .popup-stage.multi .popup-panel { max-height: 76vh; } .popup-title { font-size: 21px !important; } .popup-head { padding: 18px 52px 0; } .popup-body { padding: 14px 18px 4px; } .popup-foot { flex-direction: column-reverse; align-items: stretch; padding: 12px 18px; } .popup-dismiss { width: 100%; height: 44px; } }',
+    /* 모바일: 좌우 16px 여백 확보, 폭·높이 모두 화면을 넘지 않게 제한, 버튼은 누르기 쉬운 크기 유지 */
+    '@media (max-width: 560px) { .popup-overlay { padding: 16px; } .popup-page { gap: 14px; } .popup-panel { max-width: min(var(--popup-w-m, 340px), calc(100vw - 32px)); max-height: min(var(--popup-h-max-m, 560px), calc(100dvh - 48px)); } .popup-title { font-size: 21px !important; } .popup-head { padding: 18px 52px 0; } .popup-body { padding: 14px 18px 4px; } .popup-foot { flex-direction: column-reverse; align-items: stretch; padding: 12px 18px; } .popup-dismiss { width: 100%; height: 44px; } .popup-arrow { width: 42px; height: 42px; flex-basis: 42px; } }',
     '@media (prefers-reduced-motion: reduce) { .popup-overlay, .popup-panel { transition: none !important; } }',
     /* ─ 업무절차 반응형 ─ */
     '@media (max-width: 900px) { .process-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 24px 16px !important; } .process-arrow { display: none !important; } }',
@@ -1314,10 +1328,13 @@
   })();
 
   // ── 팝업(공지) 창 ──
-  // data/popup.json의 팝업 목록을 읽어 조건을 만족하는 팝업을 각각 독립된 창으로 동시에 띄운다.
-  // 창 하나를 닫아도 나머지는 그대로 남는다. 파일이 없거나 표시할 팝업이 없으면 아무 동작도 하지 않는다.
+  // data/popup.json의 팝업 목록을 읽어 조건을 만족하는 팝업을 독립된 창으로 표시한다.
+  // 한 화면에 다 들어가지 않으면 아래로 쌓지 않고 좌우 슬라이드로 넘긴다.
+  // PC는 한 번에 2개, 모바일은 1개를 보여준다.
   (function initPopup() {
     var STORE_KEY = 'boaz-popup-hidden';
+    var DEFAULT_W = 600, DEFAULT_W_M = 340, DEFAULT_H = 720, DEFAULT_H_M = 560;
+    var DEFAULT_BTN = '바로가기';
 
     // ── 날짜: "YYYY-MM-DD"를 로컬 시간대 기준으로 만든다 ──
     // new Date("2026-07-30")은 UTC 자정으로 해석되어 KST에서는 그날 09:00이 되므로
@@ -1337,18 +1354,20 @@
       if (end && now > end) return false;       // 종료일 23:59:59.999까지
       return true;
     }
-    // enabled가 문자열 "false"/"0"으로 저장돼도 안전하게 처리
     function isOn(v) {
       if (v === undefined || v === null) return false;
       if (typeof v === 'string') return !/^(false|0|no|off|)$/i.test(v.trim());
       return !!v;
     }
+    // 숫자 설정값이 비어 있거나 잘못돼도 기본값으로 안전하게 떨어지게 한다.
+    function num(v, fallback) {
+      var n = parseInt(v, 10);
+      return (isFinite(n) && n > 0) ? n : fallback;
+    }
     // 경로를 현재 문서 기준으로 해석한다.
     //  - http(s)://, //, data:, mailto:, tel: → 그대로 둔다(외부 주소 훼손 방지)
     //  - '/assets/...'처럼 슬래시로 시작하면 GitHub Pages 프로젝트 경로(/boaz-website/)를
     //    벗어나므로 선행 슬래시를 떼고 document.baseURI 기준으로 다시 해석한다.
-    //  - 'assets/...' 상대경로는 그대로 문서 기준으로 해석된다.
-    // 이 방식이라 로컬 미리보기·프로젝트 페이지·사용자 도메인 모두에서 동일하게 동작한다.
     function resolveAssetUrl(u) {
       if (!u) return '';
       var s = String(u).trim();
@@ -1366,9 +1385,7 @@
     }
 
     // ── 하위 호환 정규화 ──
-    // 새 구조:   { "popups": [ {id, enabled, order, title, content, images:[{src,alt}], ...} ] }
-    // 옛 구조:   { enabled, title, body, image, linkLabel, linkUrl, width, ... }  ← 단일 팝업
-    // 옛 필드명을 새 이름으로 옮겨 담아 기존에 등록된 팝업도 그대로 표시된다.
+    // 새 구조: { "popups": [ {...} ] } / 옛 구조: 단일 객체 + body·image·linkLabel·width
     function normalizeImages(raw, single) {
       var list = [];
       if (Array.isArray(raw)) {
@@ -1381,10 +1398,7 @@
       } else if (typeof raw === 'string' && raw) {
         list.push({ src: raw, alt: '' });
       }
-      // 옛 단일 image 필드
-      if (!list.length && typeof single === 'string' && single) {
-        list.push({ src: single, alt: '' });
-      }
+      if (!list.length && typeof single === 'string' && single) list.push({ src: single, alt: '' });
       return list;
     }
     function normalize(data) {
@@ -1396,31 +1410,30 @@
 
       return arr.map(function (p, i) {
         p = p || {};
-        var pc = parseInt(p.maxWidth || p.width, 10) || 460;
         return {
           id: String(p.id || p.slug || ('popup-' + (i + 1))),
           enabled: isOn(p.enabled),
           order: (p.order === 0 || p.order) ? Number(p.order) : (i + 1),
-          // 제목은 앞뒤 공백을 떼어낸다. 가운데 정렬이므로 수동으로 넣은 정렬용 공백이
-          // 남아 있으면 오히려 중심이 어긋난다.
+          // 가운데 정렬이므로 수동으로 넣은 정렬용 공백은 떼어낸다.
           title: String(p.title || '').trim(),
           content: p.content || p.body || '',
           images: normalizeImages(p.images, p.image),
-          buttonText: p.buttonText || p.linkLabel || '',
+          // 버튼 글자가 비어 있으면 '바로가기'로 표시한다(주소가 없으면 버튼 자체를 안 만든다).
+          buttonText: String(p.buttonText || p.linkLabel || '').trim() || DEFAULT_BTN,
           buttonUrl: p.buttonUrl || p.linkUrl || '',
           startDate: p.startDate || '',
           endDate: p.endDate || '',
           showOn: p.showOn || 'home',
-          maxWidth: pc,
-          // 모바일 폭은 별도 설정. 값이 없으면 340px과 PC 폭 중 작은 값을 쓴다.
-          maxWidthMobile: parseInt(p.maxWidthMobile, 10) || Math.min(340, pc)
+          maxWidth: num(p.maxWidth || p.width, DEFAULT_W),
+          maxWidthMobile: num(p.maxWidthMobile, DEFAULT_W_M),
+          maxHeight: num(p.maxHeight, DEFAULT_H),
+          maxHeightMobile: num(p.maxHeightMobile, DEFAULT_H_M)
         };
       });
     }
 
     // ── 팝업별 '오늘 하루 보지 않기' ──
-    // { "<popup id>": { fp: "<콘텐츠 지문>", until: <시각> }, ... }
-    // 팝업마다 독립이라 1번을 숨겨도 2번은 표시된다.
+    // { "<popup id>": { fp, until } } — 팝업마다 독립이라 서로 영향을 주지 않는다.
     // 옛 형식({fp, until} 단일 객체)이 남아 있어도 오류 없이 무시된다.
     function readStore() {
       try {
@@ -1428,16 +1441,13 @@
         if (!raw) return {};
         var s = JSON.parse(raw);
         if (!s || typeof s !== 'object' || Array.isArray(s)) return {};
-        if (s.fp && s.until) return {};   // 옛 단일 팝업 형식 → 무시
+        if (s.fp && s.until) return {};
         return s;
       } catch (e) { return {}; }
     }
     function writeStore(store) {
-      try { window.localStorage.setItem(STORE_KEY, JSON.stringify(store)); }
-      catch (e) { /* 시크릿 모드 등 저장 실패는 무시 */ }
+      try { window.localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {}
     }
-    // 제목·본문·이미지·버튼·기간이 바뀌면 지문이 달라져
-    // 이전 숨김 기록이 새 내용을 막지 않는다.
     function fingerprint(p) {
       var raw = [p.title, p.content, JSON.stringify(p.images), p.buttonText,
                  p.buttonUrl, p.startDate, p.endDate].join('|');
@@ -1468,28 +1478,35 @@
           .filter(function (p) {
             if (!p.enabled) return false;
             if (!inDateRange(p)) return false;
-            if (p.showOn !== 'all' && !isHome) return false;      // 'home' = 메인만
+            if (p.showOn !== 'all' && !isHome) return false;
             if (!p.title && !p.content && !p.images.length) return false;
             if (isSuppressed(p, store)) return false;
             return true;
           })
-          // 관리자에서 정한 표시 순서 적용 (같으면 원래 순서 유지)
           .sort(function (a, b) { return a.order - b.order; });
 
         if (!list.length) return;
 
         var lastFocused = document.activeElement;
-        var openCount = list.length;
-        var topZ = 1;          // 클릭한 창을 맨 앞으로 올릴 때 쓰는 z-index
-        var activePanel = null; // ESC·배경 클릭이 대상으로 삼을 창
+        var page = 0;
 
         var overlay = document.createElement('div');
         overlay.className = 'popup-overlay';
-        var stage = document.createElement('div');
-        stage.className = 'popup-stage' + (list.length > 1 ? ' multi' : '');
-        overlay.appendChild(stage);
+        var shell = document.createElement('div');
+        shell.className = 'popup-shell';
+        var viewport = document.createElement('div');
+        viewport.className = 'popup-viewport';
+        var track = document.createElement('div');
+        track.className = 'popup-track';
+        viewport.appendChild(track);
+        shell.appendChild(viewport);
+        overlay.appendChild(shell);
+        var ctl = null;   // 슬라이드 조작부 (필요할 때만 생성)
 
-        // 팝업 하나를 독립된 창으로 만든다
+        // PC는 한 번에 2개, 모바일은 1개
+        function perView() { return window.innerWidth >= 901 ? 2 : 1; }
+        function pageCount() { return Math.max(1, Math.ceil(list.length / perView())); }
+
         function buildPanel(p, i) {
           var panel = document.createElement('div');
           panel.className = 'popup-panel';
@@ -1497,10 +1514,11 @@
           panel.setAttribute('aria-modal', list.length === 1 ? 'true' : 'false');
           panel.style.setProperty('--popup-w', p.maxWidth + 'px');
           panel.style.setProperty('--popup-w-m', p.maxWidthMobile + 'px');
+          panel.style.setProperty('--popup-h-max', p.maxHeight + 'px');
+          panel.style.setProperty('--popup-h-max-m', p.maxHeightMobile + 'px');
           var titleId = 'popup-title-' + i;
           panel.setAttribute('aria-labelledby', titleId);
 
-          // 머리말: 제목(가운데) + 닫기 X 버튼(우측 상단)
           var head = document.createElement('div');
           head.className = 'popup-head';
           var h = document.createElement('h2');
@@ -1516,7 +1534,6 @@
           head.appendChild(closeBtn);
           panel.appendChild(head);
 
-          // 본문: 이미지 여러 장을 등록 순서대로 세로 표시한 뒤 글 → 버튼
           var body = document.createElement('div');
           body.className = 'popup-body';
           if (p.images.length) {
@@ -1527,14 +1544,14 @@
               img.className = 'popup-img';
               img.src = resolveAssetUrl(im.src);
               img.alt = im.alt || (p.title ? p.title + ' 이미지 ' + (n + 1) : '공지 이미지 ' + (n + 1));
-              // 지연 로딩은 쓰지 않는다. 팝업 본문은 자체 스크롤 영역이라
-              // loading="lazy"가 화면 진입을 감지하지 못해 두 번째 이후 이미지가
-              // 끝까지 로드되지 않는 경우가 있다. 팝업은 열리는 즉시 보는 내용이므로 모두 즉시 로드한다.
+              // 지연 로딩은 쓰지 않는다. 팝업 본문은 자체 스크롤 영역이라 loading="lazy"가
+              // 화면 진입을 감지하지 못해 두 번째 이후 이미지가 로드되지 않는 경우가 있다.
               img.loading = 'eager';
               img.addEventListener('error', function () {
                 img.style.display = 'none';
                 if (window.console) console.error('[팝업] 이미지를 불러올 수 없습니다:', img.src);
               });
+              img.addEventListener('load', syncHeights);
               wrap.appendChild(img);
             });
             body.appendChild(wrap);
@@ -1542,7 +1559,7 @@
           if (p.content) {
             var txt = document.createElement('p');
             txt.className = 'popup-text';
-            txt.textContent = p.content;   // textContent + white-space: pre-line → 줄바꿈 유지
+            txt.textContent = p.content;   // pre-line과 함께 줄바꿈 유지
             body.appendChild(txt);
           }
           var url = safeUrl(p.buttonUrl);
@@ -1552,12 +1569,10 @@
             a.href = url;
             a.textContent = p.buttonText;
             if (/^https?:\/\//i.test(url)) { a.target = '_blank'; a.rel = 'noopener'; }
-            a.addEventListener('click', function () { closePanel(panel, false); });
             body.appendChild(a);
           }
           panel.appendChild(body);
 
-          // 하단: 이 팝업에만 적용되는 '오늘 하루 보지 않기' + 닫기
           var foot = document.createElement('div');
           foot.className = 'popup-foot';
           var label = document.createElement('label');
@@ -1577,69 +1592,178 @@
           panel.appendChild(foot);
 
           // 이 창만 닫는다 (다른 창은 그대로)
-          closeBtn.addEventListener('click', function () { closePanel(panel, cb.checked); });
-          dismiss.addEventListener('click', function () { closePanel(panel, cb.checked); });
-          // 클릭하면 맨 앞으로 올리고, ESC·배경 클릭의 대상이 된다
-          panel.addEventListener('mousedown', function () { bringToFront(panel); });
-          panel.addEventListener('focusin', function () { bringToFront(panel); });
+          closeBtn.addEventListener('click', function () { closePopup(p, cb.checked); });
+          dismiss.addEventListener('click', function () { closePopup(p, cb.checked); });
+          panel.addEventListener('mousedown', function () { activeId = p.id; });
+          panel.addEventListener('focusin', function () { activeId = p.id; });
 
           panel._popup = p;
-          panel._hideCb = cb;
           return panel;
         }
 
-        function bringToFront(panel) {
-          activePanel = panel;
-          topZ += 1;
-          panel.style.zIndex = String(topZ);
+        var activeId = null;
+
+        // 페이지 단위로 다시 그린다 (팝업이 닫히면 페이지 수·현재 위치를 즉시 재계산)
+        function render() {
+          var pv = perView();
+          var pages = Math.max(1, Math.ceil(list.length / pv));
+          if (page > pages - 1) page = pages - 1;
+          if (page < 0) page = 0;
+
+          track.innerHTML = '';
+          for (var pi = 0; pi < pages; pi++) {
+            var pageEl = document.createElement('div');
+            pageEl.className = 'popup-page';
+            for (var k = pi * pv; k < Math.min((pi + 1) * pv, list.length); k++) {
+              pageEl.appendChild(buildPanel(list[k], k));
+            }
+            track.appendChild(pageEl);
+          }
+          track.style.transform = 'translateX(' + (-page * 100) + '%)';
+
+          // 조작부는 페이지가 2개 이상일 때만
+          if (ctl) { ctl.remove(); ctl = null; }
+          if (pages > 1) {
+            ctl = document.createElement('div');
+            ctl.className = 'popup-slider-ctl';
+            var prev = document.createElement('button');
+            prev.className = 'popup-arrow'; prev.type = 'button';
+            prev.setAttribute('aria-label', '이전 팝업'); prev.innerHTML = '&#8249;';
+            var dots = document.createElement('div');
+            dots.className = 'popup-dots';
+            for (var d = 0; d < pages; d++) {
+              (function (idx) {
+                var dot = document.createElement('button');
+                dot.className = 'popup-dot' + (idx === page ? ' active' : '');
+                dot.type = 'button';
+                dot.setAttribute('aria-label', (idx + 1) + '번째 팝업 보기');
+                dot.addEventListener('click', function () { goTo(idx); });
+                dots.appendChild(dot);
+              })(d);
+            }
+            var no = document.createElement('span');
+            no.className = 'popup-pageno';
+            no.textContent = (page + 1) + ' / ' + pages;
+            no.setAttribute('aria-live', 'polite');
+            var next = document.createElement('button');
+            next.className = 'popup-arrow'; next.type = 'button';
+            next.setAttribute('aria-label', '다음 팝업'); next.innerHTML = '&#8250;';
+            // 끝에서 반대쪽으로 순환(팝업 수가 적어 순환이 자연스럽다)
+            prev.addEventListener('click', function () { goTo((page - 1 + pages) % pages); });
+            next.addEventListener('click', function () { goTo((page + 1) % pages); });
+            ctl.appendChild(prev); ctl.appendChild(dots); ctl.appendChild(no); ctl.appendChild(next);
+            shell.appendChild(ctl);
+          }
+          syncHeights();
         }
+
+        function goTo(idx) {
+          page = idx;
+          render();
+        }
+
+        // 동시에 보이는 팝업들의 바깥 높이를 하나로 맞춘다.
+        // 자연 높이를 재서 가장 큰 값을 쓰되, 각 팝업의 설정 높이와 화면 높이를 넘지 않게 제한한다.
+        function syncHeights() {
+          var panels = Array.prototype.slice.call(track.querySelectorAll('.popup-panel'));
+          if (!panels.length) return;
+          panels.forEach(function (el) { el.style.height = ''; });
+          var mobile = window.innerWidth <= 560;
+          // 슬라이드 조작부가 있으면 그 높이(+간격)만큼 빼야 화살표가 화면 밖으로 잘리지 않는다.
+          var reserve = 48 + (ctl ? ctl.offsetHeight + 14 : 0);
+          var cap = Math.max(240, (window.innerHeight || 800) - reserve);
+          var want = 0;
+          panels.forEach(function (el) {
+            var p = el._popup;
+            var limit = Math.min(mobile ? p.maxHeightMobile : p.maxHeight, cap);
+            want = Math.max(want, Math.min(el.offsetHeight, limit));
+          });
+          if (want > 0) panels.forEach(function (el) { el.style.height = want + 'px'; });
+        }
+
         function teardown() {
           overlay.classList.remove('open');
           document.body.style.overflow = '';
           document.removeEventListener('keydown', onKey);
+          window.removeEventListener('resize', onResize);
           setTimeout(function () {
             if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
           }, 240);
           if (lastFocused && lastFocused.focus) lastFocused.focus();
         }
-        // 창 하나만 닫는다. 마지막 창이 닫히면 오버레이 전체를 정리한다.
-        function closePanel(panel, hideToday) {
-          if (!panel || !panel.parentNode) return;
-          if (hideToday) suppressToday(panel._popup, store);
-          panel.parentNode.removeChild(panel);
-          openCount -= 1;
-          if (activePanel === panel) activePanel = stage.querySelector('.popup-panel');
-          if (openCount <= 1) stage.classList.remove('multi');
-          if (openCount <= 0) teardown();
+        // 팝업 하나만 목록에서 빼고 다시 그린다. 마지막 하나가 닫히면 전체 정리.
+        function closePopup(p, hideToday) {
+          if (hideToday) suppressToday(p, store);
+          var i = list.indexOf(p);
+          if (i === -1) return;
+          list.splice(i, 1);
+          if (activeId === p.id) activeId = null;
+          if (!list.length) { teardown(); return; }
+          render();
         }
-        // ESC는 마지막으로 다룬 창 하나만 닫는다(체크 상태는 반영하지 않음).
+        function currentPopup() {
+          if (activeId) {
+            for (var i = 0; i < list.length; i++) if (list[i].id === activeId) return list[i];
+          }
+          var pv = perView();
+          return list[Math.min(page * pv, list.length - 1)];
+        }
+        // ESC는 지금 보고 있는 팝업 하나만 닫는다(체크 상태는 반영하지 않음)
         function onKey(e) {
-          if (e.key !== 'Escape') return;
-          var target = activePanel && activePanel.parentNode ? activePanel : stage.querySelector('.popup-panel');
-          closePanel(target, false);
+          if (e.key === 'Escape') { var p = currentPopup(); if (p) closePopup(p, false); }
         }
-        // 배경(창 바깥)을 눌러도 전체가 아니라 마지막으로 다룬 창 하나만 닫는다.
+        function onResize() { render(); }
+
+        // 배경(창 바깥)을 눌러도 전체가 아니라 지금 보고 있는 창 하나만 닫는다
         overlay.addEventListener('click', function (e) {
-          if (e.target !== overlay && e.target !== stage) return;
-          var target = activePanel && activePanel.parentNode ? activePanel : stage.querySelector('.popup-panel');
-          closePanel(target, false);
+          if (e.target !== overlay && e.target !== shell && e.target !== viewport) return;
+          var p = currentPopup(); if (p) closePopup(p, false);
         });
         document.addEventListener('keydown', onKey);
+        window.addEventListener('resize', onResize);
 
-        list.forEach(function (p, i) { stage.appendChild(buildPanel(p, i)); });
+        // ── 드래그 / 스와이프 ──
+        var dragX = 0, dragging = false, moved = 0;
+        function dragStart(x, target) {
+          // 본문 스크롤 영역 안에서 시작한 제스처는 슬라이드로 가로채지 않는다
+          if (target && target.closest && target.closest('.popup-body')) return;
+          if (pageCount() < 2) return;
+          dragging = true; dragX = x; moved = 0;
+          track.classList.add('dragging');
+        }
+        function dragMove(x) {
+          if (!dragging) return;
+          moved = x - dragX;
+          track.style.transform = 'translateX(calc(' + (-page * 100) + '% + ' + moved + 'px))';
+        }
+        function dragEnd() {
+          if (!dragging) return;
+          dragging = false;
+          track.classList.remove('dragging');
+          var pages = pageCount();
+          var threshold = Math.min(90, viewport.clientWidth * 0.18);
+          if (moved < -threshold) goTo((page + 1) % pages);
+          else if (moved > threshold) goTo((page - 1 + pages) % pages);
+          else track.style.transform = 'translateX(' + (-page * 100) + '%)';
+          moved = 0;
+        }
+        viewport.addEventListener('mousedown', function (e) { dragStart(e.clientX, e.target); });
+        window.addEventListener('mousemove', function (e) { if (dragging) { e.preventDefault(); dragMove(e.clientX); } });
+        window.addEventListener('mouseup', dragEnd);
+        viewport.addEventListener('touchstart', function (e) { dragStart(e.touches[0].clientX, e.target); }, { passive: true });
+        viewport.addEventListener('touchmove', function (e) { if (dragging) dragMove(e.touches[0].clientX); }, { passive: true });
+        viewport.addEventListener('touchend', dragEnd);
+
         document.body.appendChild(overlay);
-
+        render();
         // rAF에 의존하지 않고 강제 리플로우로 초기 상태를 확정한 뒤 여는 클래스를 붙인다
-        // (백그라운드 탭처럼 프레임이 그려지지 않는 상황에서도 팝업이 열린 상태가 됨)
         overlay.offsetHeight;
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
-        var first = stage.querySelector('.popup-panel');
-        if (first) {
-          activePanel = first;
-          var btn = first.querySelector('.popup-close');
-          if (btn) btn.focus();
-        }
+        var firstClose = track.querySelector('.popup-close');
+        if (firstClose) firstClose.focus();
+        // 이미지가 늦게 들어와 높이가 달라지는 경우를 대비해 한 번 더 맞춘다
+        setTimeout(syncHeights, 400);
       })
       // 방문자 화면에는 아무것도 띄우지 않고, 개발자 콘솔에만 원인을 남긴다
       .catch(function (e) {

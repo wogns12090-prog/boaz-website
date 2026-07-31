@@ -35,6 +35,7 @@ collections:
           # (ListItemTopBar가 삭제·순서변경만 지원). 아래 hint로 대체 방법을 안내합니다.
           - label: "팝업 목록"
             name: "popups"
+            add_to_top: true
             widget: "list"
             label_singular: "팝업"
             allow_add: true
@@ -60,13 +61,15 @@ collections:
                 fields:
                   - {label: "이미지 파일", name: "src", widget: "image", media_folder: "/assets/uploads/popup", public_folder: "assets/uploads/popup"}
                   - {label: "대체텍스트 (이미지가 안 보일 때 표시되는 설명)", name: "alt", widget: "string", required: false}
-              - {label: "버튼 글자 (선택, 비우면 버튼 안 보임)", name: "buttonText", widget: "string", required: false}
+              - {label: "버튼 글자", name: "buttonText", widget: "string", required: false, default: "바로가기", hint: "비워두면 '바로가기'로 표시됩니다. 버튼 주소가 비어 있으면 버튼 자체가 나오지 않습니다."}
               - {label: "버튼 주소 (선택, 예: biz-air.html 또는 https://...)", name: "buttonUrl", widget: "string", required: false}
               - {label: "표시 시작일 (선택, 비우면 바로 표시)", name: "startDate", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: false}
               - {label: "표시 종료일 (선택, 비우면 계속 표시)", name: "endDate", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: false}
               - {label: "표시 위치", name: "showOn", widget: "select", default: "home", options: [{label: "메인페이지만", value: "home"}, {label: "모든 페이지", value: "all"}]}
-              - {label: "PC 팝업 최대 너비 (px)", name: "maxWidth", widget: "number", value_type: "int", default: 460, min: 320, max: 720}
-              - {label: "모바일 팝업 최대 너비 (px)", name: "maxWidthMobile", widget: "number", value_type: "int", default: 340, min: 260, max: 480, required: false, hint: "휴대폰에서 쓰는 최대 너비입니다. 비워두면 340px이 적용되고, 화면보다 커지지 않도록 좌우 16px 여백은 항상 확보됩니다."}
+              - {label: "PC 팝업 너비 (px)", name: "maxWidth", widget: "number", value_type: "int", default: 600, min: 320, max: 900, required: false, hint: "비워두면 600px이 적용됩니다. 화면보다 크면 자동으로 줄어듭니다."}
+              - {label: "모바일 팝업 너비 (px)", name: "maxWidthMobile", widget: "number", value_type: "int", default: 340, min: 240, max: 480, required: false, hint: "비워두면 340px이 적용됩니다. 좌우 여백은 항상 확보됩니다."}
+              - {label: "PC 팝업 높이 (px)", name: "maxHeight", widget: "number", value_type: "int", default: 720, min: 300, max: 1200, required: false, hint: "비워두면 720px이 적용됩니다. 내용이 더 길면 팝업이 늘어나지 않고 본문만 스크롤됩니다."}
+              - {label: "모바일 팝업 높이 (px)", name: "maxHeightMobile", widget: "number", value_type: "int", default: 560, min: 260, max: 900, required: false, hint: "비워두면 560px이 적용됩니다. 화면 높이를 넘지 않도록 자동으로 제한됩니다."}
 
   - name: "reviews"
     label: "이용후기 (BZ REVIEW)"
@@ -77,6 +80,7 @@ collections:
         fields:
           - label: "후기 목록"
             name: "reviews"
+            add_to_top: true
             widget: "list"
             summary: "{{fields.title}} — {{fields.author}} ({{fields.rating}}점)"
             fields:
@@ -119,6 +123,7 @@ collections:
         fields:
           - label: "소식 목록"
             name: "stories"
+            add_to_top: true
             widget: "list"
             summary: "[{{fields.category}}] {{fields.title}}"
             fields:
@@ -157,6 +162,7 @@ collections:
         fields:
           - label: "고객사 목록"
             name: "customers"
+            add_to_top: true
             widget: "list"
             summary: "{{fields.order}}. {{fields.name}}"
             fields:
@@ -176,6 +182,7 @@ collections:
         fields:
           - label: "협력사 목록"
             name: "partners"
+            add_to_top: true
             widget: "list"
             summary: "{{fields.order}}. {{fields.name}}"
             fields:
