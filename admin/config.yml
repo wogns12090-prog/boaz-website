@@ -31,6 +31,8 @@ collections:
         fields:
           # '팝업 추가' 버튼으로 개수 제한 없이 등록할 수 있고, 항목을 끌어 순서를 바꿀 수 있습니다.
           # 표시 순서는 아래 '표시 순서' 숫자를 기준으로 정해집니다.
+          # 복제: Decap CMS의 목록 위젯은 항목별 복제 버튼을 제공하지 않습니다
+          # (ListItemTopBar가 삭제·순서변경만 지원). 아래 hint로 대체 방법을 안내합니다.
           - label: "팝업 목록"
             name: "popups"
             widget: "list"
@@ -38,6 +40,7 @@ collections:
             allow_add: true
             collapsed: false
             summary: "{{fields.order}}. {{fields.title}}"
+            hint: "팝업 복제 방법 — ① 아래 '팝업 추가'를 누르면 사용 여부·순서·표시 위치·너비가 기본값으로 채워진 새 팝업이 생깁니다. ② 복사하려는 팝업을 펼쳐 제목·내용·버튼 칸의 글자를 복사해 새 팝업에 붙여넣고, 이미지는 '이미지 추가'로 같은 파일을 다시 선택하면 됩니다. ③ 팝업 고유 ID는 반드시 다른 값으로 바꿔주세요(같으면 '오늘 하루 보지 않기' 기록이 섞입니다)."
             fields:
               - {label: "팝업 고유 ID (다른 팝업과 겹치지 않게, 예: notice-2026-08)", name: "id", widget: "string", hint: "한 번 정하면 바꾸지 마세요. '오늘 하루 보지 않기' 기록을 팝업별로 구분하는 값입니다."}
               - {label: "이 팝업 사용", name: "enabled", widget: "boolean", default: true, hint: "끄면 이 팝업만 표시되지 않습니다."}
@@ -62,7 +65,8 @@ collections:
               - {label: "표시 시작일 (선택, 비우면 바로 표시)", name: "startDate", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: false}
               - {label: "표시 종료일 (선택, 비우면 계속 표시)", name: "endDate", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: false}
               - {label: "표시 위치", name: "showOn", widget: "select", default: "home", options: [{label: "메인페이지만", value: "home"}, {label: "모든 페이지", value: "all"}]}
-              - {label: "팝업 최대 너비 (px)", name: "maxWidth", widget: "number", value_type: "int", default: 460, min: 320, max: 720}
+              - {label: "PC 팝업 최대 너비 (px)", name: "maxWidth", widget: "number", value_type: "int", default: 460, min: 320, max: 720}
+              - {label: "모바일 팝업 최대 너비 (px)", name: "maxWidthMobile", widget: "number", value_type: "int", default: 340, min: 260, max: 480, required: false, hint: "휴대폰에서 쓰는 최대 너비입니다. 비워두면 340px이 적용되고, 화면보다 커지지 않도록 좌우 16px 여백은 항상 확보됩니다."}
 
   - name: "reviews"
     label: "이용후기 (BZ REVIEW)"

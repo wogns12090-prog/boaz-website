@@ -206,10 +206,20 @@
     'html.reveal-ready .reveal.is-visible { opacity: 1; transform: none; transition: opacity 620ms var(--ease-out, ease), transform 620ms var(--ease-out, ease); }',
     '@media (prefers-reduced-motion: reduce) { html.reveal-ready .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }',
     /* ─ 팝업(공지) 창 ─ */
-    '.popup-overlay { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(1,20,22,0.55); opacity: 0; pointer-events: none; transition: opacity 220ms ease; }',
+    /* 오버레이는 스크롤 가능한 무대. 팝업이 많아 한 화면을 넘으면 세로로만 스크롤되고
+       가로 스크롤은 생기지 않는다. */
+    '.popup-overlay { position: fixed; inset: 0; z-index: 300; padding: 24px; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; background: rgba(1,20,22,0.55); opacity: 0; pointer-events: none; transition: opacity 220ms ease; }',
     '.popup-overlay.open { opacity: 1; pointer-events: auto; }',
-    '.popup-panel { width: 100%; max-width: 460px; max-height: 88vh; display: flex; flex-direction: column; background: var(--gray-0); border-radius: var(--radius-xl, 16px); overflow: hidden; box-shadow: 0 24px 60px -20px rgba(0,0,0,0.45); transform: translateY(14px) scale(0.985); transition: transform 260ms var(--ease-out, ease); }',
+    /* min-height:100% + align-content:center → 팝업이 적으면 가운데, 많으면 위에서부터 쌓이고
+       스크롤로 전부 닿을 수 있다(가운데 정렬 때문에 위쪽이 잘려 못 보는 문제 방지). */
+    '.popup-stage { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; align-content: center; gap: 20px; min-height: 100%; }',
+    /* 폭은 PC/모바일을 따로 지정. 모바일은 화면 폭에서 좌우 여백을 뺀 값을 넘지 않도록 제한. */
+    '.popup-panel { position: relative; z-index: 1; width: 100%; max-width: var(--popup-w, 460px); max-height: 88vh; display: flex; flex-direction: column; background: var(--gray-0); border-radius: var(--radius-xl, 16px); overflow: hidden; box-shadow: 0 24px 60px -20px rgba(0,0,0,0.45); transform: translateY(14px) scale(0.985); transition: transform 260ms var(--ease-out, ease); }',
     '.popup-overlay.open .popup-panel { transform: none; }',
+    /* 팝업이 여러 개면 한 화면에 더 들어가도록 높이를 조금 낮추고, PC에서는 짝수 번째를
+       아래로 살짝 내려 서로 엇갈리게 보이도록 한다(겹치지는 않음). */
+    '.popup-stage.multi .popup-panel { max-height: 78vh; }',
+    '@media (min-width: 901px) { .popup-stage.multi .popup-panel:nth-child(even) { margin-top: 28px; } }',
     /* 제목은 가운데 정렬. 닫기 버튼을 absolute로 빼서 제목이 여러 줄이어도 중앙이 유지되고,
        제목 좌우에 닫기 버튼 폭만큼 여백(52px)을 둬서 서로 겹치지 않게 한다. */
     '.popup-head { position: relative; flex: 0 0 auto; padding: 22px 52px 0; }',
@@ -231,16 +241,8 @@
     '.popup-hide input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--teal-700); }',
     '.popup-dismiss { background: none; border: 1px solid var(--border-default); border-radius: var(--radius-md, 8px); padding: 9px 18px; font-family: inherit; font-size: 15px; font-weight: 600; color: var(--text-primary); cursor: pointer; }',
     '.popup-dismiss:hover { background: var(--gray-0); border-color: var(--teal-600); color: var(--teal-800); }',
-    /* ─ 여러 팝업 이동(한 번에 하나씩 표시) ─ 팝업이 1개면 JS가 이 영역을 만들지 않는다. */
-    '.popup-nav { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 16px; border-top: 1px solid var(--border-subtle); }',
-    '.popup-nav-btn { min-width: 44px; height: 40px; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; background: var(--gray-0); border: 1px solid var(--border-default); border-radius: var(--radius-md, 8px); font-family: inherit; font-size: 15px; font-weight: 600; color: var(--text-primary); cursor: pointer; }',
-    '.popup-nav-btn:hover:not(:disabled) { background: var(--teal-50); border-color: var(--teal-600); color: var(--teal-800); }',
-    '.popup-nav-btn:disabled { opacity: 0.4; cursor: default; }',
-    '.popup-count { font-family: var(--font-mono); font-size: 15px; font-weight: 600; color: var(--text-secondary); }',
-    '.popup-closeall { background: none; border: none; font-family: inherit; font-size: 14px; color: var(--text-tertiary); text-decoration: underline; cursor: pointer; padding: 6px 4px; }',
-    '.popup-closeall:hover { color: var(--text-primary); }',
-    /* 모바일: 상하 안전 여백 확보, 버튼은 손가락으로 누르기 쉬운 크기 유지 */
-    '@media (max-width: 560px) { .popup-overlay { padding: 14px; align-items: center; } .popup-panel { max-height: 84vh; } .popup-title { font-size: 21px !important; } .popup-head { padding: 18px 52px 0; } .popup-body { padding: 14px 18px 4px; } .popup-foot { flex-direction: column-reverse; align-items: stretch; padding: 12px 18px; } .popup-dismiss { width: 100%; height: 44px; } .popup-nav { padding: 10px 12px; } .popup-nav-btn { height: 44px; min-width: 52px; } }',
+    /* 모바일: 좌우 16px 여백 확보, 폭은 화면을 넘지 않게 제한, X 버튼은 누르기 쉬운 크기 유지 */
+    '@media (max-width: 560px) { .popup-overlay { padding: 16px; } .popup-stage { gap: 14px; } .popup-panel { max-width: min(var(--popup-w-m, 340px), calc(100vw - 32px)); max-height: 84vh; } .popup-stage.multi .popup-panel { max-height: 76vh; } .popup-title { font-size: 21px !important; } .popup-head { padding: 18px 52px 0; } .popup-body { padding: 14px 18px 4px; } .popup-foot { flex-direction: column-reverse; align-items: stretch; padding: 12px 18px; } .popup-dismiss { width: 100%; height: 44px; } }',
     '@media (prefers-reduced-motion: reduce) { .popup-overlay, .popup-panel { transition: none !important; } }',
     /* ─ 업무절차 반응형 ─ */
     '@media (max-width: 900px) { .process-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 24px 16px !important; } .process-arrow { display: none !important; } }',
@@ -1312,9 +1314,8 @@
   })();
 
   // ── 팝업(공지) 창 ──
-  // data/popup.json의 팝업 목록을 읽어 조건을 만족하는 팝업만 표시한다.
-  // 활성 팝업이 여러 개면 한 번에 하나씩 보여주고 이전/다음으로 이동한다.
-  // 파일이 없거나 표시할 팝업이 없으면 아무 동작도 하지 않는다.
+  // data/popup.json의 팝업 목록을 읽어 조건을 만족하는 팝업을 각각 독립된 창으로 동시에 띄운다.
+  // 창 하나를 닫아도 나머지는 그대로 남는다. 파일이 없거나 표시할 팝업이 없으면 아무 동작도 하지 않는다.
   (function initPopup() {
     var STORE_KEY = 'boaz-popup-hidden';
 
@@ -1343,8 +1344,11 @@
       return !!v;
     }
     // 경로를 현재 문서 기준으로 해석한다.
-    // 앞에 '/'가 붙은 경로는 GitHub Pages 프로젝트 경로(/boaz-website/)를 벗어나므로
-    // 선행 슬래시를 떼고 문서 기준으로 다시 해석한다. 전체 URL은 그대로 둔다.
+    //  - http(s)://, //, data:, mailto:, tel: → 그대로 둔다(외부 주소 훼손 방지)
+    //  - '/assets/...'처럼 슬래시로 시작하면 GitHub Pages 프로젝트 경로(/boaz-website/)를
+    //    벗어나므로 선행 슬래시를 떼고 document.baseURI 기준으로 다시 해석한다.
+    //  - 'assets/...' 상대경로는 그대로 문서 기준으로 해석된다.
+    // 이 방식이라 로컬 미리보기·프로젝트 페이지·사용자 도메인 모두에서 동일하게 동작한다.
     function resolveAssetUrl(u) {
       if (!u) return '';
       var s = String(u).trim();
@@ -1392,6 +1396,7 @@
 
       return arr.map(function (p, i) {
         p = p || {};
+        var pc = parseInt(p.maxWidth || p.width, 10) || 460;
         return {
           id: String(p.id || p.slug || ('popup-' + (i + 1))),
           enabled: isOn(p.enabled),
@@ -1406,7 +1411,9 @@
           startDate: p.startDate || '',
           endDate: p.endDate || '',
           showOn: p.showOn || 'home',
-          maxWidth: parseInt(p.maxWidth || p.width, 10) || 460
+          maxWidth: pc,
+          // 모바일 폭은 별도 설정. 값이 없으면 340px과 PC 폭 중 작은 값을 쓴다.
+          maxWidthMobile: parseInt(p.maxWidthMobile, 10) || Math.min(340, pc)
         };
       });
     }
@@ -1471,35 +1478,39 @@
 
         if (!list.length) return;
 
-        var idx = 0;
         var lastFocused = document.activeElement;
+        var openCount = list.length;
+        var topZ = 1;          // 클릭한 창을 맨 앞으로 올릴 때 쓰는 z-index
+        var activePanel = null; // ESC·배경 클릭이 대상으로 삼을 창
 
         var overlay = document.createElement('div');
         overlay.className = 'popup-overlay';
-        var panel = document.createElement('div');
-        panel.className = 'popup-panel';
-        panel.setAttribute('role', 'dialog');
-        panel.setAttribute('aria-modal', 'true');
-        panel.setAttribute('aria-labelledby', 'popup-title');
-        overlay.appendChild(panel);
+        var stage = document.createElement('div');
+        stage.className = 'popup-stage' + (list.length > 1 ? ' multi' : '');
+        overlay.appendChild(stage);
 
-        // 팝업 하나를 패널 안에 그린다 (여러 개일 때는 같은 패널을 갈아끼운다)
-        function render() {
-          var p = list[idx];
-          panel.style.maxWidth = p.maxWidth + 'px';
-          panel.innerHTML = '';
+        // 팝업 하나를 독립된 창으로 만든다
+        function buildPanel(p, i) {
+          var panel = document.createElement('div');
+          panel.className = 'popup-panel';
+          panel.setAttribute('role', 'dialog');
+          panel.setAttribute('aria-modal', list.length === 1 ? 'true' : 'false');
+          panel.style.setProperty('--popup-w', p.maxWidth + 'px');
+          panel.style.setProperty('--popup-w-m', p.maxWidthMobile + 'px');
+          var titleId = 'popup-title-' + i;
+          panel.setAttribute('aria-labelledby', titleId);
 
-          // 머리말: 제목(가운데) + 닫기 버튼(우측 상단 absolute)
+          // 머리말: 제목(가운데) + 닫기 X 버튼(우측 상단)
           var head = document.createElement('div');
           head.className = 'popup-head';
           var h = document.createElement('h2');
           h.className = 'popup-title';
-          h.id = 'popup-title';
+          h.id = titleId;
           h.textContent = p.title || '';
           var closeBtn = document.createElement('button');
           closeBtn.className = 'popup-close';
           closeBtn.type = 'button';
-          closeBtn.setAttribute('aria-label', '팝업 닫기');
+          closeBtn.setAttribute('aria-label', (p.title ? p.title + ' ' : '') + '팝업 닫기');
           closeBtn.innerHTML = '&times;';
           head.appendChild(h);
           head.appendChild(closeBtn);
@@ -1516,7 +1527,10 @@
               img.className = 'popup-img';
               img.src = resolveAssetUrl(im.src);
               img.alt = im.alt || (p.title ? p.title + ' 이미지 ' + (n + 1) : '공지 이미지 ' + (n + 1));
-              img.loading = n === 0 ? 'eager' : 'lazy';
+              // 지연 로딩은 쓰지 않는다. 팝업 본문은 자체 스크롤 영역이라
+              // loading="lazy"가 화면 진입을 감지하지 못해 두 번째 이후 이미지가
+              // 끝까지 로드되지 않는 경우가 있다. 팝업은 열리는 즉시 보는 내용이므로 모두 즉시 로드한다.
+              img.loading = 'eager';
               img.addEventListener('error', function () {
                 img.style.display = 'none';
                 if (window.console) console.error('[팝업] 이미지를 불러올 수 없습니다:', img.src);
@@ -1538,38 +1552,12 @@
             a.href = url;
             a.textContent = p.buttonText;
             if (/^https?:\/\//i.test(url)) { a.target = '_blank'; a.rel = 'noopener'; }
-            a.addEventListener('click', function () { closeAll(); });
+            a.addEventListener('click', function () { closePanel(panel, false); });
             body.appendChild(a);
           }
           panel.appendChild(body);
 
-          // 이전/다음 이동 — 팝업이 2개 이상일 때만 만든다
-          if (list.length > 1) {
-            var nav = document.createElement('div');
-            nav.className = 'popup-nav';
-            var prev = document.createElement('button');
-            prev.className = 'popup-nav-btn';
-            prev.type = 'button';
-            prev.textContent = '‹ 이전';
-            prev.disabled = idx === 0;
-            var count = document.createElement('span');
-            count.className = 'popup-count';
-            count.textContent = (idx + 1) + ' / ' + list.length;
-            count.setAttribute('aria-live', 'polite');
-            var next = document.createElement('button');
-            next.className = 'popup-nav-btn';
-            next.type = 'button';
-            next.textContent = '다음 ›';
-            next.disabled = idx === list.length - 1;
-            prev.addEventListener('click', function () { if (idx > 0) { idx--; render(); } });
-            next.addEventListener('click', function () { if (idx < list.length - 1) { idx++; render(); } });
-            nav.appendChild(prev);
-            nav.appendChild(count);
-            nav.appendChild(next);
-            panel.appendChild(nav);
-          }
-
-          // 하단: 오늘 하루 보지 않기 + 닫기 (+ 여러 개면 전체 닫기)
+          // 하단: 이 팝업에만 적용되는 '오늘 하루 보지 않기' + 닫기
           var foot = document.createElement('div');
           foot.className = 'popup-foot';
           var label = document.createElement('label');
@@ -1580,34 +1568,31 @@
           span.textContent = '오늘 하루 보지 않기';
           label.appendChild(cb);
           label.appendChild(span);
-          var right = document.createElement('div');
-          right.style.cssText = 'display: flex; align-items: center; gap: 10px;';
-          if (list.length > 1) {
-            var closeAllBtn = document.createElement('button');
-            closeAllBtn.className = 'popup-closeall';
-            closeAllBtn.type = 'button';
-            closeAllBtn.textContent = '전체 닫기';
-            closeAllBtn.addEventListener('click', function () {
-              if (cb.checked) suppressToday(p, store);   // 지금 보고 있는 팝업만 체크 상태 반영
-              closeAll();
-            });
-            right.appendChild(closeAllBtn);
-          }
           var dismiss = document.createElement('button');
           dismiss.className = 'popup-dismiss';
           dismiss.type = 'button';
           dismiss.textContent = '닫기';
-          dismiss.addEventListener('click', function () { closeCurrent(cb.checked); });
-          right.appendChild(dismiss);
           foot.appendChild(label);
-          foot.appendChild(right);
+          foot.appendChild(dismiss);
           panel.appendChild(foot);
 
-          closeBtn.addEventListener('click', function () { closeCurrent(cb.checked); });
-          body.scrollTop = 0;
-          closeBtn.focus();
+          // 이 창만 닫는다 (다른 창은 그대로)
+          closeBtn.addEventListener('click', function () { closePanel(panel, cb.checked); });
+          dismiss.addEventListener('click', function () { closePanel(panel, cb.checked); });
+          // 클릭하면 맨 앞으로 올리고, ESC·배경 클릭의 대상이 된다
+          panel.addEventListener('mousedown', function () { bringToFront(panel); });
+          panel.addEventListener('focusin', function () { bringToFront(panel); });
+
+          panel._popup = p;
+          panel._hideCb = cb;
+          return panel;
         }
 
+        function bringToFront(panel) {
+          activePanel = panel;
+          topZ += 1;
+          panel.style.zIndex = String(topZ);
+        }
         function teardown() {
           overlay.classList.remove('open');
           document.body.style.overflow = '';
@@ -1617,28 +1602,44 @@
           }, 240);
           if (lastFocused && lastFocused.focus) lastFocused.focus();
         }
-        // 현재 팝업만 닫는다. 남은 팝업이 있으면 다음 팝업으로 넘어간다.
-        function closeCurrent(hideToday) {
-          if (hideToday) suppressToday(list[idx], store);
-          list.splice(idx, 1);
-          if (!list.length) { teardown(); return; }
-          if (idx > list.length - 1) idx = list.length - 1;
-          render();
+        // 창 하나만 닫는다. 마지막 창이 닫히면 오버레이 전체를 정리한다.
+        function closePanel(panel, hideToday) {
+          if (!panel || !panel.parentNode) return;
+          if (hideToday) suppressToday(panel._popup, store);
+          panel.parentNode.removeChild(panel);
+          openCount -= 1;
+          if (activePanel === panel) activePanel = stage.querySelector('.popup-panel');
+          if (openCount <= 1) stage.classList.remove('multi');
+          if (openCount <= 0) teardown();
         }
-        function closeAll() { teardown(); }
-        // ESC는 항상 '지금 보고 있는 팝업'만 닫는다 (체크 상태는 반영하지 않음)
-        function onKey(e) { if (e.key === 'Escape') closeCurrent(false); }
-
-        overlay.addEventListener('click', function (e) { if (e.target === overlay) closeCurrent(false); });
+        // ESC는 마지막으로 다룬 창 하나만 닫는다(체크 상태는 반영하지 않음).
+        function onKey(e) {
+          if (e.key !== 'Escape') return;
+          var target = activePanel && activePanel.parentNode ? activePanel : stage.querySelector('.popup-panel');
+          closePanel(target, false);
+        }
+        // 배경(창 바깥)을 눌러도 전체가 아니라 마지막으로 다룬 창 하나만 닫는다.
+        overlay.addEventListener('click', function (e) {
+          if (e.target !== overlay && e.target !== stage) return;
+          var target = activePanel && activePanel.parentNode ? activePanel : stage.querySelector('.popup-panel');
+          closePanel(target, false);
+        });
         document.addEventListener('keydown', onKey);
 
+        list.forEach(function (p, i) { stage.appendChild(buildPanel(p, i)); });
         document.body.appendChild(overlay);
-        render();
+
         // rAF에 의존하지 않고 강제 리플로우로 초기 상태를 확정한 뒤 여는 클래스를 붙인다
         // (백그라운드 탭처럼 프레임이 그려지지 않는 상황에서도 팝업이 열린 상태가 됨)
         overlay.offsetHeight;
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
+        var first = stage.querySelector('.popup-panel');
+        if (first) {
+          activePanel = first;
+          var btn = first.querySelector('.popup-close');
+          if (btn) btn.focus();
+        }
       })
       // 방문자 화면에는 아무것도 띄우지 않고, 개발자 콘솔에만 원인을 남긴다
       .catch(function (e) {
