@@ -1405,11 +1405,27 @@
       btn.addEventListener('click', function () {
         if (busy) return;
         busy = true;
-        // 접거나 펼칠 때 화면이 튀지 않도록, 버튼 위치를 기준으로 스크롤을 보정한다.
-        var before = btn.getBoundingClientRect().top;
-        apply(!expanded);
-        var after = btn.getBoundingClientRect().top;
-        window.scrollBy(0, after - before);
+        var willExpand = !expanded;
+        if (willExpand) {
+          // 펼칠 때는 버튼 위치를 붙잡아 두지 않는다.
+          // (그렇게 하면 새로 열린 항목만큼 화면이 같이 내려가 정작 펼친 내용을 못 본다.)
+          // 대신 새로 열린 첫 항목이 화면에 들어오도록만 맞춘다.
+          // 연혁은 숨긴 항목이 버튼 위쪽에 있어, 그냥 두면 브라우저의 스크롤 앵커링 때문에
+          // 화면이 그대로 유지되어 펼쳐진 내용이 보이지 않는다.
+          apply(true);
+          var first = hidden[0];
+          if (first && first.scrollIntoView) {
+            // behavior는 'auto'(즉시)로 둔다. 'smooth'는 프레임이 그려져야 진행되므로
+            // 백그라운드 탭 등에서 이동이 끝나지 않을 수 있다.
+            first.scrollIntoView({ block: 'nearest' });
+          }
+        } else {
+          // 접을 때만 보정한다. 접히면서 위쪽 내용이 사라져 화면이 튀는 것을 막는다.
+          var before = btn.getBoundingClientRect().top;
+          apply(false);
+          var after = btn.getBoundingClientRect().top;
+          window.scrollBy(0, after - before);
+        }
         setTimeout(function () { busy = false; }, 200);
       });
 
