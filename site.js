@@ -212,6 +212,36 @@
     'html.reveal-ready .reveal { opacity: 0; transform: translateY(26px); transition: none; }',
     'html.reveal-ready .reveal.is-visible { opacity: 1; transform: none; transition: opacity 620ms var(--ease-out, ease), transform 620ms var(--ease-out, ease); }',
     '@media (prefers-reduced-motion: reduce) { html.reveal-ready .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }',
+    /* ═══ 회사소개 모바일 가독성 개선 (PC는 그대로) ═══ */
+    /* ─ 1. 상단 탭: 가로 스크롤형. 글자가 단어 중간에서 끊기지 않게 한다 ─ */
+    '@media (max-width: 900px) { .subnav { flex-wrap: nowrap !important; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-padding-left: 20px; } .subnav::-webkit-scrollbar { display: none; } .subnav a { flex: 0 0 auto; white-space: nowrap; word-break: keep-all; } }',
+    /* ─ 2. 인사말: 모바일에서 1단 세로 배치 ─ */
+    '@media (max-width: 900px) { .greeting-grid { grid-template-columns: 1fr !important; gap: 20px !important; padding: 22px 18px !important; } }',
+    /* 한국어는 단어 단위로 줄바꿈해야 한두 글자씩 끊기지 않는다. */
+    '@media (max-width: 900px) { .greeting-grid h2, .greeting-grid .body-text, .greeting-grid p, .history-desc, .vision-desc, .vision-title, .cert-card-title { word-break: keep-all; overflow-wrap: break-word; } }',
+    '@media (max-width: 900px) { .greeting-grid h2 { font-size: 26px !important; line-height: 1.4 !important; } .greeting-grid p { font-size: 16px !important; line-height: 1.85 !important; margin-bottom: 16px !important; } }',
+    /* ─ 3. 서브 히어로: 모바일 높이 축소 356 → 292px (약 18%) ─
+       전역 `section { padding: 48px 0 !important }`가 96px을 더하고 있어 그대로 두면
+       min-height를 줄여도 효과가 반감된다. 히어로는 전체폭 이미지라 그 여백이 필요 없으므로
+       모바일에서만 제거하고 min-height로 높이를 직접 정한다.
+       .sub-hero는 서브페이지 공통 클래스라 모든 서브페이지에 같은 기준이 적용된다. */
+    '@media (max-width: 560px) { .sub-hero { min-height: 292px; padding-top: 0 !important; padding-bottom: 0 !important; } }',
+    /* ─ 4. 연혁: 날짜 열을 좁히고 설명 폭을 넓힌다 ─ */
+    '@media (max-width: 900px) { .history-card { margin-top: 56px !important; padding: 20px 16px !important; } .history-list { padding-left: 18px !important; margin-left: 4px !important; } .history-item { padding: 4px 0 12px !important; } .history-item > div:first-child { left: -26px !important; width: 9px !important; height: 9px !important; } .history-row { grid-template-columns: 78px 1fr !important; gap: 10px !important; padding: 8px 0 !important; } .history-date { font-size: 14px !important; } .history-desc { font-size: 15.5px !important; line-height: 1.6 !important; } }',
+    /* 접힌 항목 */
+    '.history-item.is-hidden { display: none; }',
+    /* ─ 5. 핵심 역량(비전) 카드 압축 ─ */
+    '@media (max-width: 900px) { .vision-grid { gap: 12px !important; } .vision-card { padding: 18px 16px !important; } .vision-icon { width: 150px !important; margin: 0 auto 10px !important; } .vision-icon svg { width: 46px; height: 46px; } .vision-tag { font-size: 13px !important; } .vision-title { font-size: 20px !important; margin: 4px 0 6px !important; } .vision-desc { font-size: 14.5px !important; line-height: 1.6 !important; } }',
+    /* ─ 6. 등록증·인증서: 모바일 2열, 이미지 박스 높이 통일 ─ */
+    '@media (max-width: 900px) { .cert-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; } .cert-card-thumb { aspect-ratio: auto !important; height: 150px; display: flex; align-items: center; justify-content: center; background: var(--gray-50); } .cert-card-thumb img { width: 100%; height: 100%; object-fit: contain !important; object-position: center !important; padding: 6px; box-sizing: border-box; } .cert-card-body { padding: 10px 12px 12px !important; } .cert-card-title { font-size: 14px !important; line-height: 1.45 !important; } .cert-card-hint { font-size: 12px !important; margin-top: 2px !important; } }',
+    '.cert-card.is-hidden { display: none; }',
+    /* PC에서도 카드 높이가 들쭉날쭉하지 않도록 정렬만 보정 */
+    '@media (min-width: 901px) { .cert-card { display: flex; flex-direction: column; } .cert-card-body { flex: 1 1 auto; } }',
+    /* ─ 펼치기/접기 버튼 (연혁·인증서 공용) ─ */
+    '.more-btn { display: none; }',
+    '@media (max-width: 900px) { .more-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; width: 100%; min-height: 48px; margin-top: 14px; padding: 12px 18px; background: var(--gray-0); border: 1px solid var(--teal-600); border-radius: var(--radius-md, 8px); font-family: inherit; font-size: 15px; font-weight: 600; color: var(--teal-700); cursor: pointer; } .more-btn:hover { background: var(--teal-50); } .more-btn .more-arrow { font-size: 12px; transition: transform 200ms ease; } .more-btn[aria-expanded="true"] .more-arrow { transform: rotate(180deg); } }',
+    /* ─ 7. 하단 상담 버튼: 모바일 터치 영역 확보 ─ */
+    '@media (max-width: 900px) { .consult-btn { width: 100%; box-sizing: border-box; justify-content: center; min-height: 56px; padding: 16px 20px !important; font-size: 17px !important; white-space: nowrap; line-height: 1.2; } }',
     /* ─ 팝업(공지) 창 ─ */
     /* 오버레이는 화면에 고정. 팝업이 많아도 세로로 길게 쌓지 않고 슬라이드로 넘긴다
        (아래로 스크롤해 다음 팝업을 찾는 구조를 쓰지 않음). */
@@ -1325,6 +1355,82 @@
         }
       });
     }, 2500);
+  })();
+
+  // ── 회사소개: 모바일 펼치기/접기 (연혁 · 등록증/인증서) ──
+  // 모바일에서만 일부만 먼저 보여주고 나머지는 버튼으로 펼친다.
+  // JS가 실행되지 않으면 아무것도 숨기지 않으므로 콘텐츠는 항상 접근 가능하다.
+  (function initMobileCollapse() {
+    var MQ = '(max-width: 900px)';
+
+    // items: 접기 대상 요소 배열 / keep: 처음부터 보여줄 개수 / hideFrom: 'end'면 뒤쪽을 남긴다
+    function setup(items, keep, host, labelMore, labelLess, hideFrom) {
+      if (!items.length || items.length <= keep) return;
+      // 최신 항목을 먼저 보여주려면 뒤쪽 keep개를 남기고 앞쪽을 숨긴다.
+      var hidden = hideFrom === 'end'
+        ? items.slice(0, items.length - keep)
+        : items.slice(keep);
+
+      var btn = document.createElement('button');
+      btn.className = 'more-btn';
+      btn.type = 'button';
+      btn.setAttribute('aria-expanded', 'false');
+      var txt = document.createElement('span');
+      txt.textContent = labelMore;
+      var arrow = document.createElement('span');
+      arrow.className = 'more-arrow';
+      arrow.textContent = '▼';
+      btn.appendChild(txt);
+      btn.appendChild(arrow);
+      host.appendChild(btn);
+
+      var expanded = false;
+      var busy = false;   // 연타로 중복 실행되지 않게 잠근다
+
+      function apply(on) {
+        hidden.forEach(function (el) { el.classList.toggle('is-hidden', !on); });
+        expanded = on;
+        btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+        txt.textContent = on ? labelLess : labelMore;
+      }
+      function sync() {
+        // PC로 넓어지면 숨김을 모두 해제한다(PC는 전체 표시).
+        if (!window.matchMedia(MQ).matches) {
+          hidden.forEach(function (el) { el.classList.remove('is-hidden'); });
+        } else {
+          apply(expanded);
+        }
+      }
+
+      btn.addEventListener('click', function () {
+        if (busy) return;
+        busy = true;
+        // 접거나 펼칠 때 화면이 튀지 않도록, 버튼 위치를 기준으로 스크롤을 보정한다.
+        var before = btn.getBoundingClientRect().top;
+        apply(!expanded);
+        var after = btn.getBoundingClientRect().top;
+        window.scrollBy(0, after - before);
+        setTimeout(function () { busy = false; }, 200);
+      });
+
+      apply(false);
+      sync();
+      window.addEventListener('resize', sync);
+    }
+
+    // 연혁: 최근 8개를 남기고 이전 항목을 접는다(데이터가 오래된 순이라 뒤쪽이 최신).
+    var histItems = Array.prototype.slice.call(document.querySelectorAll('.history-item'));
+    var histHost = document.querySelector('.history-card');
+    if (histItems.length && histHost) {
+      setup(histItems, 8, histHost, '연혁 전체보기', '연혁 접기', 'end');
+    }
+
+    // 등록증·인증서: 앞에서 4개만 먼저 보여준다(등록 순서 유지).
+    var certItems = Array.prototype.slice.call(document.querySelectorAll('.cert-card'));
+    var certGrid = document.querySelector('.cert-grid');
+    if (certItems.length && certGrid && certGrid.parentNode) {
+      setup(certItems, 4, certGrid.parentNode, '등록증 및 인증서 전체보기', '등록증 및 인증서 접기', 'start');
+    }
   })();
 
   // ── 팝업(공지) 창 ──
