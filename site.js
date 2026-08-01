@@ -214,7 +214,15 @@
     '@media (prefers-reduced-motion: reduce) { html.reveal-ready .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }',
     /* ═══ 회사소개 모바일 가독성 개선 (PC는 그대로) ═══ */
     /* ─ 1. 상단 탭: 가로 스크롤형. 글자가 단어 중간에서 끊기지 않게 한다 ─ */
-    '@media (max-width: 900px) { .subnav { flex-wrap: nowrap !important; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-padding-left: 20px; } .subnav::-webkit-scrollbar { display: none; } .subnav a { flex: 0 0 auto; white-space: nowrap; word-break: keep-all; } }',
+    /* 좁아 보이던 원인: `.subnav a`에 padding: 10px 16px만 있고 최소 너비가 없어
+       '조직도'처럼 짧은 메뉴가 글자 길이(75px)에 딱 맞게 줄어들었다.
+       min-width로 바닥을 깔고 좌우 여백을 넓히되, 긴 메뉴는 콘텐츠에 맞춰 더 넓어지게 둔다.
+       box-sizing: border-box라야 min-width 안에 padding·border가 포함돼 계산이 어긋나지 않는다.
+       .subnav는 회사소개 4개·사업분야 3개 페이지가 공유하는 공통 클래스라 한 곳만 고치면 된다. */
+    '@media (max-width: 900px) { .subnav { flex-wrap: nowrap !important; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-padding-left: 20px; gap: 10px !important; } .subnav::-webkit-scrollbar { display: none; } .subnav a { flex: 0 0 auto; box-sizing: border-box; min-width: 104px; min-height: 48px; padding: 0 22px; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; word-break: keep-all; } }',
+    /* 마지막 탭이 스크롤 끝에서 잘리지 않도록 오른쪽 여백을 확보한다.
+       (스크롤 컨테이너에서는 padding-right가 무시되는 브라우저가 있어 마지막 항목에 여백을 준다.) */
+    '@media (max-width: 900px) { .subnav a:last-child { margin-right: 20px; } }',
     /* ─ 2. 인사말: 모바일에서 1단 세로 배치 ─ */
     '@media (max-width: 900px) { .greeting-grid { grid-template-columns: 1fr !important; gap: 20px !important; padding: 22px 18px !important; } }',
     /* 한국어는 단어 단위로 줄바꿈해야 한두 글자씩 끊기지 않는다. */
@@ -1278,6 +1286,22 @@
   (function initSubnavScroll() {
     var subnav = document.querySelector('.subnav');
     if (!subnav) return;
+
+    // 탭이 화면 폭을 넘어 가로 스크롤되는 경우, 현재 선택된 탭이 처음부터 보이도록 맞춘다.
+    // 페이지 세로 스크롤에 영향을 주지 않도록 scrollIntoView 대신 scrollLeft만 조정한다.
+    (function showActiveTab() {
+      var active = subnav.querySelector('a.active');
+      if (!active) return;
+      if (subnav.scrollWidth <= subnav.clientWidth) return;   // 다 보이면 그대로 둔다
+      var pad = 20;
+      var left = active.offsetLeft - subnav.offsetLeft;
+      var right = left + active.offsetWidth;
+      if (left < subnav.scrollLeft + pad) {
+        subnav.scrollLeft = Math.max(0, left - pad);
+      } else if (right > subnav.scrollLeft + subnav.clientWidth - pad) {
+        subnav.scrollLeft = right - subnav.clientWidth + pad;
+      }
+    })();
 
     // 페이지 로드 시 sessionStorage 확인 후 스크롤
     if (sessionStorage.getItem('subnav-scroll')) {
