@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 이미지 1차 미리보기 — 보아스환경기술</title>
+<link href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/fonts.css" rel="stylesheet">
+<link href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/colors.css" rel="stylesheet">
+<link href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/typography.css" rel="stylesheet">
+<link href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/spacing.css" rel="stylesheet">
+<link href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/radii.css" rel="stylesheet">
+<link href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/shadows.css" rel="stylesheet">
+<link href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/tokens/semantic.css" rel="stylesheet">
+<link href="_ds/boas-environmental-design-system-8f288d7b-8f13-4137-b79d-931d2e494645/styles.css" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--surface-sunken, #F5F7F8);
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+  .preview-header {
+    background: linear-gradient(135deg, var(--teal-800, #013F44) 0%, var(--teal-600, #01737D) 100%);
+    color: #fff;
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .preview-header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .preview-header p {
+    margin: 12px 0 0;
+    font-size: 15px;
+    opacity: 0.9;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+  .badge-row {
+    display: inline-flex;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .slot-block {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(1, 63, 68, 0.06);
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  .slot-head {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border-subtle, #E8EDEC);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .slot-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--teal-700, #01737D);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .slot-meta { flex: 1; min-width: 240px; }
+  .slot-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .slot-where {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .slot-where code {
+    font-family: var(--font-mono);
+    background: var(--gray-50, #F5F7F8);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--teal-700, #01737D);
+  }
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .compare-col {
+    padding: 24px 32px;
+  }
+  .compare-col + .compare-col {
+    border-left: 1px solid var(--border-subtle, #E8EDEC);
+  }
+  .col-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .col-label.before { color: var(--text-secondary); }
+  .col-label.after { color: var(--teal-700, #01737D); }
+  .col-label::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .col-label.before::before { background: var(--text-secondary); }
+  .col-label.after::before { background: var(--teal-500, #22A5AC); }
+  .img-frame {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    background: #000;
+    position: relative;
+  }
+  .img-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .img-frame.placeholder {
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.4);
+  }
+  .frame-note {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 10px;
+    line-height: 1.55;
+  }
+
+  /* aspect variants */
+  .aspect-4x3 { aspect-ratio: 4/3; }
+  .aspect-16x9 { aspect-ratio: 16/9; }
+  .aspect-16x10 { aspect-ratio: 16/10; }
+
+  .img-frame.cover-crop {
+    overflow: hidden;
+  }
+  .img-frame.cover-crop img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+
+  /* Approval footer */
+  .approval-card {
+    background: var(--teal-50, #E0F5F5);
+    border: 2px solid var(--teal-500, #22A5AC);
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 48px;
+    text-align: center;
+  }
+  .approval-card h2 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--teal-800, #013F44);
+    font-weight: 700;
+  }
+  .approval-card p {
+    margin: 12px 0 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .approval-actions {
+    display: inline-flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-approve {
+    padding: 12px 28px;
+    background: var(--teal-700, #01737D);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: default;
+  }
+  .btn-reject {
+    padding: 12px 28px;
+    background: #fff;
+    color: var(--text-primary);
+    border: 1px solid var(--border-default, #D1DBD9);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: default;
+  }
+
+  /* Sub-page banner variant */
+  .banner-sim {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 21/9;
+    background: linear-gradient(135deg, rgba(1, 63, 68, 0.82) 0%, rgba(1, 115, 125, 0.7) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .banner-sim.with-photo {
+    background: #000;
+  }
+  .banner-sim.with-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+  }
+  .banner-sim .banner-text {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .banner-sim.with-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(1,63,68,0.55) 0%, rgba(1,115,125,0.4) 100%);
+    z-index: 1;
+  }
+
+  /* Business card variant */
+  .biz-card-sim {
+    aspect-ratio: 16/10;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, rgb(1,115,125) 0%, rgb(34,165,172) 100%);
+  }
+  .biz-card-sim img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .biz-card-sim .biz-label {
+    position: absolute;
+    top: 14px; right: 14px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: rgba(255,255,255,0.9);
+    background: rgba(0,0,0,0.35);
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    z-index: 2;
+  }
+
+  /* WE ARE card */
+  .weare-card-sim {
+    aspect-ratio: 4/3;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, var(--teal-700, #01737D) 0%, var(--teal-300, #7DD3DB) 100%);
+    box-shadow: var(--shadow-md);
+  }
+  .weare-card-sim img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+  }
+
+  @media (max-width: 900px) {
+    .preview-header { padding: 32px 20px; }
+    .preview-header h1 { font-size: 24px; }
+    .container { padding: 32px 16px 60px; }
+    .slot-head { padding: 18px 20px; gap: 14px; }
+    .slot-num { width: 36px; height: 36px; font-size: 15px; }
+    .slot-title { font-size: 17px; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .compare-col + .compare-col {
+      border-left: none;
+      border-top: 1px solid var(--border-subtle, #E8EDEC);
+    }
+    .compare-col { padding: 20px; }
+    .banner-sim { font-size: 16px; aspect-ratio: 16/9; }
+  }
+</style>
+</head>
+<body>
+
+<header class="preview-header">
+  <h1>AI 이미지 1차 시험 제작 — 승인 요청</h1>
+  <p>㈜보아스환경기술 자체 사진을 Gemini로 편집해 만든 8장의 이미지입니다. 좌측이 현재 홈페이지 모습, 우측이 AI 이미지 적용 후 예상 모습입니다.</p>
+  <div class="badge-row">
+    <span class="badge">🖼️ 총 8개 슬롯</span>
+    <span class="badge">📐 2752×1536 → 1920×1080 WebP</span>
+    <span class="badge">🔒 개인정보 처리 검수 완료</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- SLOT 1: Hero 1 -->
+  <div class="slot-block">
+    <div class="slot-head">
+      <div class="slot-num">1</div>
+      <div class="slot-meta">
+        <div class="slot-title">메인 히어로 슬라이드 1 — 현장 측정</div>
+        <div class="slot-where"><code>index.html</code> · 메인 상단 슬라이더 · 첫 번째 슬라이드</div>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="col-label before">현재 (SVG 플레이스홀더)</div>
+        <div class="banner-sim">
+          <span class="banner-text">그래디언트 + 아이콘</span>
+        </div>
+        <div class="frame-note">청록 그래디언트 배경에 SVG 아이콘만 표시</div>
+      </div>
+      <div class="compare-col">
+        <div class="col-label after">AI 이미지 적용 후</div>
+        <div class="banner-sim with-photo">
+          <img src="assets/images/photos/hero-1-measurement.webp" alt="현장 측정">
+          <span class="banner-text">최적의 대기환경 솔루션</span>
+        </div>
+        <div class="frame-note">안전모+방독마스크 착용 작업자 뒷모습, 산업단지 조망 · 얼굴 노출 없음</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLOT 2: Hero 2 -->
+  <div class="slot-block">
+    <div class="slot-head">
+      <div class="slot-num">2</div>
+      <div class="slot-meta">
+        <div class="slot-title">메인 히어로 슬라이드 2 — 산업 항만</div>
+        <div class="slot-where"><code>index.html</code> · 메인 상단 슬라이더 · 두 번째 슬라이드</div>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="col-label before">현재 (SVG 플레이스홀더)</div>
+        <div class="banner-sim">
+          <span class="banner-text">그래디언트 + 아이콘</span>
+        </div>
+      </div>
+      <div class="compare-col">
+        <div class="col-label after">AI 이미지 적용 후</div>
+        <div class="banner-sim with-photo">
+          <img src="assets/images/photos/hero-2-industry.webp" alt="산업 항만">
+          <span class="banner-text">쾌적한 대기질을 위한 노력</span>
+        </div>
+        <div class="frame-note">울산 산업항만 노을 파노라마 · 원경 인물 실루엣</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLOT 3: Hero 3 -->
+  <div class="slot-block">
+    <div class="slot-head">
+      <div class="slot-num">3</div>
+      <div class="slot-meta">
+        <div class="slot-title">메인 히어로 슬라이드 3 — 자연과 사람</div>
+        <div class="slot-where"><code>index.html</code> · 메인 상단 슬라이더 · 세 번째 슬라이드</div>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="col-label before">현재 (SVG 플레이스홀더)</div>
+        <div class="banner-sim">
+          <span class="banner-text">그래디언트 + 아이콘</span>
+        </div>
+      </div>
+      <div class="compare-col">
+        <div class="col-label after">AI 이미지 적용 후</div>
+        <div class="banner-sim with-photo">
+          <img src="assets/images/photos/hero-3-laboratory.webp" alt="자연과 사람">
+          <span class="banner-text">사람과 자연이 함께하는 환경</span>
+        </div>
+        <div class="frame-note">메타세쿼이아 가로수길을 걷는 가족 · 환경의 가치를 상징</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLOT 4: WE ARE -->
+  <div class="slot-block">
+    <div class="slot-head">
+      <div class="slot-num">4</div>
+      <div class="slot-meta">
+        <div class="slot-title">WE ARE 섹션 — 회사 소개 이미지</div>
+        <div class="slot-where"><code>index.html</code> · WE ARE 섹션 · 우측 이미지 영역 (4:3)</div>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="col-label before">현재 (SVG 플레이스홀더)</div>
+        <div class="weare-card-sim" style="background: linear-gradient(135deg, var(--teal-700, #01737D) 0%, var(--teal-300, #7DD3DB) 100%);">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);font-size:60px;">🏢</div>
+        </div>
+      </div>
+      <div class="compare-col">
+        <div class="col-label after">AI 이미지 적용 후</div>
+        <div class="weare-card-sim">
+          <img src="assets/images/photos/weare-office.webp" alt="사무실 전경">
+        </div>
+        <div class="frame-note">사무 환경 · 창밖 항만 뷰 · 청록 톤 컬러 그레이딩</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLOT 5: Sub Company -->
+  <div class="slot-block">
+    <div class="slot-head">
+      <div class="slot-num">5</div>
+      <div class="slot-meta">
+        <div class="slot-title">회사소개 페이지 상단 배너 — 건물 전경</div>
+        <div class="slot-where"><code>greeting.html</code> · 상단 배너 (신규 추가 예정)</div>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="col-label before">현재 (SVG 그래디언트 배너)</div>
+        <div class="banner-sim">
+          <span class="banner-text">회사소개</span>
+        </div>
+      </div>
+      <div class="compare-col">
+        <div class="col-label after">AI 이미지 적용 후</div>
+        <div class="banner-sim with-photo">
+          <img src="assets/images/photos/sub-company.webp" alt="건물 전경">
+          <span class="banner-text">회사소개</span>
+        </div>
+        <div class="frame-note">본사 건물 외관 · MITECH 등 원본 간판 제거 완료</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLOT 6: Business Air Card -->
+  <div class="slot-block">
+    <div class="slot-head">
+      <div class="slot-num">6</div>
+      <div class="slot-meta">
+        <div class="slot-title">사업분야 카드 — 대기측정 및 분석</div>
+        <div class="slot-where"><code>index.html</code> · OUR BUSINESS · 첫 번째 카드 이미지 (16:10)</div>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="col-label before">현재 (SVG 플레이스홀더)</div>
+        <div class="biz-card-sim">
+          <span class="biz-label">BUSINESS 01</span>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.7);font-size:50px;">💨</div>
+        </div>
+      </div>
+      <div class="compare-col">
+        <div class="col-label after">AI 이미지 적용 후</div>
+        <div class="biz-card-sim">
+          <span class="biz-label">BUSINESS 01</span>
+          <img src="assets/images/photos/sub-business-air.webp" alt="대기측정">
+        </div>
+        <div class="frame-note">굴뚝+방지시설 원경 · 청록 톤 · 대기측정 사업의 상징성 강조</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLOT 7: BZ STORY -->
+  <div class="slot-block">
+    <div class="slot-head">
+      <div class="slot-num">7</div>
+      <div class="slot-meta">
+        <div class="slot-title">BZ STORY 페이지 상단 배너 — 연구 활동</div>
+        <div class="slot-where"><code>story.html</code> · 상단 배너 (신규 추가 예정)</div>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="col-label before">현재 (SVG 그래디언트 배너)</div>
+        <div class="banner-sim">
+          <span class="banner-text">BZ STORY</span>
+        </div>
+      </div>
+      <div class="compare-col">
+        <div class="col-label after">AI 이미지 적용 후</div>
+        <div class="banner-sim with-photo">
+          <img src="assets/images/photos/sub-story.webp" alt="연구 활동">
+          <span class="banner-text">BZ STORY</span>
+        </div>
+        <div class="frame-note">연구원 협업 장면 · 밝고 개방적인 실험실 분위기</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLOT 8: Review -->
+  <div class="slot-block">
+    <div class="slot-head">
+      <div class="slot-num">8</div>
+      <div class="slot-meta">
+        <div class="slot-title">이용후기 페이지 상단 배너 — 장비실</div>
+        <div class="slot-where"><code>review.html</code> · 상단 배너 (신규 추가 예정)</div>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="col-label before">현재 (SVG 그래디언트 배너)</div>
+        <div class="banner-sim">
+          <span class="banner-text">이용후기</span>
+        </div>
+      </div>
+      <div class="compare-col">
+        <div class="col-label after">AI 이미지 적용 후</div>
+        <div class="banner-sim with-photo">
+          <img src="assets/images/photos/sub-review.webp" alt="장비실">
+          <span class="banner-text">이용후기</span>
+        </div>
+        <div class="frame-note">보유 측정장비 전시 공간 · 전문성 및 신뢰감 전달</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Approval -->
+  <div class="approval-card">
+    <h2>이대로 홈페이지에 적용해도 될까요?</h2>
+    <p>
+      승인해 주시면 위 이미지들을 홈페이지 각 슬롯에 적용하고,<br>
+      반응형 레이아웃과 배너 텍스트 가독성을 검증한 뒤 로컬 미리보기로 최종 확인 요청드리겠습니다.<br>
+      개별 이미지 교체가 필요하면 슬롯 번호와 함께 알려주세요.
+    </p>
+    <div class="approval-actions">
+      <span class="btn-approve">✅ 이대로 적용 진행</span>
+      <span class="btn-reject">✏️ N번 이미지 교체 요청</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
